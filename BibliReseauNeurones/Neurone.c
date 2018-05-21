@@ -3,6 +3,7 @@
                  Definition des types de neurones
               et des fonctions de gestion associées
 *******************************************************************/
+#include "Neurone.h"
 
 T_ERREUR InitNeurone ( short int               siNbDendrites               ,
                        REEL                  * tablfPoids                  ,
@@ -20,7 +21,18 @@ T_ERREUR DesinitNeurone ( T_NEURONE * pNeurone )
 
 T_ERREUR AfficheNeurone ( T_NEURONE LeNeurone )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    int i =0;
+
+    printf("\t\t Nombre dendrites : %hd \n", LeNeurone.siNbDendrites);
+
+    printf("\t\t Les poids sont : \n");
+
+    for(i = 0; i< LeNeurone.siNbDendrites; i++)
+    {
+        printf("\t\t Coefficient N %hd : %lf \n", i, LeNeurone.tablfPoids[i]);
+    }
+
+    return PAS_D_ERREUR;
 }
 
 T_ERREUR SauveFicTexteNeurone ( T_NEURONE   LeNeurone ,

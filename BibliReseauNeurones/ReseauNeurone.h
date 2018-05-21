@@ -6,7 +6,10 @@ Definition des fonctions de gestion des "reseaux de neurones"associées
 #ifndef RESEAUNEURONE_H_INCLUDED
 #define RESEAUNEURONE_H_INCLUDED
 
+#include "constantes.h"
 #include "TypeReseauNeurones.h"
+#include "../InterfaceNeuroneDataSet.h"
+#include "FonctionCout.h"
 
 /***************************************************
   Initialisation d'un reseau de neurones en couches

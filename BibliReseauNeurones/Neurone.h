@@ -6,6 +6,11 @@
 #ifndef NEURONE_H_INCLUDED
 #define NEURONE_H_INCLUDED
 
+#include <stdio.h>
+
+#include "constantes.h"
+#include "Activation.h"
+
 /***************************************************
               Definition d'un neurone
 On suppose qu'il possede :

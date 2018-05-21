@@ -2,14 +2,8 @@
                     FONCTIONSCOUT.C
               Fonctions de cout utilisees
 ******************************************************/
-
-typedef T_ERREUR T_FONCTION_COUT ( REEL      * tablfValeursVraies   ,
-                                   REEL      * tablfValeursEstimees ,
-                                   short int   siNbElts             ,
-                                   REEL      * plfCout              )
-{
-    return ERREUR_FONCTION_NON_DEFINIE ;
-}
+#include "FonctionCout.h"
+#include "constantes.h"
 
 T_ERREUR FonctionCoutLogLoss ( REEL      * tablfValeursVraies   ,
                                REEL      * tablfValeursEstimees ,

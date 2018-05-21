@@ -8,6 +8,8 @@
 #ifndef ACTIVATION_H_INCLUDED
 #define ACTIVATION_H_INCLUDED
 
+#include "constantes.h"
+
 /***************************************************
          Fonctions d'activation scalaires
 ***************************************************/
@@ -88,9 +90,18 @@ typedef T_ERREUR T_FONCTION_ACTIVATION_VECTORIELLE ( REEL      * tablfX         
                  Fonction SoftMax
          sortie comprise entre 0.0 et +1.0
 ***************************************************/
-T_FONCTION_ACTIVATION_VECTORIELLE CalcSoftMax ;
-T_FONCTION_ACTIVATION_VECTORIELLE CalcDeriveePartielleSoftMaxViaValSoftMax ;
+//T_FONCTION_ACTIVATION_VECTORIELLE CalcSoftMax ;
+//T_FONCTION_ACTIVATION_VECTORIELLE CalcDeriveePartielleSoftMaxViaValSoftMax ;
 
+T_ERREUR CalcSoftMax( REEL      * tablfX                   ,
+                      short int   siNbElts                 ,
+                      REEL      * tablfResult              ,
+                      short int   siIndiceDeriveePartielle ) ;
+
+T_ERREUR CalcDeriveePartielleSoftMaxViaValSoftMax ( REEL      * tablfX                   ,
+                                                    short int   siNbElts                 ,
+                                                    REEL      * tablfResult              ,
+                                                    short int   siIndiceDeriveePartielle ) ;
 #endif // ACTIVATION_H_INCLUDED
 
 /***************************************************

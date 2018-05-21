@@ -6,6 +6,8 @@
 #ifndef FONCTIONCOUT_H_INCLUDED
 #define FONCTIONCOUT_H_INCLUDED
 
+#include "constantes.h"
+
 /*****************************************************
 defintions explicites du ZERO et du UN utilise dans ce code
 car on procedera a des tests d'egalite entre REEL ce qui n'est

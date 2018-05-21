@@ -2,44 +2,89 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="BibliReseauNeurones\constantes.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="BibliReseauNeurones\CalcMax.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="494" topLine="10" />
+			<Cursor1 position="268" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="BibliReseauNeurones\CoucheNeurone.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="BibliReseauNeurones\constantes.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="13557" topLine="238" />
-		</Cursor>
-	</File>
-	<File name="BibliReseauNeurones\CalcMax.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="457" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="BibliReseauNeurones\Activation.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="750" topLine="58" />
-		</Cursor>
-	</File>
-	<File name="BibliReseauNeurones\ReseauNeurone.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5958" topLine="47" />
-		</Cursor>
-	</File>
-	<File name="BibliReseauNeurones\Neurone.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5467" topLine="93" />
+			<Cursor1 position="1546" topLine="21" />
 		</Cursor>
 	</File>
 	<File name="main.c" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="146" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="BibliReseauNeurones\FonctionCout.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1218" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="BibliReseauNeurones\CoucheNeurone.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3031" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="BibliReseauNeurones\CoucheNeurone.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="562" topLine="4" />
+		</Cursor>
+	</File>
+	<File name="BibliReseauNeurones\Activation.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1853" topLine="65" />
+		</Cursor>
+	</File>
+	<File name="BibliReseauNeurones\Neurone.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="782" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="935" topLine="15" />
 		</Cursor>
 	</File>
 	<File name="BibliReseauNeurones\FonctionCout.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="608" topLine="3" />
+			<Cursor1 position="287" topLine="18" />
+		</Cursor>
+	</File>
+	<File name="BibliReseauNeurones\ReseauNeurone.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="456" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="BibliReseauNeurones\TypeReseauNeurones.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="355" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="TestsUnitaires\TestsUnitaires.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3577" topLine="79" />
+		</Cursor>
+	</File>
+	<File name="BibliReseauNeurones\CalcMax.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="302" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="BibliReseauNeurones\ReseauNeurone.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="6084" topLine="27" />
+		</Cursor>
+	</File>
+	<File name="BibliReseauNeurones\Activation.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3984" topLine="81" />
+		</Cursor>
+	</File>
+	<File name="BibliReseauNeurones\Neurone.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2568" topLine="55" />
+		</Cursor>
+	</File>
+	<File name="TestsUnitaires\TestsUnitaires.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="679" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

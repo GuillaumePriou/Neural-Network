@@ -4,6 +4,8 @@ Definition des fonctions de gestion des "reseaux de neurones"associées
 
 *******************************************************************/
 
+#include "ReseauNeurone.h"
+
 T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeurones                        ,
                              char                                * pszDescription                            ,
                              REEL                                  lfTauxApprentissage                       ,

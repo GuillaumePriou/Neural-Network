@@ -3,6 +3,7 @@
                 Definition des types "couches de neurones"
                    et des fonctions de gestion associées
 *******************************************************************/
+#include "CoucheNeurone.h"
 
 T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeurones                 ,
                              char                              * pszDescription                     ,
@@ -28,7 +29,34 @@ T_ERREUR AfficheCoucheNeurone ( T_COUCHE_NEURONES LaCoucheNeurones ,
                                 short int         siIndiceNeurone  ,
                                 short int         siIndiceCouche   )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+
+    short int i ;
+    printf("-----------------------\n");
+    printf ("\t Type couche de neurone : %hd\n", LaCoucheNeurones.typeCoucheNeurones) ;
+    printf ("\t Description couche de neurone : %s\n", LaCoucheNeurones.szDescription) ;
+    printf ("\t %hd neurones ayant %hd dendrites\n", LaCoucheNeurones.siNbNeurones,
+                                                LaCoucheNeurones.siNbDendritesParNeurone);
+    for (i=0; i<LaCoucheNeurones.siNbNeurones; i++)
+    {
+        printf ("\t\t Neurone N.%hd : \n", i);
+        AfficheNeurone(LaCoucheNeurones.pNeurones[i]) ;
+        printf("\n");
+    }
+
+    printf("-----------------------------\n");
+    for (i=0; i<LaCoucheNeurones.siNbNeurones; i++)
+    {
+        printf ("\t Sortie du neurone N.%hd : %lf (erreur de %lf)\n",
+                                            i,
+                                            LaCoucheNeurones.plfOutputSample[i],
+                                            LaCoucheNeurones.plfErreurDeltaSample[i]);
+    }
+
+
+    if(LaCoucheNeurones.typeCoucheNeurones == COUCHE_NON_INITIALISEE)
+        return ERREUR_TYPE_COUCHE_INCONNU;
+    else
+        return PAS_D_ERREUR ;
 }
 
 T_ERREUR SauveFicTexteCoucheNeurones ( T_COUCHE_NEURONES   LaCoucheNeurones ,

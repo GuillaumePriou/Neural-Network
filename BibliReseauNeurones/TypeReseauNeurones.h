@@ -6,6 +6,8 @@
 #ifndef TYPERESEAUNEURONES_H_INCLUDED
 #define TYPERESEAUNEURONES_H_INCLUDED
 
+#include "CoucheNeurone.h"
+
 /* les differents types de reseau de neurones */
 typedef enum
 {

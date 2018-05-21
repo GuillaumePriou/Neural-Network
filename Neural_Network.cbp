@@ -31,14 +31,33 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="BibliReseauNeurones/Activation.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="BibliReseauNeurones/Activation.h" />
+		<Unit filename="BibliReseauNeurones/CalcMax.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="BibliReseauNeurones/CalcMax.h" />
+		<Unit filename="BibliReseauNeurones/CoucheNeurone.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="BibliReseauNeurones/CoucheNeurone.h" />
+		<Unit filename="BibliReseauNeurones/FonctionCout.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="BibliReseauNeurones/FonctionCout.h" />
+		<Unit filename="BibliReseauNeurones/Neurone.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="BibliReseauNeurones/Neurone.h" />
+		<Unit filename="BibliReseauNeurones/ReseauNeurone.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="BibliReseauNeurones/ReseauNeurone.h" />
 		<Unit filename="BibliReseauNeurones/TypeReseauNeurones.h" />
 		<Unit filename="BibliReseauNeurones/constantes.h" />
+		<Unit filename="InterfaceNeuroneDataSet.h" />
 		<Unit filename="TestsUnitaires/TestsUnitaires.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -1,84 +1,75 @@
 /*******************************************************************
-                              ACTIVATION.H
+                              ACTIVATION.c
                  Definition des fonctions d'activation
                        scalaires et vectorielles
                  utilisees par les reseaux de neurones
 *******************************************************************/
 
-#ifndef ACTIVATION_H_INCLUDED
-#define ACTIVATION_H_INCLUDED
+#include "Activation.h"
 
-/***************************************************
-         Fonctions d'activation scalaires
-***************************************************/
+REEL CalcLogistique (REEL lfX)
+{
+    return 0 ;
+}
 
-/***************************************************
-      Definition du type fonction d'activation
- Cette fonction prend un argument lfX (REEL) et
- retourne un resultat de type REEL
+REEL CalcDeriveeLogistiqueViaValLogistique (REEL lfX)
+{
+    return 0 ;
+}
 
- **************************************************/
-typedef REEL T_FONCTION_ACTIVATION ( REEL lfX ) ;
+REEL CalcTanHyperbolique (REEL lfX)
+{
+    return 0 ;
+}
 
-/***************************************************
-                 Fonction logistique
-          sortie comprise entre 0.0 et +1.0
-***************************************************/
-T_FONCTION_ACTIVATION CalcLogistique ;
-T_FONCTION_ACTIVATION CalcDeriveeLogistiqueViaValLogistique ;
+REEL CalcDeriveeTanHyperboliqueViaValTanHyperbolique (REEL lfX)
+{
+    return 0 ;
+}
 
-/***************************************************
-            Fonction tangente hyperbolique
-          sortie comprise entre -1.0 et +1.0
-***************************************************/
-T_FONCTION_ACTIVATION CalcTanHyperbolique ;
-T_FONCTION_ACTIVATION CalcDeriveeTanHyperboliqueViaValTanHyperbolique ;
+REEL CalcReLU (REEL lfX)
+{
+    return 0 ;
+}
 
-/***************************************************
-                 Fonction ReLU
-          sortie comprise entre 0.0 et +1.0
-***************************************************/
-T_FONCTION_ACTIVATION CalcReLU ;
-T_FONCTION_ACTIVATION CalcDeriveeReLU ;
+REEL CalcDeriveeReLU (REEL lfX)
+{
+    return 0 ;
+}
 
-/***************************************************
-                 Fonction Identite
-***************************************************/
-T_FONCTION_ACTIVATION CalcIdentite ;
-T_FONCTION_ACTIVATION CalcDeriveeIdentite ;
+REEL CalcIdentite (REEL lfX)
+{
+    return 0 ;
+}
 
-/***************************************************
-         Fonction "echelon" de HeavisideZero
-       sortie comprise entre 0.0 et +1.0
-***************************************************/
-T_FONCTION_ACTIVATION CalcHeavisideZero ;
-T_FONCTION_ACTIVATION CalcDeriveeHeavisideZero ;
+REEL CalcDeriveeIdentite (REEL lfX)
+{
+    return 0 ;
+}
 
-/***************************************************
-         Fonction "echelon" de HeavisideMoinsUn
-       sortie comprise entre -1.0 et +1.0
-***************************************************/
-T_FONCTION_ACTIVATION CalcHeavisideMoinsUn ;
-T_FONCTION_ACTIVATION CalcDeriveeHeavisideMoinsUn ;
+REEL CalcHeavisideZero (REEL lfX)
+{
+    return 0 ;
+}
+
+REEL CalcDeriveeHeavisideZero (REEL lfX)
+{
+    return 0 ;
+}
+
+REEL CalcHeavisideMoinsUn (REEL lfX)
+{
+    return 0 ;
+}
+
+REEL CalcDeriveeHeavisideMoinsUn (REEL lfX)
+{
+    return 0 ;
+}
 
 /***************************************************
          Fonctions d'activation vectorielles
 ***************************************************/
-/***************************************************
-      Definition du type fonction d'activation
- Cette fonction prend en argument :
- * un tableau TablfX (REEL) comportant siNbElts
- * il faut fournir (si on calcule une derivee partielle)
-   un autre indice (siIndiceDeriveePartielle) identifiant
-   la variable par rapport a laquelle il faut deriver
-
- La fonction calcule l'image de tablfX[i] par application
- de SoftMax (ou de sa derivee partielle par rapport a l'element
- d'indice siIndiceDeriveePartielle) et la stocke dans tablfResult[i]
-
- Cette fonction retourne un resultat de type ERREUR
- (0 = tout est OK)
- **************************************************/
 typedef T_ERREUR T_FONCTION_ACTIVATION_VECTORIELLE ( REEL      * tablfX                   ,
                                                      short int   siNbElts                 ,
                                                      REEL      * tablfResult              ,
@@ -88,11 +79,15 @@ typedef T_ERREUR T_FONCTION_ACTIVATION_VECTORIELLE ( REEL      * tablfX         
                  Fonction SoftMax
          sortie comprise entre 0.0 et +1.0
 ***************************************************/
-T_FONCTION_ACTIVATION_VECTORIELLE CalcSoftMax ;
-T_FONCTION_ACTIVATION_VECTORIELLE CalcDeriveePartielleSoftMaxViaValSoftMax ;
+T_ERREUR CalcSoftMax( REEL      * tablfX                   ,
+                      short int   siNbElts                 ,
+                      REEL      * tablfResult              ,
+                      short int   siIndiceDeriveePartielle ) ;
 
-#endif // ACTIVATION_H_INCLUDED
-
+T_ERREUR CalcDeriveePartielleSoftMaxViaValSoftMax ( REEL      * tablfX                   ,
+                                                    short int   siNbElts                 ,
+                                                    REEL      * tablfResult              ,
+                                                    short int   siIndiceDeriveePartielle ) ;
 /***************************************************
                  FIN DU COMPOSANT
 ***************************************************/

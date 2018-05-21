@@ -6,6 +6,12 @@
 #ifndef COUCHENEURONE_H_INCLUDED
 #define COUCHENEURONE_H_INCLUDED
 
+#include <stdio.h>
+
+#include "constantes.h"
+#include "Activation.h"
+#include "Neurone.h"
+
 /* les differents types de couche de neurones */
 typedef enum
 {
