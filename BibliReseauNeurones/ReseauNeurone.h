@@ -1,6 +1,6 @@
 /*******************************************************************
                               RESEAUNEURONE.H
-Definition des fonctions de gestion des "reseaux de neurones" associées
+Definition des fonctions de gestion des "reseaux de neurones"associées
 
 *******************************************************************/
 #ifndef RESEAUNEURONE_H_INCLUDED

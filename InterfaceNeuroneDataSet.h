@@ -1,6 +1,6 @@
 /*******************************************************************
                         INTERFACENEURONEDATASET.H
-                  Definition des fonctions d'interface
+                  Definition des fonctions d'interace
            entre le code de traitement par reseau de neurone
                          et les jeux de donnees
 
