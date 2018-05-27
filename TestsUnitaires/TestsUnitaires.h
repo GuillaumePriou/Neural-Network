@@ -50,5 +50,21 @@ T_ERREUR testCalcPredictionNeurone (void);
 /*********************************************************************************
     ReseauNeurone
 *********************************************************************************/
+T_ERREUR testInitReseauNeurone (void);
+T_ERREUR testDesinitReseauNeurone (void);
+T_ERREUR testAfficheReseauNeurone (void);
+T_ERREUR testAfficheIntegralReseauNeurone (void);
+T_ERREUR testSauveFicTexteReseauNeurones (void);
+T_ERREUR testSauveCoucheNeuronesDansFicTexte (void);
+T_ERREUR testSauveFicBinaireReseauNeurones (void);
+T_ERREUR testSauveCoucheNeuronesDansFicBinaire (void);
+T_ERREUR testChargeFicBinaireReseauNeurones (void);
+T_ERREUR testChargeCoucheNeuronesDansFicBinaire (void);
+T_ERREUR testCalcPredictionReseauNeurones (void);
+T_ERREUR testRetroPropagationErreursEtGradients (void);
+T_ERREUR testInitAZeroGradientsPoidsCumules (void);
+T_ERREUR testCalcCorrectionPoidsSynaptiques (void);
+T_ERREUR testPredictionJeuDeDonnees (void);
+T_ERREUR testApprentissageJeuDeDonnees (void);
 
 #endif // TESTSUNITAIRES_H_INCLUDED

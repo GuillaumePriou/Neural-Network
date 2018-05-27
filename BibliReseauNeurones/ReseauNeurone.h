@@ -42,7 +42,7 @@ ENTREE :
 - la derivee de la fonction d'activation des neurones de sortie (Fonction_Derivee_ActivationNeurone_Sortie)
   NULL si pas de fonction
 - nombre de lot eventuel si traitement par batch pour un apprentissage stochastique  (usiNbLots)
-  si usiNbLots < 2 on traite tout le jeu de donnees dans chaque passe d'apprentissage
+  si usiNbLots non< 2 on traite tout le jeu de donnees dans chaque passe d'apprentissage
   si usiNbLots = 2, 3, ..., on divise le jeu de donnees en usiNbLots
      de taille = (taille du jeu de donnees) / usiNbLots
   remarque : il est preferable que usiNbLots soit un diviseur de la taille du jeu de donnees

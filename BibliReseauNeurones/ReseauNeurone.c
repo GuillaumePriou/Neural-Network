@@ -31,7 +31,21 @@ T_ERREUR DesinitReseauNeurone ( T_RESEAU_NEURONES * pReseauNeurones )
 
 T_ERREUR AfficheReseauNeurone ( T_RESEAU_NEURONES LeReseauNeurones )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    int i = 0;
+    printf("Type du reseau neuronal : %hd\n", LeReseauNeurones.typeReseauNeurones);
+    printf("Description reseau neuronal : %s\n", LeReseauNeurones.szDescription);
+    printf("Nombre de couche : %hd \n", LeReseauNeurones.siNbCouches);
+    printf("Taux d'apprentissage du RN : %lf \n", LeReseauNeurones.lfTauxApprentissage);
+    printf("Cout Cumulee : %lf\n", LeReseauNeurones.lfCoutCumule);
+
+    for(i=0; i< LeReseauNeurones.pCouchesNeurones[LeReseauNeurones.siNbCouches].siNbNeurones; i++)
+    {
+       printf("indice %d - Prediction finale : %lf, Vrai valeur : %lf\n", i,
+              LeReseauNeurones.plfPredictionFinale[i], LeReseauNeurones.plfVraieValeurFinale[i]);
+    }
+    printf("Nombre de lot : %d", LeReseauNeurones.usiNbLots);
+
+    return PAS_D_ERREUR ;
 }
 
 T_ERREUR AfficheIntegralReseauNeurone ( T_RESEAU_NEURONES LeReseauNeurones )

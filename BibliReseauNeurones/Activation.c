@@ -68,26 +68,24 @@ REEL CalcDeriveeHeavisideMoinsUn (REEL lfX)
 }
 
 /***************************************************
-         Fonctions d'activation vectorielles
-***************************************************/
-typedef T_ERREUR T_FONCTION_ACTIVATION_VECTORIELLE ( REEL      * tablfX                   ,
-                                                     short int   siNbElts                 ,
-                                                     REEL      * tablfResult              ,
-                                                     short int   siIndiceDeriveePartielle ) ;
-
-/***************************************************
                  Fonction SoftMax
          sortie comprise entre 0.0 et +1.0
 ***************************************************/
 T_ERREUR CalcSoftMax( REEL      * tablfX                   ,
                       short int   siNbElts                 ,
                       REEL      * tablfResult              ,
-                      short int   siIndiceDeriveePartielle ) ;
+                      short int   siIndiceDeriveePartielle )
+{
+    return ERREUR_FONCTION_NON_DEFINIE;
+}
 
 T_ERREUR CalcDeriveePartielleSoftMaxViaValSoftMax ( REEL      * tablfX                   ,
                                                     short int   siNbElts                 ,
                                                     REEL      * tablfResult              ,
-                                                    short int   siIndiceDeriveePartielle ) ;
+                                                    short int   siIndiceDeriveePartielle )
+{
+    return ERREUR_FONCTION_NON_DEFINIE;
+}
 /***************************************************
                  FIN DU COMPOSANT
 ***************************************************/
