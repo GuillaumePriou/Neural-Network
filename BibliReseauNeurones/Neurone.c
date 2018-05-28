@@ -4,6 +4,8 @@
               et des fonctions de gestion associées
 *******************************************************************/
 #include "Neurone.h"
+#include "constantes.h"
+#include <stdlib.h>
 
 T_ERREUR InitNeurone ( short int               siNbDendrites               ,
                        REEL                  * tablfPoids                  ,
@@ -11,7 +13,33 @@ T_ERREUR InitNeurone ( short int               siNbDendrites               ,
                        T_FONCTION_ACTIVATION * Fonction_Derivee_Activation ,
                        T_NEURONE             * pNeurone                    )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    int i = 0;
+
+    // Remplissage du neurone avec les bonnes valeurs
+    (*pNeurone).F_Activation = Fonction_Activation;
+    (*pNeurone).F_DeriveeActivation = Fonction_Derivee_Activation;
+    (*pNeurone).siNbDendrites = siNbDendrites;
+
+    //allocation mémoire pour tableau de coefficients du neurone
+    (*pNeurone).tablfPoids = malloc(siNbDendrites * sizeof(REEL));
+
+    // Remplissage du tableau de coefficients avec les bonnes valeurs
+    if((*pNeurone).tablfPoids == NULL)
+    {
+        //si rentre alors on libère la mémoire (pas d'allocation inutile)
+        return ERREUR_ALLOCATION_MEMOIRE_NEURONE;
+    }
+
+    if(tablfPoids == NULL)
+        //si tab est null alors on remplis par des coeff par defaut
+        for(i = 0; i < siNbDendrites; i++)
+            (*pNeurone).tablfPoids[i] = VAL_POIDS_DEFAUT;
+    else
+        //si tab != null alors on récupère les coeffs
+        for(i = 0; i < siNbDendrites; i++)
+            (*pNeurone).tablfPoids[i] = tablfPoids[i];
+
+    return PAS_D_ERREUR;
 }
 
 T_ERREUR DesinitNeurone ( T_NEURONE * pNeurone )

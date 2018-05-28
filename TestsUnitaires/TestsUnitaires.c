@@ -18,9 +18,13 @@ T_ERREUR executerTests (void)
     if ( resultat != PAS_D_ERREUR)
         printf ("-> Echec test AfficheCoucheNeurone (cause : %hd)\n", resultat);*/
 
-    resultat = testAfficheReseauNeurone();
+    /*resultat = testAfficheReseauNeurone();
     if( resultat != PAS_D_ERREUR)
-        printf("-> Echec test AfficheReseauNeuronne (cause : %hd)\n", resultat);
+        printf("-> Echec test AfficheReseauNeuronne (cause : %hd)\n", resultat);*/
+
+    resultat = testInitNeurone();
+    if( resultat != PAS_D_ERREUR)
+        printf("-> ECHEC TEST INIT NEURONE (cause %hd)\n", resultat);
 
     // Retourne le resultat des tests
     if (flag_echec_test != 0)
@@ -148,7 +152,31 @@ T_ERREUR testCalcPredictionCoucheNeurones ()
 
 T_ERREUR testInitNeurone ()
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    short int siNbDendrite = 3;
+    REEL tabPoids[3] = {0.02, 0.03, 0.05};
+    T_FONCTION_ACTIVATION *fonctionActivation = CalcLogistique;
+    T_FONCTION_ACTIVATION *deriveeActivation = CalcDeriveeLogistiqueViaValLogistique;
+
+    //T_NEURONE *ptrNeurone = NULL;
+    T_NEURONE monNeurone ;
+
+    InitNeurone(siNbDendrite, tabPoids, fonctionActivation,
+                deriveeActivation, &monNeurone);
+
+    if(monNeurone.siNbDendrites != 3
+       || monNeurone.F_Activation != fonctionActivation
+       || monNeurone.F_DeriveeActivation != deriveeActivation)
+       return ERREUR_NEURONE_MAL_INITIALISE;
+    else if(monNeurone.tablfPoids == NULL
+       || monNeurone.tablfPoids[0] != 0.02
+       || monNeurone.tablfPoids[1] != 0.03
+       || monNeurone.tablfPoids[2] != 0.05)
+        return ERREUR_INDETERMINEE;
+    else
+    {
+        AfficheNeurone(monNeurone);
+        return PAS_D_ERREUR;
+    }
 }
 
 T_ERREUR testDesinitNeurone ()
