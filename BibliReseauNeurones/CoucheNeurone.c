@@ -4,6 +4,9 @@
                    et des fonctions de gestion associées
 *******************************************************************/
 #include "CoucheNeurone.h"
+#include <stdlib.h>
+#include <string.h>
+
 
 T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeurones                 ,
                              char                              * pszDescription                     ,
@@ -17,7 +20,57 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
                              T_FONCTION_ACTIVATION             * Fonction_Derivee_ActivationNeurone ,
                              T_COUCHE_NEURONES                 * pCoucheNeurones                    )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    int i,j;
+
+    (*pCoucheNeurones).typeCoucheNeurones = typeCoucheNeurones;
+     strcpy( (*pCoucheNeurones).szDescription, pszDescription);
+    (*pCoucheNeurones).pCoucheNeuronesAmont = pCoucheNeuronesAmont;
+    (*pCoucheNeurones).F_ActivationVectorielle = F_ActivationVectorielle;
+    (*pCoucheNeurones).F_Derivee_ActivationVectorielle = F_Derivee_ActivationVectorielle;
+    (*pCoucheNeurones).siNbNeurones = siNbNeurones;
+    (*pCoucheNeurones).siNbDendritesParNeurone = siNbDendritesParNeurone;
+
+    // Initialisation des neurones
+    for (i=0; i<siNbNeurones; i++)
+    {
+        InitNeurone((*pCoucheNeurones).siNbDendritesParNeurone,
+                     mat2DlfPoids[i],
+                     Fonction_ActivationNeurone,
+                     Fonction_Derivee_ActivationNeurone,
+                    &(*pCoucheNeurones).pNeurones[i]);
+
+        for (j=0; j<siNbDendritesParNeurone; j++)
+        {
+            (*pCoucheNeurones).pNeurones[i].tablfPoids[j] = mat2DlfPoids[i][j];
+
+        }
+    }
+
+    // Allocation de plfOutputSample
+    (*pCoucheNeurones).plfOutputSample = malloc(siNbNeurones*sizeof(REEL));
+
+    if ((*pCoucheNeurones).plfOutputSample == NULL) // En cas d'echec, annuler toute l'init
+    {
+        for (i=0; i<siNbNeurones; i++)
+            DesinitNeurone(&(*pCoucheNeurones).pNeurones[i]);
+
+        return ERREUR_ALLOCATION_MEMOIRE_COUCHE;
+    }
+
+    // Allocationn de plfErreurDeltaSample
+    (*pCoucheNeurones).plfErreurDeltaSample = malloc(siNbNeurones*sizeof(REEL));
+
+    if ((*pCoucheNeurones).plfErreurDeltaSample == NULL) // En cas d'echec, annuler toute l'init
+    {
+        free((*pCoucheNeurones).plfOutputSample);
+        for (i=0; i<siNbNeurones; i++)
+            DesinitNeurone(&(*pCoucheNeurones).pNeurones[i]);
+
+        return ERREUR_ALLOCATION_MEMOIRE_COUCHE;
+    }
+
+
+    return PAS_D_ERREUR ;
 }
 
 T_ERREUR DesinitCoucheNeurone ( T_COUCHE_NEURONES * pCoucheNeurones )

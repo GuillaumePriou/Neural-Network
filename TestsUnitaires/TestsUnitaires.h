@@ -13,6 +13,7 @@
 /*********************************************************************************
     CoucheNeurone
 *********************************************************************************/
+T_ERREUR testInitCoucheNeurone ();
 T_ERREUR testDesinitCoucheNeurone ();
 T_ERREUR testAfficheCoucheNeurone ();
 T_ERREUR testSauveFicTexteCoucheNeurones ();
@@ -39,7 +40,8 @@ T_ERREUR testCalcPredictionCoucheNeurones ();
     Neurone
 *********************************************************************************/
 T_ERREUR executerTests (void);
-T_ERREUR testInitNeurone (void);
+T_ERREUR testInitNeuroneTabPoidsOk (void);
+T_ERREUR testInitNeuroneTabPoidsNull(void);
 T_ERREUR testDesinitNeurone (void);
 T_ERREUR testAfficheNeurone (void);
 T_ERREUR testSauveFicTexteNeurone (void);

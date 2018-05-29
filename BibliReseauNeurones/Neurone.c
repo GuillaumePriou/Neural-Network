@@ -44,7 +44,15 @@ T_ERREUR InitNeurone ( short int               siNbDendrites               ,
 
 T_ERREUR DesinitNeurone ( T_NEURONE * pNeurone )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    free( (pNeurone)->tablfPoids );
+
+    (*pNeurone).tablfPoids = NULL;
+
+    (*pNeurone).siNbDendrites = 0;
+    (*pNeurone).F_Activation = NULL;
+    (*pNeurone).F_DeriveeActivation = NULL;
+
+    return PAS_D_ERREUR;
 }
 
 T_ERREUR AfficheNeurone ( T_NEURONE LeNeurone )
@@ -90,6 +98,22 @@ T_ERREUR CalcPredictionNeurone ( REEL      * tablfX        ,
                                  REEL      * plfPrediction )
 {
     return ERREUR_FONCTION_NON_DEFINIE ;
+}
+
+
+short CmpNeurone ( T_NEURONE   LeNeuroneA ,
+                   T_NEURONE   LeNeuroneB )
+{
+    if( LeNeuroneA.siNbDendrites != LeNeuroneB.siNbDendrites
+        || LeNeuroneA.F_Activation != LeNeuroneB.F_Activation
+        || LeNeuroneA.F_DeriveeActivation != LeNeuroneB.F_DeriveeActivation )
+      return 1;
+
+    int i;
+    for (i=0; i<LeNeuroneA.siNbDendrites; i++)
+        if(LeNeuroneA.tablfPoids[i] != LeNeuroneB.tablfPoids[i] )
+            return 1;
+    return 0;
 }
 
 /***************************************************

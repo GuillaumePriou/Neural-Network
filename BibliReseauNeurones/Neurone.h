@@ -167,6 +167,26 @@ T_ERREUR CalcPredictionNeurone ( REEL      * tablfX        ,
                                  T_NEURONE   LeNeurone     ,
                                  REEL      * plfPrediction ) ;
 
+
+
+/***************************************************
+                 CmpNeurone
+  Compare deux neurones
+
+ENTREE :
+- Neurone 1
+- Neurone 2
+SORTIE :
+- Int 0 si égale, 1 sinon
+VALEUR RETOURNEE :
+PAS_D_ERREUR = OK
+ERREUR_NB_DENDRITES = la taille du tableau tablfX
+                      differe du nombre de dendrites
+***************************************************/
+
+short CmpNeurone ( T_NEURONE   LeNeuroneA ,
+                   T_NEURONE   LeNeuroneB );
+
 #endif // NEURONE_H_INCLUDED
 
 /***************************************************
