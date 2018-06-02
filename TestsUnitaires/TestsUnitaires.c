@@ -23,28 +23,28 @@ T_ERREUR executerTests (void)
     if( resultat != PAS_D_ERREUR)
         printf("-> Echec test AfficheReseauNeuronne (cause : %hd)\n", resultat);*/
 
-    printf ("Test de testInitNeuroneTabPoidsOk...");
+    printf ("%-40s", "Test de testInitNeuroneTabPoidsOk...");
     resultat = testInitNeuroneTabPoidsOk();
     if( resultat != PAS_D_ERREUR)
         printf("-> ECHEC TEST INIT NEURONE (cause %hd)\n", resultat);
     else
         printf("ok\n");
 
-    printf ("Test de testInitNeuroneTabPoidsNull...");
+    printf ("%-40s", "Test de testInitNeuroneTabPoidsNull...");
     resultat = testInitNeuroneTabPoidsNull();
     if( resultat != PAS_D_ERREUR)
         printf("-> ECHEC TEST INIT NEURONE (cause %hd)\n", resultat);
     else
         printf("ok\n");
 
-    printf ("Test de testDesinitNeurone...");
+    printf ("%-40s", "Test de testDesinitNeurone...");
     resultat = testDesinitNeurone();
     if(resultat != PAS_D_ERREUR)
             printf("-> Echec test desinit neurone (cause %hd) \n", resultat);
     else
         printf("ok\n");
 
-    printf ("Test de testInitCoucheNeurone...\n");
+    printf ("%-40s", "Test de testInitCoucheNeurone...\n");
     resultat = testInitCoucheNeurone();
     if(resultat != PAS_D_ERREUR)
             printf("-> Echec test init couche neurone (cause %hd) \n", resultat);
@@ -79,7 +79,6 @@ T_ERREUR executerTests (void)
 
 T_ERREUR testInitCoucheNeurone ()
 {
-    printf ("Variables de test initialisees...");
     // Creation d'une couche de neurones pour tester initCoucheNeurone
     REEL tabCoef[3]={ 0.2, 0.3, 0.4 } ;
     T_NEURONE tabNeurones[3] = {{ 3,
@@ -113,9 +112,6 @@ T_ERREUR testInitCoucheNeurone ()
 
     T_COUCHE_NEURONES coucheNeuroneAInitialiser ;
 
-    printf (" ok\n") ;
-    printf ("Execution de InitCoucheNeurone...");
-
     T_ERREUR resultat = InitCoucheNeurone ( coucheEntreeATester.typeCoucheNeurones,
                                             coucheEntreeATester.szDescription,
                                             coucheEntreeATester.pCoucheNeuronesAmont,
@@ -127,7 +123,6 @@ T_ERREUR testInitCoucheNeurone ()
                                             NULL,
                                             NULL,
                                             &coucheNeuroneAInitialiser);
-    printf (" ok\n") ;
 
     if (   coucheEntreeATester.typeCoucheNeurones != coucheNeuroneAInitialiser.typeCoucheNeurones
         || 0 != strcmp(coucheEntreeATester.szDescription, coucheNeuroneAInitialiser.szDescription)

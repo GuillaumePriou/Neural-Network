@@ -13,19 +13,14 @@ T_ERREUR InitNeurone ( short int               siNbDendrites               ,
                        T_NEURONE             * pNeurone                    )
 {
     int i = 0;
-    printf ("\nFonction activation : %p\n",Fonction_Activation);
-    printf ("\n(*pNeurone).F_Activation  : %p\n",(*pNeurone).F_Activation ); // Plante aussi
 
     // Meme les neurones de la couche d'entree ont au moins une dendrite
     if (siNbDendrites < 1)
         return ERREUR_NB_DENDRITES ;
 
     // Remplissage du neurone avec les bonnes valeurs (etape 2)
-    printf ("A");
-    (*pNeurone).F_Activation = Fonction_Activation; // Plante ici
-    printf ("B");
+    (*pNeurone).F_Activation = Fonction_Activation;
     (*pNeurone).F_DeriveeActivation = Fonction_Derivee_Activation;
-    printf ("C");
     (*pNeurone).siNbDendrites = siNbDendrites;
 
     //allocation mémoire pour tableau de coefficients du neurone (etape 3)
