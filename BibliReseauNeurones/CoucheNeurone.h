@@ -72,6 +72,7 @@ ENTREE :
 - nombre de neurones dans la couche (siNbNeurones), 0 si pas de neurone
 - Nombre de dendrites par neurone (siNbDendritesParNeurone), 0 si pas de dendrite
 - matrice 2D des (siNbDendrites x siNbNeurones) poids (mat2DlfPoids)
+  NULL si l'on initialise une matrice d'entree
 - la fonction d'activation des neurones (Fonction_Activation), NULL si pas de fonction
 - la derivee de la fonction d'activation des neurones (Fonction_Derivee_Activation)
   NULL si pas de fonction
@@ -89,6 +90,17 @@ IMPORTANT : les pointeurs pCoucheNeuronesAmont, F_ActivationVectorielle,
             F_Derivee_ActivationVectorielle, mat2DlfPoids, Fonction_ActivationNeurone,
             Fonction_Derivee_ActivationNeurone sont supposes valides s'ils sont utilises
 
+NOTE :
+    La creation d'une couche de neurones se compose de 6 etapes :
+    1. Allouer la memoire a la couche de neurones
+    2. Initialiser les attributs de la couche de neurones, sauf :
+        - tableau de neurones
+        - tableau de stockage de la sortie de la couche (predictions)
+        - tableau de stockage de l'erreur de prediction de la couche
+    3. Allouer la memoire pour le tableau de neurones
+    4. Initialiser les neurones
+    5. Allouer la memoire pour les predictions de la couche (inutile d'initialiser)
+    6. Allouer la memoire pour l'erreur de prediction (inutile d'initialiser)
 ***************************************************/
 
 T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeurones                 ,

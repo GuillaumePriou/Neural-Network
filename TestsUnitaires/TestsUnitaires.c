@@ -23,21 +23,40 @@ T_ERREUR executerTests (void)
     if( resultat != PAS_D_ERREUR)
         printf("-> Echec test AfficheReseauNeuronne (cause : %hd)\n", resultat);*/
 
-    /*resultat = testInitNeuroneTabPoidsOk();
+    printf ("Test de testInitNeuroneTabPoidsOk...");
+    resultat = testInitNeuroneTabPoidsOk();
     if( resultat != PAS_D_ERREUR)
         printf("-> ECHEC TEST INIT NEURONE (cause %hd)\n", resultat);
+    else
+        printf("ok\n");
 
+    printf ("Test de testInitNeuroneTabPoidsNull...");
     resultat = testInitNeuroneTabPoidsNull();
     if( resultat != PAS_D_ERREUR)
-        printf("-> ECHEC TEST INIT NEURONE (cause %hd)\n", resultat);*/
+        printf("-> ECHEC TEST INIT NEURONE (cause %hd)\n", resultat);
+    else
+        printf("ok\n");
 
-    /*resultat = testDesinitNeurone();
+    printf ("Test de testDesinitNeurone...");
+    resultat = testDesinitNeurone();
     if(resultat != PAS_D_ERREUR)
-            printf("-> Echec test desinit neurone (cause %hd) \n", resultat);*/
+            printf("-> Echec test desinit neurone (cause %hd) \n", resultat);
+    else
+        printf("ok\n");
 
+    printf ("Test de testInitCoucheNeurone...\n");
     resultat = testInitCoucheNeurone();
     if(resultat != PAS_D_ERREUR)
             printf("-> Echec test init couche neurone (cause %hd) \n", resultat);
+    else
+        printf("ok\n");
+/*
+    resultat = testDesinitCoucheNeurone();
+    if(resultat != PAS_D_ERREUR)
+            printf("-> Echec test desinit couche neurone (cause %hd) \n", resultat);
+    else
+        printf("ok\n");
+*/
 
     // Retourne le resultat des tests
     if (flag_echec_test != 0)
@@ -60,6 +79,7 @@ T_ERREUR executerTests (void)
 
 T_ERREUR testInitCoucheNeurone ()
 {
+    printf ("Variables de test initialisees...");
     // Creation d'une couche de neurones pour tester initCoucheNeurone
     REEL tabCoef[3]={ 0.2, 0.3, 0.4 } ;
     T_NEURONE tabNeurones[3] = {{ 3,
@@ -93,6 +113,9 @@ T_ERREUR testInitCoucheNeurone ()
 
     T_COUCHE_NEURONES coucheNeuroneAInitialiser ;
 
+    printf (" ok\n") ;
+    printf ("Execution de InitCoucheNeurone...");
+
     T_ERREUR resultat = InitCoucheNeurone ( coucheEntreeATester.typeCoucheNeurones,
                                             coucheEntreeATester.szDescription,
                                             coucheEntreeATester.pCoucheNeuronesAmont,
@@ -104,6 +127,7 @@ T_ERREUR testInitCoucheNeurone ()
                                             NULL,
                                             NULL,
                                             &coucheNeuroneAInitialiser);
+    printf (" ok\n") ;
 
     if (   coucheEntreeATester.typeCoucheNeurones != coucheNeuroneAInitialiser.typeCoucheNeurones
         || 0 != strcmp(coucheEntreeATester.szDescription, coucheNeuroneAInitialiser.szDescription)
@@ -128,9 +152,56 @@ T_ERREUR testInitCoucheNeurone ()
 
 T_ERREUR testDesinitCoucheNeurone ()
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
-}
+/*
+    // Creation d'une couche de neurones pour tester DesInitCoucheNeurone
+    REEL tabCoef[3]={ 0.2, 0.3, 0.4 } ;
+    T_NEURONE tabNeurones[3] = {{ 3,
+                                 tabCoef ,
+                                 CalcLogistique ,
+                                 CalcDeriveeLogistiqueViaValLogistique
+                               },
+                               { 3,
+                                 tabCoef ,
+                                 CalcLogistique ,
+                                 CalcDeriveeLogistiqueViaValLogistique
+                               },
+                               { 3,
+                                 tabCoef ,
+                                 CalcLogistique ,
+                                 CalcDeriveeLogistiqueViaValLogistique
+                               }} ;
+    REEL tabOutput[3] = {1,2,3} ;
+    REEL tabErreur[3] = {4,5,6} ;
 
+    T_COUCHE_NEURONES coucheEntreeADesinit = {COUCHE_ENTREE,
+                                             "couche d'entree",
+                                             NULL,
+                                             NULL,
+                                             NULL,
+                                             3,
+                                             3,
+                                             tabNeurones,
+                                             tabOutput,
+                                             tabErreur};
+
+    T_ERREUR resultat = DesinitCoucheNeurone(&coucheEntreeADesinit);
+
+    if (   coucheEntreeADesinit.typeCoucheNeurones != COUCHE_NON_INITIALISEE
+        || 0 != strcmp(coucheEntreeADesinit.szDescription, "Couche desinitialisee")
+        || coucheEntreeADesinit.pCoucheNeuronesAmont != NULL
+        || coucheEntreeADesinit.F_ActivationVectorielle != NULL
+        || coucheEntreeADesinit.F_Derivee_ActivationVectorielle != NULL
+        || coucheEntreeADesinit.siNbNeurones != 0
+        || coucheEntreeADesinit.siNbDendritesParNeurone != 0
+        || coucheEntreeADesinit.pNeurones != NULL
+        || coucheEntreeADesinit.plfOutputSample != NULL
+        || coucheEntreeADesinit.plfErreurDeltaSample != NULL
+        )
+        return ERREUR_POINTEUR_NON_INITIALISE ;
+    else
+*/
+        return PAS_D_ERREUR;
+}
 T_ERREUR testAfficheCoucheNeurone ()
 {
     short int resultat = 0;
@@ -252,7 +323,7 @@ T_ERREUR testInitNeuroneTabPoidsOk()
         return ERREUR_INDETERMINEE;
     else
     {
-        AfficheNeurone(monNeurone);
+        //AfficheNeurone(monNeurone);
         return PAS_D_ERREUR;
     }
 }
@@ -280,7 +351,7 @@ T_ERREUR testInitNeuroneTabPoidsNull()
         return ERREUR_INDETERMINEE;
     else
     {
-        AfficheNeurone(monNeurone);
+        //AfficheNeurone(monNeurone);
         return PAS_D_ERREUR;
     }
 }

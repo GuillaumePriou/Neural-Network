@@ -34,6 +34,7 @@ typedef struct TagNeurone
            Initialisation d'un neurone
 ENTREE :
 - Nombre de dendrites (siNbDendrites)
+    Valeur minimum : 1
 - tableau des siNbDendrites poids (tablfPoids)
 - la fonction d'activation (Fonction_Activation)
 - la derivee de la fonction d'activation (Fonction_Derivee_Activation)
@@ -47,6 +48,17 @@ IMPORTANT : le pointeur pNeurone est suppose valide
 
 Si le tableau tablfPoids d'initialisation des poids est NULL,
 on initialise tous les poids a la valeur par defaut : VAL_POIDS_DEFAUT
+
+Note :
+    La creation d'un neurone est comosee de 4 etapes :
+    1. Allouer la memoire au neurone, sauf pour ses coefficients
+       (stockes dans une autre variable tableau de taille variable)
+    2. Initialiser les parametres du neurone (hors coefficients)
+    3. Allouer la memoire pour les coefficients du neurone
+    4. Initialiser les coefficients
+
+    InitNeurones ne gère que les etapes 2 à 4. L'etape 1 est geree
+    par la fonction appelant InitNeurone (InitCouche typiquement)
 
 ***************************************************/
 
