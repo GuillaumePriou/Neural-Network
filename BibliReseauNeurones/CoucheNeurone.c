@@ -111,7 +111,7 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
 
 T_ERREUR DesinitCoucheNeurone ( T_COUCHE_NEURONES * pCoucheNeurones )
 {
-    /*
+
     // Sa couche est bizarre, revoie une erreur
     if ((*pCoucheNeurones).typeCoucheNeurones == COUCHE_NON_INITIALISEE)
         return ERREUR_TYPE_COUCHE_INCONNU ;
@@ -134,7 +134,7 @@ T_ERREUR DesinitCoucheNeurone ( T_COUCHE_NEURONES * pCoucheNeurones )
     (*pCoucheNeurones).plfOutputSample = NULL;
     (*pCoucheNeurones).plfErreurDeltaSample = NULL ;
 
-    */
+
     return PAS_D_ERREUR ;
 }
 T_ERREUR AfficheCoucheNeurone ( T_COUCHE_NEURONES LaCoucheNeurones ,

@@ -20,7 +20,8 @@ T_ERREUR executerTests (void)
                                           { &testAfficheReseauNeurone, "AfficheReseauNeurone..." , false},
                                           { &testInitNeurone         , "InitNeurone..."          , false},
                                           { &testDesinitNeurone      , "DesinitNeurone..."       , false},
-                                          { &testInitCoucheNeurone   , "InitCoucheNeurone..."    , false}/*,
+                                          { &testInitCoucheNeurone   , "InitCoucheNeurone..."    , false},
+                                          { &testDesinitCoucheNeurone, "DesinitCoucheNeurone..." , false}/*,
                                           { &, "Test de ..."},*/
                                         };
 
@@ -67,21 +68,21 @@ T_ERREUR execTest(T_GROUPE_TEST grp)
 T_ERREUR testInitCoucheNeurone ()
 {
     // Creation d'une couche de neurones pour tester initCoucheNeurone
-    REEL tabCoef[3]={ 0.2, 0.3, 0.4 } ;
-    T_NEURONE tabNeurones[3] = {{ 3,
+    REEL tabCoef[1]={1} ;
+    T_NEURONE tabNeurones[3] = {{ 1,
                                  tabCoef ,
-                                 CalcLogistique ,
-                                 CalcDeriveeLogistiqueViaValLogistique
+                                 CalcIdentite ,
+                                 CalcDeriveeIdentite
                                },
-                               { 3,
+                               { 1,
                                  tabCoef ,
-                                 CalcLogistique ,
-                                 CalcDeriveeLogistiqueViaValLogistique
+                                 CalcIdentite ,
+                                 CalcDeriveeIdentite
                                },
-                               { 3,
+                               { 1,
                                  tabCoef ,
-                                 CalcLogistique ,
-                                 CalcDeriveeLogistiqueViaValLogistique
+                                 CalcIdentite ,
+                                 CalcDeriveeIdentite
                                }} ;
     REEL tabOutput[3] = {1,2,3} ;
     REEL tabErreur[3] = {4,5,6} ;
@@ -91,8 +92,8 @@ T_ERREUR testInitCoucheNeurone ()
                                              NULL,
                                              NULL,
                                              NULL,
-                                             1,
                                              3,
+                                             1,
                                              tabNeurones,
                                              tabOutput,
                                              tabErreur};
@@ -107,8 +108,8 @@ T_ERREUR testInitCoucheNeurone ()
                                             coucheEntreeATester.siNbNeurones,
                                             coucheEntreeATester.siNbDendritesParNeurone,
                                             NULL,
-                                            NULL,
-                                            NULL,
+                                            CalcIdentite,
+                                            CalcDeriveeIdentite,
                                             &coucheNeuroneAInitialiser);
 
     if (   coucheEntreeATester.typeCoucheNeurones != coucheNeuroneAInitialiser.typeCoucheNeurones
@@ -134,23 +135,22 @@ T_ERREUR testInitCoucheNeurone ()
 
 T_ERREUR testDesinitCoucheNeurone ()
 {
-/*
     // Creation d'une couche de neurones pour tester DesInitCoucheNeurone
-    REEL tabCoef[3]={ 0.2, 0.3, 0.4 } ;
-    T_NEURONE tabNeurones[3] = {{ 3,
+    REEL tabCoef[1]={1} ;
+    T_NEURONE tabNeurones[3] = {{ 1,
                                  tabCoef ,
-                                 CalcLogistique ,
-                                 CalcDeriveeLogistiqueViaValLogistique
+                                 CalcIdentite ,
+                                 CalcDeriveeIdentite
                                },
-                               { 3,
+                               { 1,
                                  tabCoef ,
-                                 CalcLogistique ,
-                                 CalcDeriveeLogistiqueViaValLogistique
+                                 CalcIdentite ,
+                                 CalcDeriveeIdentite
                                },
-                               { 3,
+                               { 1,
                                  tabCoef ,
-                                 CalcLogistique ,
-                                 CalcDeriveeLogistiqueViaValLogistique
+                                 CalcIdentite ,
+                                 CalcDeriveeIdentite
                                }} ;
     REEL tabOutput[3] = {1,2,3} ;
     REEL tabErreur[3] = {4,5,6} ;
@@ -161,7 +161,7 @@ T_ERREUR testDesinitCoucheNeurone ()
                                              NULL,
                                              NULL,
                                              3,
-                                             3,
+                                             1,
                                              tabNeurones,
                                              tabOutput,
                                              tabErreur};
@@ -181,7 +181,7 @@ T_ERREUR testDesinitCoucheNeurone ()
         )
         return ERREUR_POINTEUR_NON_INITIALISE ;
     else
-*/
+
         return PAS_D_ERREUR;
 }
 
