@@ -34,6 +34,7 @@ typedef struct TagNeurone
            Initialisation d'un neurone
 ENTREE :
 - Nombre de dendrites (siNbDendrites)
+    Valeur minimum : 1
 - tableau des siNbDendrites poids (tablfPoids)
 - la fonction d'activation (Fonction_Activation)
 - la derivee de la fonction d'activation (Fonction_Derivee_Activation)

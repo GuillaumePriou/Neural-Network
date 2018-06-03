@@ -1,7 +1,7 @@
 /*******************************************************************
                               NEURONE.C
                  Definition des types de neurones
-              et des fonctions de gestion associées
+              et des fonctions de gestion associï¿½es
 *******************************************************************/
 #include "Neurone.h"
 #include <stdlib.h>
@@ -14,12 +14,16 @@ T_ERREUR InitNeurone ( short int               siNbDendrites               ,
 {
     int i = 0;
 
+    // Meme les neurones de la couche d'entree ont au moins une dendrite
+    if (siNbDendrites < 1)
+        return ERREUR_NB_DENDRITES ;
+
     // Remplissage du neurone avec les bonnes valeurs (etape 2)
     (*pNeurone).F_Activation = Fonction_Activation;
     (*pNeurone).F_DeriveeActivation = Fonction_Derivee_Activation;
     (*pNeurone).siNbDendrites = siNbDendrites;
 
-    //allocation mémoire pour tableau de coefficients du neurone (etape 3)
+    //allocation mï¿½moire pour tableau de coefficients du neurone (etape 3)
     (*pNeurone).tablfPoids = malloc(siNbDendrites * sizeof(REEL));
 
     if((*pNeurone).tablfPoids == NULL) // En cas de probleme d'allocation de memoire,
@@ -30,7 +34,7 @@ T_ERREUR InitNeurone ( short int               siNbDendrites               ,
         for(i = 0; i < siNbDendrites; i++)
             (*pNeurone).tablfPoids[i] = VAL_POIDS_DEFAUT;
     else
-        //si tab != null alors on récupère les coeffs
+        //si tab != null alors on rï¿½cupï¿½re les coeffs
         for(i = 0; i < siNbDendrites; i++)
             (*pNeurone).tablfPoids[i] = tablfPoids[i];
 

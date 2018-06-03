@@ -1,7 +1,7 @@
 /*******************************************************************
                               COUCHENEURONE.C
                 Definition des types "couches de neurones"
-                   et des fonctions de gestion associées
+                   et des fonctions de gestion associï¿½es
 *******************************************************************/
 #include "CoucheNeurone.h"
 #include <stdlib.h>

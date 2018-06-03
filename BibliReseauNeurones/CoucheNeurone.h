@@ -1,7 +1,7 @@
 /*******************************************************************
                               COUCHENEURONE.H
                 Definition des types "couches de neurones"
-                   et des fonctions de gestion associées
+                   et des fonctions de gestion associï¿½es
 *******************************************************************/
 #ifndef COUCHENEURONE_H_INCLUDED
 #define COUCHENEURONE_H_INCLUDED
@@ -92,7 +92,7 @@ IMPORTANT : les pointeurs pCoucheNeuronesAmont, F_ActivationVectorielle,
 
 NOTE :
     La creation d'une couche de neurones se compose de 6 etapes :
-    1. Allouer la memoire a la couche de neurones (n'est pas effectuée par le InitCoucheNeurone)
+    1. Allouer la memoire a la couche de neurones (n'est pas effectuï¿½e par le InitCoucheNeurone)
     2. Initialiser les attributs de la couche de neurones, sauf :
         - tableau de neurones
         - tableau de stockage de la sortie de la couche (predictions)
@@ -194,7 +194,7 @@ ERREUR_FICHIER_ECHEC_ECRITURE = echec ecriture dans le fichier
 ERREUR_TYPE_COUCHE_INCONNU = le type de la couche est inconnu
 
 ATTENTION : on ne sauvergarde que les informations suivantes :
-1/ le cle numérique (long int)
+1/ le cle numï¿½rique (long int)
 2/ le type de neurone (T_TYPE_COUCHE_NEURONES)
 3/ la description de la couche de neurones (char[TAILLE_TEXTE+1])
 4/ le nombre de neurones (short int)
