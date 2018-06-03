@@ -2,6 +2,17 @@
 #define TESTSUNITAIRES_H_INCLUDED
 
 #include "../BibliReseauNeurones/constantes.h"
+
+
+/*********************************************************************************
+    Fonctions de test general
+*********************************************************************************/
+/*
+    Execute tous les tests les uns apres les autres et revoie le resultat au main
+    => si echec d'un test, le programme ne devrait pas aller plus loin
+*/
+T_ERREUR executerTests (void);
+
 /*********************************************************************************
     Test Activation
 *********************************************************************************/
@@ -39,7 +50,7 @@ T_ERREUR testCalcPredictionCoucheNeurones ();
 /********************************************************************************
     Neurone
 *********************************************************************************/
-T_ERREUR executerTests (void);
+T_ERREUR testInitNeurone (void);
 T_ERREUR testInitNeuroneTabPoidsOk (void);
 T_ERREUR testInitNeuroneTabPoidsNull(void);
 T_ERREUR testDesinitNeurone (void);

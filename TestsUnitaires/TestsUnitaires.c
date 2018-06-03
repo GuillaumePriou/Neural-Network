@@ -6,6 +6,9 @@
 #include "../BibliReseauNeurones/ReseauNeurone.h"
 #include <string.h>
 
+/*********************************************************************************
+    Fonctions de test general
+*********************************************************************************/
 T_ERREUR executerTests (void)
 {
     short flag_echec_test = 0;
@@ -23,31 +26,33 @@ T_ERREUR executerTests (void)
     if( resultat != PAS_D_ERREUR)
         printf("-> Echec test AfficheReseauNeuronne (cause : %hd)\n", resultat);*/
 
-    printf ("%-40s", "Test de testInitNeuroneTabPoidsOk...");
-    resultat = testInitNeuroneTabPoidsOk();
+    printf ("%-40s", "Test de InitNeurone...");
+    resultat = testInitNeurone();
     if( resultat != PAS_D_ERREUR)
+    {
+        flag_echec_test = 1 ;
         printf("-> ECHEC TEST INIT NEURONE (cause %hd)\n", resultat);
+    }
     else
         printf("ok\n");
 
-    printf ("%-40s", "Test de testInitNeuroneTabPoidsNull...");
-    resultat = testInitNeuroneTabPoidsNull();
-    if( resultat != PAS_D_ERREUR)
-        printf("-> ECHEC TEST INIT NEURONE (cause %hd)\n", resultat);
-    else
-        printf("ok\n");
-
-    printf ("%-40s", "Test de testDesinitNeurone...");
+    printf ("%-40s", "Test de DesinitNeurone...");
     resultat = testDesinitNeurone();
     if(resultat != PAS_D_ERREUR)
+    {
+        flag_echec_test = 1 ;
             printf("-> Echec test desinit neurone (cause %hd) \n", resultat);
+    }
     else
         printf("ok\n");
 
-    printf ("%-40s", "Test de testInitCoucheNeurone...\n");
+    printf ("%-40s", "Test de InitCoucheNeurone...\n");
     resultat = testInitCoucheNeurone();
     if(resultat != PAS_D_ERREUR)
+    {
+        flag_echec_test = 1 ;
             printf("-> Echec test init couche neurone (cause %hd) \n", resultat);
+    }
     else
         printf("ok\n");
 /*
@@ -197,6 +202,7 @@ T_ERREUR testDesinitCoucheNeurone ()
 */
         return PAS_D_ERREUR;
 }
+
 T_ERREUR testAfficheCoucheNeurone ()
 {
     short int resultat = 0;
@@ -293,7 +299,27 @@ T_ERREUR testCalcPredictionCoucheNeurones ()
 /********************************************************************************
     Neurone
 *********************************************************************************/
+T_ERREUR testInitNeurone (void)
+{
+    short flag_echec_test = 0;
+    T_ERREUR resultat;
 
+    printf ("%-40s", "Test de InitNeuroneTabPoidsOk...");
+    resultat = testInitNeuroneTabPoidsOk();
+    if( resultat != PAS_D_ERREUR)
+        printf("-> ECHEC TEST INIT NEURONE (cause %hd)\n", resultat);
+    else
+        printf("ok\n");
+
+    printf ("%-40s", "Test de InitNeuroneTabPoidsNull...");
+    resultat = testInitNeuroneTabPoidsNull();
+    if( resultat != PAS_D_ERREUR)
+        printf("-> ECHEC TEST INIT NEURONE (cause %hd)\n", resultat);
+    else
+        printf("ok\n");
+
+    return resultat;
+}
 T_ERREUR testInitNeuroneTabPoidsOk()
 {
     short int siNbDendrite = 3;
