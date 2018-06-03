@@ -134,7 +134,6 @@ T_ERREUR DesinitCoucheNeurone ( T_COUCHE_NEURONES * pCoucheNeurones )
     (*pCoucheNeurones).plfOutputSample = NULL;
     (*pCoucheNeurones).plfErreurDeltaSample = NULL ;
 
-
     return PAS_D_ERREUR ;
 }
 T_ERREUR AfficheCoucheNeurone ( T_COUCHE_NEURONES LaCoucheNeurones ,

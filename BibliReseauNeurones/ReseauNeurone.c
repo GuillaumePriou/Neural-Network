@@ -5,6 +5,8 @@ Definition des fonctions de gestion des "reseaux de neurones"associées
 *******************************************************************/
 
 #include "ReseauNeurone.h"
+#include <string.h>
+#include <stdlib.h>
 
 T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeurones                        ,
                              char                                * pszDescription                            ,
@@ -21,7 +23,126 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
                              unsigned short int                    usiNbLots                                 ,
                              T_RESEAU_NEURONES                   * pReseauNeurones                           )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+
+    short int i = 0;
+    char str[TAILLE_TEXTE];
+    //etape 1 : remplissage des paramètres du reseau neurone
+
+    (*pReseauNeurones).typeReseauNeurones = typeReseauNeurones;
+    strcpy((*pReseauNeurones).szDescription, pszDescription);
+    (*pReseauNeurones).lfTauxApprentissage = lfTauxApprentissage;
+    (*pReseauNeurones).siNbCouches = siNbCouches;
+    (*pReseauNeurones).lfCoutCumule = 0;
+    (*pReseauNeurones).usiNbLots = usiNbLots;
+
+    //etape 2 : allocation memoire couches neurones (alloc dynamique)
+
+    (*pReseauNeurones).pCouchesNeurones = malloc(siNbCouches*sizeof(T_COUCHE_NEURONES));
+
+    if ((*pReseauNeurones).pCouchesNeurones == NULL)
+    {
+        DesInitParametresReseauNeuronesNiveauUn (pReseauNeurones);
+        return ERREUR_ALLOCATION_MEMOIRE_RESEAU;
+    }
+
+    //etape 3 : parametrage des couches neurones
+
+    InitCoucheNeurone(COUCHE_ENTREE,
+                      "couche d'entree, indice 0",
+                      NULL,
+                      NULL,
+                      NULL,
+                      tabsiNbNeurones[0],
+                      1,
+                      (REEL**) &(mat3DlfPoids[0]),
+                      CalcIdentite,
+                      CalcDeriveeIdentite,
+                      &(((*pReseauNeurones).pCouchesNeurones)[0])
+                      );
+
+    for(i = 1; i<siNbCouches-1; i++)
+    {
+        sprintf(str, "%hd", i);
+        InitCoucheNeurone(COUCHE_CACHEE,
+                          str,
+                          &(((*pReseauNeurones).pCouchesNeurones)[i-1]),
+                          NULL,
+                          NULL,
+                          tabsiNbNeurones[i],
+                          tabsiNbNeurones[i-1],
+                          (REEL**) &(mat3DlfPoids[i]),
+                          Fonction_ActivationNeurone_Cache,
+                          Fonction_Derivee_ActivationNeurone_Cache,
+                          &(((*pReseauNeurones).pCouchesNeurones)[i])
+                          );
+    }
+
+    sprintf(str, "%hd", i);
+    InitCoucheNeurone(COUCHE_SORTIE,
+                      str,
+                      &(((*pReseauNeurones).pCouchesNeurones)[i-1]),
+                      F_ActivationVectorielle,
+                      F_Derivee_ActivationVectorielle,
+                      tabsiNbNeurones[i],
+                      tabsiNbNeurones[i-1],
+                      (REEL**) &(mat3DlfPoids[i]),
+                      Fonction_ActivationNeurone_Sortie,
+                      Fonction_Derivee_ActivationNeurone_Sortie,
+                      &(((*pReseauNeurones).pCouchesNeurones)[i])
+                      );
+
+    //etape 4 : allocation memoire tableau prediction valeurs finales
+
+    (*pReseauNeurones).plfPredictionFinale = malloc((1+tabsiNbNeurones[i]) * sizeof(REEL));
+
+    if ((*pReseauNeurones).plfPredictionFinale == NULL)
+    {
+        DesInitTabPredictionsNiveauDeux(pReseauNeurones, siNbCouches);
+        return ERREUR_ALLOCATION_MEMOIRE_RESEAU;
+    }
+
+    //etape 5 : allocation memoire tableau vraies valeurs finales
+
+    (*pReseauNeurones).plfVraieValeurFinale = malloc((1+tabsiNbNeurones[i]) * sizeof(REEL));
+
+
+    if ((*pReseauNeurones).plfVraieValeurFinale == NULL)
+    {
+        DesInitTabVraiesValeursNiveauTrois (pReseauNeurones, siNbCouches);
+        return ERREUR_ALLOCATION_MEMOIRE_RESEAU;
+    }
+
+    //etape 6 : allocation memoire pour tableau des gradients
+
+    (*pReseauNeurones).pGradientsPoidsCumules = malloc(siNbCouches * sizeof(REEL***));
+
+
+    if ((*pReseauNeurones).plfVraieValeurFinale == NULL)
+    {
+        free((*pReseauNeurones).plfPredictionFinale);
+
+        for(i = 1; i<siNbCouches-1; i++)
+            DesinitCoucheNeurone(&(((*pReseauNeurones).pCouchesNeurones)[i]));
+
+        free((*pReseauNeurones).pCouchesNeurones);
+
+        (*pReseauNeurones).typeReseauNeurones = RESEAU_NON_INITIALISE;
+        strcpy((*pReseauNeurones).szDescription, "");
+        (*pReseauNeurones).lfTauxApprentissage = 0;
+        (*pReseauNeurones).siNbCouches = 0;
+        (*pReseauNeurones).lfCoutCumule = 0;
+        (*pReseauNeurones).usiNbLots = 0;
+
+        return ERREUR_ALLOCATION_MEMOIRE_RESEAU;
+    }
+
+
+    //etape 7 : initialisation a 0 des gradients
+
+
+
+
+    return PAS_D_ERREUR;
 }
 
 T_ERREUR DesinitReseauNeurone ( T_RESEAU_NEURONES * pReseauNeurones )
@@ -136,6 +257,37 @@ T_ERREUR ApprentissageJeuDeDonnees ( long int                                   
                                      unsigned char                              cParam                                 )
 {
     return ERREUR_FONCTION_NON_DEFINIE ;
+}
+
+void DesInitParametresReseauNeuronesNiveauUn (T_RESEAU_NEURONES * pReseauNeurones)
+{
+    (*pReseauNeurones).typeReseauNeurones = RESEAU_NON_INITIALISE;
+    strcpy((*pReseauNeurones).szDescription, "");
+    (*pReseauNeurones).lfTauxApprentissage = 0;
+    (*pReseauNeurones).siNbCouches = 0;
+    (*pReseauNeurones).lfCoutCumule = 0;
+    (*pReseauNeurones).usiNbLots = 0;
+}
+
+void DesInitTabPredictionsNiveauDeux (T_RESEAU_NEURONES * pReseauNeurones, short siNbCouches)
+{
+    short i ;
+
+    for(i = 1; i<siNbCouches-1; i++)
+        DesinitCoucheNeurone(&(((*pReseauNeurones).pCouchesNeurones)[i]));
+
+    free((*pReseauNeurones).pCouchesNeurones);
+    (*pReseauNeurones).pCouchesNeurones = NULL;
+
+    DesInitParametresReseauNeuronesNiveauUn (pReseauNeurones);
+}
+
+void DesInitTabVraiesValeursNiveauTrois (T_RESEAU_NEURONES * pReseauNeurones, short siNbCouches)
+{
+    free((*pReseauNeurones).plfPredictionFinale);
+    (*pReseauNeurones).plfPredictionFinale = NULL ;
+
+    DesInitTabPredictionsNiveauDeux(pReseauNeurones, siNbCouches);
 }
 
 /***************************************************

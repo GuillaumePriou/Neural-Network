@@ -29,8 +29,8 @@ ENTREE :
   NULL si pas de fonction
 - matrice 3D des poids (mat3DlfPoids) :
   * mat3DlfPoids[i] contient la matrice 2D des poids synaptiques entre la couche (i-1) et la couche i
-  * Par exemple, mat2DlfPoids[0] contient les poids des dendrites enterl a couche d'entree (0)
-  et la premiere couche cachee (ou la couche de sorite si pas de couche cachee)
+  * Par exemple, mat2DlfPoids[0] contient les poids des dendrites enter la couche d'entree (0)
+  et la premiere couche cachee (ou la couche de sortie si pas de couche cachee)
   * Par exemple, mat3DlfPoids[siNbCouches-2] contient les poids des dendrites entre la derniere couche
   cachee (ou la couche d'entree si pas de couche cachee) (siNbCouches-2)
   et la  couche de sortie (siNbCouches-1)
@@ -418,6 +418,11 @@ T_ERREUR ApprentissageJeuDeDonnees ( long int                                   
                                      T_INJECTEUR_VRAIES_VALEURS_SORTIE_RESEAU * InjectionVraieValeurDansReseauNeurones ,
                                      T_FONCTION_COUT                          * FonctionDeCout                         ,
                                      unsigned char                              cParam                                 ) ;
+
+void DesInitParametresReseauNeuronesNiveauUn (T_RESEAU_NEURONES * pReseauNeurones);
+void DesInitTabPredictionsNiveauDeux (T_RESEAU_NEURONES * pReseauNeurones, short siNbCouches);
+void DesInitTabVraiesValeursNiveauTrois (T_RESEAU_NEURONES * pReseauNeurones, short siNbCouches);
+
 
 #endif // RESEAUNEURONE_H_INCLUDED
 
