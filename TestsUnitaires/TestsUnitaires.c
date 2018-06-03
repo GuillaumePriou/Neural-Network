@@ -15,12 +15,12 @@ T_ERREUR executerTests (void)
     T_ERREUR resultat = PAS_D_ERREUR ;
 
     T_GROUPE_TEST tabTest [NB_TESTS] =  {
-                                          { &testAfficheNeurone      , "Test de AfficheNeurone..."       , false},
-                                          { &testAfficheCoucheNeurone, "Test de AfficheCoucheNeurone..." , false},
-                                          { &testAfficheReseauNeurone, "Test de AfficheReseauNeurone..." , false},
-                                          { &testInitNeurone         , "Test de InitNeurone..."          , false},
-                                          { &testDesinitNeurone      , "Test de DesinitNeurone..."       , false},
-                                          { &testInitCoucheNeurone   , "Test de InitCoucheNeurone..."    , false}/*,
+                                          { &testAfficheNeurone      , "AfficheNeurone..."       , false},
+                                          { &testAfficheCoucheNeurone, "AfficheCoucheNeurone..." , false},
+                                          { &testAfficheReseauNeurone, "AfficheReseauNeurone..." , false},
+                                          { &testInitNeurone         , "InitNeurone..."          , false},
+                                          { &testDesinitNeurone      , "DesinitNeurone..."       , false},
+                                          { &testInitCoucheNeurone   , "InitCoucheNeurone..."    , false}/*,
                                           { &, "Test de ..."},*/
                                         };
 
@@ -36,15 +36,16 @@ T_ERREUR executerTests (void)
 T_ERREUR execTest(T_GROUPE_TEST grp)
 {
     // Affiche le test en cours
-    printf ("%-40s", grp.descriptionTest);
+    if (grp.subFctTest == false)
+    printf ("Test de %-40s", grp.descriptionTest);
 
     // Effectue le test
     T_ERREUR resultat = (*(grp.ptr_fct_test))();
 
     // Affiche le resultat : "ok" ou "Erreur : ..."
     if(resultat != PAS_D_ERREUR)
-            printf("-> Echec test init couche neurone (cause %hd) \n", resultat);
-    else
+            printf("-> Echec test %s (cause %hd) \n", grp.descriptionTest, resultat);
+    else if (grp.subFctTest == false)
         printf("ok\n");
 
     // Retourne le code d'erreur
@@ -285,6 +286,11 @@ T_ERREUR testInitNeurone (void)
     short flag_echec_test = 0;
     T_ERREUR resultat;
 
+    resultat = execTest({&testInitNeuroneTabPoidsOk, "InitNeuroneTabPoidsOk", true});
+
+    if (resultat == PAS_D_ERREUR)
+        execTest({&testInitNeuroneTabPoidsNull, "InitNeuroneTabPoidsNull", true});
+    /*
     printf ("%-40s", "Test de InitNeuroneTabPoidsOk...");
     resultat = testInitNeuroneTabPoidsOk();
     if( resultat != PAS_D_ERREUR)
@@ -299,6 +305,7 @@ T_ERREUR testInitNeurone (void)
     else
         printf("ok\n");
 
+    */
     return resultat;
 }
 T_ERREUR testInitNeuroneTabPoidsOk()

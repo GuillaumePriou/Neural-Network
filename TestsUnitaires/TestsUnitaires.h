@@ -20,7 +20,7 @@ typedef struct
 {
     T_FONCTION_TEST* ptr_fct_test;
     char descriptionTest[50];
-    bool afficherSeulementSiProbleme;
+    bool subFctTest;
 } T_GROUPE_TEST;
 
 /*********************************************************************************
