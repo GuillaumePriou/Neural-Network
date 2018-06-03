@@ -3,6 +3,25 @@
 
 #include "../BibliReseauNeurones/constantes.h"
 
+// Le nombre de tests
+#define NB_TESTS 6
+
+// Format des fonctions de test
+typedef T_ERREUR T_FONCTION_TEST(void) ;
+
+// Definition d'un type booleen
+typedef enum { false, true } bool;
+
+/*
+ Une structure contenant un pointeur vers une fonction de test
+ et une description succinte de ce qui est teste
+*/
+typedef struct
+{
+    T_FONCTION_TEST* ptr_fct_test;
+    char descriptionTest[50];
+    bool afficherSeulementSiProbleme;
+} T_GROUPE_TEST;
 
 /*********************************************************************************
     Fonctions de test general
@@ -12,6 +31,17 @@
     => si echec d'un test, le programme ne devrait pas aller plus loin
 */
 T_ERREUR executerTests (void);
+
+/*
+    execute la fonction de test donnee en parametre et se charge d'afficher le resultat
+
+    ENTREE :
+    - grp : structure contenant un pointeur vers la fonction de test a executer
+            ainsi que le teste a afficher selon le resultat
+    SORTIE :
+    Le code d'erreur renvoye par la fonction de test
+*/
+T_ERREUR execTest(T_GROUPE_TEST grp);
 
 /*********************************************************************************
     Test Activation
@@ -24,14 +54,14 @@ T_ERREUR executerTests (void);
 /*********************************************************************************
     CoucheNeurone
 *********************************************************************************/
-T_ERREUR testInitCoucheNeurone ();
-T_ERREUR testDesinitCoucheNeurone ();
-T_ERREUR testAfficheCoucheNeurone ();
-T_ERREUR testSauveFicTexteCoucheNeurones ();
-T_ERREUR testSauveNeuroneDansFicTexte ();
-T_ERREUR testSauveFicBinaireCoucheNeurones ();
-T_ERREUR testChargeFicBinaireCoucheNeurones ();
-T_ERREUR testCalcPredictionCoucheNeurones ();
+T_FONCTION_TEST testInitCoucheNeurone;
+T_FONCTION_TEST testDesinitCoucheNeurone;
+T_FONCTION_TEST testAfficheCoucheNeurone;
+T_FONCTION_TEST testSauveFicTexteCoucheNeurones;
+T_FONCTION_TEST testSauveNeuroneDansFicTexte;
+T_FONCTION_TEST testSauveFicBinaireCoucheNeurones;
+T_FONCTION_TEST testChargeFicBinaireCoucheNeurones;
+T_FONCTION_TEST testCalcPredictionCoucheNeurones;
 
 
 /*********************************************************************************
@@ -50,34 +80,34 @@ T_ERREUR testCalcPredictionCoucheNeurones ();
 /********************************************************************************
     Neurone
 *********************************************************************************/
-T_ERREUR testInitNeurone (void);
-T_ERREUR testInitNeuroneTabPoidsOk (void);
-T_ERREUR testInitNeuroneTabPoidsNull(void);
-T_ERREUR testDesinitNeurone (void);
-T_ERREUR testAfficheNeurone (void);
-T_ERREUR testSauveFicTexteNeurone (void);
-T_ERREUR testSauveFicBinaireNeurone (void);
-T_ERREUR testChargeFicBinaireNeurone (void);
-T_ERREUR testCalcPredictionNeurone (void);
+T_FONCTION_TEST testInitNeurone;
+T_FONCTION_TEST testInitNeuroneTabPoidsOk;
+T_FONCTION_TEST testInitNeuroneTabPoidsNull;
+T_FONCTION_TEST testDesinitNeurone;
+T_FONCTION_TEST testAfficheNeurone;
+T_FONCTION_TEST testSauveFicTexteNeurone;
+T_FONCTION_TEST testSauveFicBinaireNeurone;
+T_FONCTION_TEST testChargeFicBinaireNeurone;
+T_FONCTION_TEST testCalcPredictionNeurone;
 
 /*********************************************************************************
     ReseauNeurone
 *********************************************************************************/
-T_ERREUR testInitReseauNeurone (void);
-T_ERREUR testDesinitReseauNeurone (void);
-T_ERREUR testAfficheReseauNeurone (void);
-T_ERREUR testAfficheIntegralReseauNeurone (void);
-T_ERREUR testSauveFicTexteReseauNeurones (void);
-T_ERREUR testSauveCoucheNeuronesDansFicTexte (void);
-T_ERREUR testSauveFicBinaireReseauNeurones (void);
-T_ERREUR testSauveCoucheNeuronesDansFicBinaire (void);
-T_ERREUR testChargeFicBinaireReseauNeurones (void);
-T_ERREUR testChargeCoucheNeuronesDansFicBinaire (void);
-T_ERREUR testCalcPredictionReseauNeurones (void);
-T_ERREUR testRetroPropagationErreursEtGradients (void);
-T_ERREUR testInitAZeroGradientsPoidsCumules (void);
-T_ERREUR testCalcCorrectionPoidsSynaptiques (void);
-T_ERREUR testPredictionJeuDeDonnees (void);
-T_ERREUR testApprentissageJeuDeDonnees (void);
+T_FONCTION_TEST testInitReseauNeurone;
+T_FONCTION_TEST testDesinitReseauNeurone;
+T_FONCTION_TEST testAfficheReseauNeurone;
+T_FONCTION_TEST testAfficheIntegralReseauNeurone;
+T_FONCTION_TEST testSauveFicTexteReseauNeurones;
+T_FONCTION_TEST testSauveCoucheNeuronesDansFicTexte;
+T_FONCTION_TEST testSauveFicBinaireReseauNeurones;
+T_FONCTION_TEST testSauveCoucheNeuronesDansFicBinaire;
+T_FONCTION_TEST testChargeFicBinaireReseauNeurones;
+T_FONCTION_TEST testChargeCoucheNeuronesDansFicBinaire;
+T_FONCTION_TEST testCalcPredictionReseauNeurones;
+T_FONCTION_TEST testRetroPropagationErreursEtGradients;
+T_FONCTION_TEST testInitAZeroGradientsPoidsCumules;
+T_FONCTION_TEST testCalcCorrectionPoidsSynaptiques;
+T_FONCTION_TEST testPredictionJeuDeDonnees;
+T_FONCTION_TEST testApprentissageJeuDeDonnees;
 
 #endif // TESTSUNITAIRES_H_INCLUDED

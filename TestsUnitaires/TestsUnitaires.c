@@ -11,63 +11,44 @@
 *********************************************************************************/
 T_ERREUR executerTests (void)
 {
-    short flag_echec_test = 0;
-    T_ERREUR resultat;
+    short i=3 ;
+    T_ERREUR resultat = PAS_D_ERREUR ;
 
-    /*resultat = testAfficheNeurone();
-    if ( resultat != PAS_D_ERREUR)
-        printf ("-> Echec test AfficheNeurone (cause : %hd)\n", resultat);
+    T_GROUPE_TEST tabTest [NB_TESTS] =  {
+                                          { &testAfficheNeurone      , "Test de AfficheNeurone..."       , false},
+                                          { &testAfficheCoucheNeurone, "Test de AfficheCoucheNeurone..." , false},
+                                          { &testAfficheReseauNeurone, "Test de AfficheReseauNeurone..." , false},
+                                          { &testInitNeurone         , "Test de InitNeurone..."          , false},
+                                          { &testDesinitNeurone      , "Test de DesinitNeurone..."       , false},
+                                          { &testInitCoucheNeurone   , "Test de InitCoucheNeurone..."    , false}/*,
+                                          { &, "Test de ..."},*/
+                                        };
 
-    resultat = testAfficheCoucheNeurone();
-    if ( resultat != PAS_D_ERREUR)
-        printf ("-> Echec test AfficheCoucheNeurone (cause : %hd)\n", resultat);*/
-
-    /*resultat = testAfficheReseauNeurone();
-    if( resultat != PAS_D_ERREUR)
-        printf("-> Echec test AfficheReseauNeuronne (cause : %hd)\n", resultat);*/
-
-    printf ("%-40s", "Test de InitNeurone...");
-    resultat = testInitNeurone();
-    if( resultat != PAS_D_ERREUR)
+    while (resultat == PAS_D_ERREUR && i<NB_TESTS)
     {
-        flag_echec_test = 1 ;
-        printf("-> ECHEC TEST INIT NEURONE (cause %hd)\n", resultat);
+        execTest(tabTest[i]);
+        i++;
     }
-    else
-        printf("ok\n");
 
-    printf ("%-40s", "Test de DesinitNeurone...");
-    resultat = testDesinitNeurone();
-    if(resultat != PAS_D_ERREUR)
-    {
-        flag_echec_test = 1 ;
-            printf("-> Echec test desinit neurone (cause %hd) \n", resultat);
-    }
-    else
-        printf("ok\n");
+    return resultat;
+}
 
-    printf ("%-40s", "Test de InitCoucheNeurone...\n");
-    resultat = testInitCoucheNeurone();
+T_ERREUR execTest(T_GROUPE_TEST grp)
+{
+    // Affiche le test en cours
+    printf ("%-40s", grp.descriptionTest);
+
+    // Effectue le test
+    T_ERREUR resultat = (*(grp.ptr_fct_test))();
+
+    // Affiche le resultat : "ok" ou "Erreur : ..."
     if(resultat != PAS_D_ERREUR)
-    {
-        flag_echec_test = 1 ;
             printf("-> Echec test init couche neurone (cause %hd) \n", resultat);
-    }
     else
         printf("ok\n");
-/*
-    resultat = testDesinitCoucheNeurone();
-    if(resultat != PAS_D_ERREUR)
-            printf("-> Echec test desinit couche neurone (cause %hd) \n", resultat);
-    else
-        printf("ok\n");
-*/
 
-    // Retourne le resultat des tests
-    if (flag_echec_test != 0)
-        return ERREUR_INDETERMINEE;
-    else
-        return PAS_D_ERREUR;
+    // Retourne le code d'erreur
+    return resultat;
 }
 
 /*********************************************************************************
@@ -399,7 +380,7 @@ T_ERREUR testDesinitNeurone ()
         return PAS_D_ERREUR;
 }
 
-T_ERREUR testAfficheNeurone ()
+T_ERREUR testAfficheNeurone (void)
 {
     REEL tabCoef[3]={ 0.2, 0.3, 0.4 } ;
 
