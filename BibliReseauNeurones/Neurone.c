@@ -4,7 +4,6 @@
               et des fonctions de gestion associées
 *******************************************************************/
 #include "Neurone.h"
-#include "constantes.h"
 #include <stdlib.h>
 
 T_ERREUR InitNeurone ( short int               siNbDendrites               ,
@@ -15,23 +14,19 @@ T_ERREUR InitNeurone ( short int               siNbDendrites               ,
 {
     int i = 0;
 
-    // Remplissage du neurone avec les bonnes valeurs
+    // Remplissage du neurone avec les bonnes valeurs (etape 2)
     (*pNeurone).F_Activation = Fonction_Activation;
     (*pNeurone).F_DeriveeActivation = Fonction_Derivee_Activation;
     (*pNeurone).siNbDendrites = siNbDendrites;
 
-    //allocation mémoire pour tableau de coefficients du neurone
+    //allocation mémoire pour tableau de coefficients du neurone (etape 3)
     (*pNeurone).tablfPoids = malloc(siNbDendrites * sizeof(REEL));
 
-    // Remplissage du tableau de coefficients avec les bonnes valeurs
-    if((*pNeurone).tablfPoids == NULL)
-    {
-        //si rentre alors on libère la mémoire (pas d'allocation inutile)
-        return ERREUR_ALLOCATION_MEMOIRE_NEURONE;
-    }
+    if((*pNeurone).tablfPoids == NULL) // En cas de probleme d'allocation de memoire,
+        return ERREUR_ALLOCATION_MEMOIRE_NEURONE; // return une erreur
 
-    if(tablfPoids == NULL)
-        //si tab est null alors on remplis par des coeff par defaut
+    // Remplissage du tableau de coefficients avec les bonnes valeurs (etape 4)
+    if(tablfPoids == NULL) // Donner des coeff par defaut si aucune valeur donnee en parametre
         for(i = 0; i < siNbDendrites; i++)
             (*pNeurone).tablfPoids[i] = VAL_POIDS_DEFAUT;
     else

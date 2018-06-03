@@ -21,7 +21,27 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
                              T_COUCHE_NEURONES                 * pCoucheNeurones                    )
 {
     int i,j;
+    REEL tabDeBiais[1] = {1};
 
+    // Verifie la coherence des parametres d'initialisation
+    if (pCoucheNeurones == NULL)
+        return ERREUR_COUCHE_NEURONE_MAL_INITIALISEE;
+
+    switch (typeCoucheNeurones)
+    {
+        case COUCHE_ENTREE :    if (   mat2DlfPoids != NULL
+                                    || siNbDendritesParNeurone != 1
+                                    || Fonction_ActivationNeurone != CalcIdentite
+                                    || Fonction_Derivee_ActivationNeurone != CalcDeriveeIdentite)
+                                    return ERREUR_COUCHE_NEURONE_MAL_INITIALISEE;
+                                break;
+        default:    if (mat2DlfPoids == NULL)
+                        return ERREUR_COUCHE_NEURONE_MAL_INITIALISEE;
+                    break;
+    }
+
+
+    // Initialisation des attributs de la couche (hors neurones) (etape 2)
     (*pCoucheNeurones).typeCoucheNeurones = typeCoucheNeurones;
      strcpy( (*pCoucheNeurones).szDescription, pszDescription);
     (*pCoucheNeurones).pCoucheNeuronesAmont = pCoucheNeuronesAmont;
@@ -30,23 +50,36 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
     (*pCoucheNeurones).siNbNeurones = siNbNeurones;
     (*pCoucheNeurones).siNbDendritesParNeurone = siNbDendritesParNeurone;
 
-    // Initialisation des neurones
-    for (i=0; i<siNbNeurones; i++)
+    // Allocation memoire pour les neurones (etape 3)
+    (*pCoucheNeurones).pNeurones = malloc(siNbNeurones*sizeof(T_NEURONE));
+
+    // Initialisation des neurones (dans le cas ou ce n'est pas une couche d'entree)
+    //(etape 4)
+    switch (typeCoucheNeurones)
     {
-        InitNeurone((*pCoucheNeurones).siNbDendritesParNeurone,
-                     mat2DlfPoids[i],
-                     Fonction_ActivationNeurone,
-                     Fonction_Derivee_ActivationNeurone,
-                    &(*pCoucheNeurones).pNeurones[i]);
+        case COUCHE_ENTREE: //  Initialisation des neurones de la couche d'entree
+                            for (i=0; i<siNbNeurones; i++)
+                                InitNeurone( 1,
+                                             tabDeBiais,
+                                             CalcIdentite,
+                                             CalcDeriveeIdentite,
+                                            &((*pCoucheNeurones).pNeurones[i]));
+                            break;
 
-        for (j=0; j<siNbDendritesParNeurone; j++)
-        {
-            (*pCoucheNeurones).pNeurones[i].tablfPoids[j] = mat2DlfPoids[i][j];
-
-        }
+        case COUCHE_CACHEE: // Pas de break ici : COUCHE_CACHE et COUCHE_SORTIE ont
+        case COUCHE_SORTIE: // la meme procedure d'initialisation
+                            for (i=0; i<siNbNeurones; i++)
+                                InitNeurone((*pCoucheNeurones).siNbDendritesParNeurone,
+                                             mat2DlfPoids[i],
+                                             Fonction_ActivationNeurone,
+                                             Fonction_Derivee_ActivationNeurone,
+                                            &((*pCoucheNeurones).pNeurones[i]));
+                            break;
+        default:    return ERREUR_TYPE_COUCHE_INCONNU ;
+                        break;
     }
 
-    // Allocation de plfOutputSample
+    // Allocation de plfOutputSample (etape 5)
     (*pCoucheNeurones).plfOutputSample = malloc(siNbNeurones*sizeof(REEL));
 
     if ((*pCoucheNeurones).plfOutputSample == NULL) // En cas d'echec, annuler toute l'init
@@ -54,17 +87,20 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
         for (i=0; i<siNbNeurones; i++)
             DesinitNeurone(&(*pCoucheNeurones).pNeurones[i]);
 
+        free ((*pCoucheNeurones).pNeurones);
         return ERREUR_ALLOCATION_MEMOIRE_COUCHE;
     }
 
-    // Allocationn de plfErreurDeltaSample
+    // Allocation de plfErreurDeltaSample (etape 6)
     (*pCoucheNeurones).plfErreurDeltaSample = malloc(siNbNeurones*sizeof(REEL));
 
     if ((*pCoucheNeurones).plfErreurDeltaSample == NULL) // En cas d'echec, annuler toute l'init
     {
-        free((*pCoucheNeurones).plfOutputSample);
         for (i=0; i<siNbNeurones; i++)
             DesinitNeurone(&(*pCoucheNeurones).pNeurones[i]);
+
+        free ((*pCoucheNeurones).pNeurones);
+        free((*pCoucheNeurones).plfOutputSample);
 
         return ERREUR_ALLOCATION_MEMOIRE_COUCHE;
     }
@@ -75,9 +111,32 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
 
 T_ERREUR DesinitCoucheNeurone ( T_COUCHE_NEURONES * pCoucheNeurones )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
-}
+    /*
+    // Sa couche est bizarre, revoie une erreur
+    if ((*pCoucheNeurones).typeCoucheNeurones == COUCHE_NON_INITIALISEE)
+        return ERREUR_TYPE_COUCHE_INCONNU ;
 
+    // Mettre a zero toutes les variables
+    (*pCoucheNeurones).typeCoucheNeurones = COUCHE_NON_INITIALISEE;
+    strcpy((*pCoucheNeurones).szDescription, "Couche desinitialisee");
+    (*pCoucheNeurones).pCoucheNeuronesAmont = NULL;
+    (*pCoucheNeurones).F_ActivationVectorielle = NULL;
+    (*pCoucheNeurones).F_Derivee_ActivationVectorielle = NULL;
+    (*pCoucheNeurones).siNbNeurones = 0 ;
+    (*pCoucheNeurones).siNbDendritesParNeurone = 0 ;
+
+    // Desallouer les tableaux dynamiquement alloues
+    free((*pCoucheNeurones).pNeurones);
+    free((*pCoucheNeurones).plfOutputSample);
+    free((*pCoucheNeurones).plfErreurDeltaSample);
+
+    (*pCoucheNeurones).pNeurones = NULL;
+    (*pCoucheNeurones).plfOutputSample = NULL;
+    (*pCoucheNeurones).plfErreurDeltaSample = NULL ;
+
+    */
+    return PAS_D_ERREUR ;
+}
 T_ERREUR AfficheCoucheNeurone ( T_COUCHE_NEURONES LaCoucheNeurones ,
                                 short int         siIndiceNeurone  ,
                                 short int         siIndiceCouche   )
