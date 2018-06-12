@@ -26,6 +26,10 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
 
     short int i = 0;
     char str[TAILLE_TEXTE];
+
+    if (siNbCouches < 2)
+        return ERREUR_NB_COUCHES;
+
     //etape 1 : remplissage des paramètres du reseau neurone
 
     (*pReseauNeurones).typeReseauNeurones = typeReseauNeurones;
@@ -111,36 +115,6 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
         DesInitTabVraiesValeursNiveauTrois (pReseauNeurones, siNbCouches);
         return ERREUR_ALLOCATION_MEMOIRE_RESEAU;
     }
-
-    //etape 6 : allocation memoire pour tableau des gradients
-
-    (*pReseauNeurones).pGradientsPoidsCumules = malloc(siNbCouches * sizeof(REEL***));
-
-
-    if ((*pReseauNeurones).plfVraieValeurFinale == NULL)
-    {
-        free((*pReseauNeurones).plfPredictionFinale);
-
-        for(i = 1; i<siNbCouches-1; i++)
-            DesinitCoucheNeurone(&(((*pReseauNeurones).pCouchesNeurones)[i]));
-
-        free((*pReseauNeurones).pCouchesNeurones);
-
-        (*pReseauNeurones).typeReseauNeurones = RESEAU_NON_INITIALISE;
-        strcpy((*pReseauNeurones).szDescription, "");
-        (*pReseauNeurones).lfTauxApprentissage = 0;
-        (*pReseauNeurones).siNbCouches = 0;
-        (*pReseauNeurones).lfCoutCumule = 0;
-        (*pReseauNeurones).usiNbLots = 0;
-
-        return ERREUR_ALLOCATION_MEMOIRE_RESEAU;
-    }
-
-
-    //etape 7 : initialisation a 0 des gradients
-
-
-
 
     return PAS_D_ERREUR;
 }

@@ -59,7 +59,6 @@ typedef struct TagReseauNeurone
     REEL                              * plfPredictionFinale           ;
     REEL                              * plfVraieValeurFinale          ;
     REEL                                lfCoutCumule                  ;
-    REEL                            *** pGradientsPoidsCumules        ;
     unsigned short int                  usiNbLots                     ;
 } T_RESEAU_NEURONES ;
 

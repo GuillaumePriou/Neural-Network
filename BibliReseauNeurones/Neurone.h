@@ -17,15 +17,22 @@ On suppose qu'il possede :
 - siNbDendrites dendrites
 - un vecteur des poids tablfPoids
   (en nombre egal a siNbDendrites)
+- un vecteur des gradients tablfGradients
+(un gradient par coefficient)
 - une fonction d'activation
 - une fonction donnant la valeur de la derivee de la
   fonction d'activation en fonction de la valeur de
   la fonction d'activation (et non de x)
+
+IMPORTANT : si le neurone se trouve dans une couche de sortie,
+            sa fonction d'activation n'est pas prise en compte
+            (la couche de sortie garde ce parametre en son sein)
 ***************************************************/
 typedef struct TagNeurone
 {
     short int               siNbDendrites ;
     REEL                  * tablfPoids ;
+    REEL                  * tablfGradients;
     T_FONCTION_ACTIVATION * F_Activation ;
     T_FONCTION_ACTIVATION * F_DeriveeActivation ;
 } T_NEURONE ;
@@ -55,9 +62,11 @@ Note :
        (stockes dans une autre variable tableau de taille variable)
     2. Initialiser les parametres du neurone (hors coefficients)
     3. Allouer la memoire pour les coefficients du neurone
-    4. Initialiser les coefficients
+    4. Allouer la memoire pour les gradients (correction des coeffs) du neurone
+    5. Initialiser les coefficients
+    6. Initialisation du tableau de gradient à 0
 
-    InitNeurones ne gère que les etapes 2 à 4. L'etape 1 est geree
+    InitNeurones ne gère que les etapes 2 à 6. L'etape 1 est geree
     par la fonction appelant InitNeurone (InitCouche typiquement)
 
 ***************************************************/

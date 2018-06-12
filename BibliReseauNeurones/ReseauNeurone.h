@@ -61,6 +61,14 @@ IMPORTANT : les pointeurs F_ActivationVectorielle, F_Derivee_ActivationVectoriel
             Fonction_ActivationNeurone_Sortie, Fonction_Derivee_ActivationNeurone_Sortie
             sont supposes valides s'ils sont utilises
 
+NOTE :
+    La creation d'un reseau de neurone se compose de ... etapes:
+    1. Remplissage des parametres du reseau de neurones (hors allocation dynamique)
+    2. Allocation memoire pour les couches de neurones du reseau de neurones
+    3. Initialisation des couches de neurones
+    4. Allocation memoire tableau prediction des valeurs finales
+    5. Allocation memoire tableau des vrais valeurs finales
+
 ***************************************************/
 
 T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeurones                        ,

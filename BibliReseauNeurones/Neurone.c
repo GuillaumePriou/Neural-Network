@@ -25,11 +25,20 @@ T_ERREUR InitNeurone ( short int               siNbDendrites               ,
 
     //allocation m�moire pour tableau de coefficients du neurone (etape 3)
     (*pNeurone).tablfPoids = malloc(siNbDendrites * sizeof(REEL));
-
-    if((*pNeurone).tablfPoids == NULL) // En cas de probleme d'allocation de memoire,
+     if((*pNeurone).tablfPoids == NULL) // En cas de probleme d'allocation de memoire,
         return ERREUR_ALLOCATION_MEMOIRE_NEURONE; // return une erreur
 
-    // Remplissage du tableau de coefficients avec les bonnes valeurs (etape 4)
+    //allocation memoire pour tableau de gradients du neurone (etape 4)
+    (*pNeurone).tablfGradients = malloc(siNbDendrites * sizeof(REEL));
+
+    if((*pNeurone).tablfGradients == NULL) // En cas de probleme d'allocation de memoire,
+    {
+        free((*pNeurone).tablfPoids);
+        return ERREUR_ALLOCATION_MEMOIRE_NEURONE;
+    } // return une erreur
+
+
+    // Remplissage du tableau de coefficients avec les bonnes valeurs (etape 5)
     if(tablfPoids == NULL) // Donner des coeff par defaut si aucune valeur donnee en parametre
         for(i = 0; i < siNbDendrites; i++)
             (*pNeurone).tablfPoids[i] = VAL_POIDS_DEFAUT;
@@ -38,14 +47,20 @@ T_ERREUR InitNeurone ( short int               siNbDendrites               ,
         for(i = 0; i < siNbDendrites; i++)
             (*pNeurone).tablfPoids[i] = tablfPoids[i];
 
+    // Initialisation du tableau de gradient a 0  (etape 6)
+    for(i = 0; i < siNbDendrites; i++)
+        (*pNeurone).tablfGradients[i] = 0;
+
     return PAS_D_ERREUR;
 }
 
 T_ERREUR DesinitNeurone ( T_NEURONE * pNeurone )
 {
     free( (pNeurone)->tablfPoids );
+    free( (pNeurone)->tablfGradients );
 
     (*pNeurone).tablfPoids = NULL;
+    (*pNeurone).tablfGradients = NULL;
 
     (*pNeurone).siNbDendrites = 0;
     (*pNeurone).F_Activation = NULL;
