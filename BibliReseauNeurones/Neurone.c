@@ -42,10 +42,17 @@ T_ERREUR InitNeurone ( short int               siNbDendrites               ,
     if(tablfPoids == NULL) // Donner des coeff par defaut si aucune valeur donnee en parametre
         for(i = 0; i < siNbDendrites; i++)
             (*pNeurone).tablfPoids[i] = VAL_POIDS_DEFAUT;
-    else
-        //si tab != null alors on r�cup�re les coeffs
+    else{
+         //si tab != null alors on r�cup�re les coeffs
+        //printf("(*pNeurone).tablfPoids = %p\n",(*pNeurone).tablfPoids);
+        //printf("(*pNeurone).tablfPoids[0] = %lf\n",(*pNeurone).tablfPoids[0]);
+        //printf("tablfPoids[0] = %lf\n",tablfPoids[0]);
         for(i = 0; i < siNbDendrites; i++)
             (*pNeurone).tablfPoids[i] = tablfPoids[i];
+    }
+
+
+
 
     // Initialisation du tableau de gradient a 0  (etape 6)
     for(i = 0; i < siNbDendrites; i++)

@@ -66,15 +66,22 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
                                             &((*pCoucheNeurones).pNeurones[i]));
                             break;
 
-        case COUCHE_CACHEE: // Pas de break ici : COUCHE_CACHE et COUCHE_SORTIE ont
-        case COUCHE_SORTIE: // la meme procedure d'initialisation
-                            for (i=0; i<siNbNeurones; i++)
+        case COUCHE_CACHEE: for (i=0; i<siNbNeurones; i++)
                                 InitNeurone((*pCoucheNeurones).siNbDendritesParNeurone,
-                                             mat2DlfPoids[i],
+                                             &(mat2DlfPoids[i]),
                                              Fonction_ActivationNeurone,
                                              Fonction_Derivee_ActivationNeurone,
                                             &((*pCoucheNeurones).pNeurones[i]));
                             break;
+
+        case COUCHE_SORTIE: for (i=0; i<siNbNeurones; i++)
+                                InitNeurone((*pCoucheNeurones).siNbDendritesParNeurone,
+                                             &(mat2DlfPoids[i]),
+                                             Fonction_ActivationNeurone,
+                                             Fonction_Derivee_ActivationNeurone,
+                                            &((*pCoucheNeurones).pNeurones[i]));
+                            break;
+
         default:    return ERREUR_TYPE_COUCHE_INCONNU ;
                         break;
     }
@@ -200,6 +207,26 @@ T_ERREUR ChargeFicBinaireCoucheNeurones ( T_COUCHE_NEURONES * LaCoucheNeurones ,
 T_ERREUR CalcPredictionCoucheNeurones ( T_COUCHE_NEURONES * pCoucheNeurones )
 {
     return ERREUR_FONCTION_NON_DEFINIE ;
+}
+
+short CmpCoucheNeurone ( T_COUCHE_NEURONES   coucheA ,
+                         T_COUCHE_NEURONES   coucheB )
+{
+    if( coucheA.typeCoucheNeurones != coucheB.typeCoucheNeurones
+        || strcmp(coucheA.szDescription, coucheB.szDescription)
+        //|| coucheA.pCoucheNeuronesAmont != coucheB.pCoucheNeuronesAmont
+        || coucheA.F_ActivationVectorielle != coucheB.F_ActivationVectorielle
+        || coucheA.F_Derivee_ActivationVectorielle != coucheB.F_Derivee_ActivationVectorielle
+        || coucheA.siNbNeurones != coucheB.siNbNeurones
+        || coucheA.siNbDendritesParNeurone != coucheB.siNbDendritesParNeurone
+    )
+      return 1;
+
+    int i;
+    for (i=0; i<coucheA.siNbNeurones; i++)
+        if(CmpNeurone(coucheA.pNeurones[i],coucheB.pNeurones[i]) != 0)
+            return 1;
+    return 0;
 }
 
 /***************************************************

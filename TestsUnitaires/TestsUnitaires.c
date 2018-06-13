@@ -458,10 +458,11 @@ T_ERREUR testCalcPredictionNeurone ()
 
 T_ERREUR testInitReseauNeurone ( )
 {
-    short tabSiNbNeurones[2] = {3, 2};
-    REEL matPoids[2][3] = {
+    short tabSiNbNeurones[3] = {3,3,2};
+    REEL matPoids[3][4] = {
                             {1,1,1},
-                            {11,12,13}
+                            {11,12,13},
+                            {11,12}
                           };
     // Définition des elements alloues dynamiquement par la couche d'entree à 3 neurones
     REEL tabOutputEntree[3] = {1,2,3} ;
@@ -503,24 +504,45 @@ T_ERREUR testInitReseauNeurone ( )
                                           { 3,
                                             tabPoidsSortie ,
                                             tabGradientsSortie,
-                                            CalcIdentite ,
-                                            CalcDeriveeIdentite
+                                            CalcLogistique ,
+                                            CalcDeriveeLogistiqueViaValLogistique
                                           },
                                           { 3,
                                             tabPoidsSortie ,
                                             tabGradientsSortie,
-                                            CalcIdentite ,
-                                            CalcDeriveeIdentite
+                                            CalcLogistique ,
+                                            CalcDeriveeLogistiqueViaValLogistique
+                                          }
+                                      } ;
+
+    REEL tabOutputCache[2] = {22,23} ;
+    REEL tabErreurCache[2] = {25,26} ;
+
+    REEL tabPoidsCache[3] = {11,12,13};
+    REEL tabGradientsCache[3] = {14,15,16};
+
+    T_NEURONE tabNeuronesCache[3] =  {
+                                          { 3,
+                                            tabPoidsCache ,
+                                            tabGradientsCache,
+                                            CalcLogistique ,
+                                            CalcDeriveeLogistiqueViaValLogistique
+                                          },
+                                          { 3,
+                                            tabPoidsCache ,
+                                            tabGradientsCache,
+                                            CalcLogistique ,
+                                            CalcDeriveeLogistiqueViaValLogistique
                                           }
                                       } ;
 
     // Creation des couches de neurones
-    T_COUCHE_NEURONES tabCouchesNeurones [2] =
+    T_COUCHE_NEURONES tabCouchesNeurones [3] =
         {
             // Couche d'entree
             {
                 COUCHE_ENTREE,
-                "Ma couche d'entree",
+                "couche d'entree, indice 0",
                 NULL,
                 NULL,
                 NULL,
@@ -530,14 +552,27 @@ T_ERREUR testInitReseauNeurone ( )
                 tabOutputEntree,
                 tabErreurEntree
             },
+             // Couche de caché
+            {
+                COUCHE_CACHEE,
+                "couche cachee, indice 1",
+                &(tabCouchesNeurones),
+                NULL,
+                NULL,
+                3,
+                3,
+                tabNeuronesCache,
+                tabOutputCache,
+                tabErreurCache
+            },
             // Couche de sortie
             {
                 COUCHE_SORTIE,
-                "Ma couche de sortie",
-                tabCouchesNeurones,
+                "couche de sortie, indice 2",
+                &(tabCouchesNeurones[1]),
                 CalcSoftMax,
                 CalcDeriveePartielleSoftMaxViaValSoftMax,
-                2,
+                3,
                 3,
                 tabNeuronesSortie,
                 tabOutputSortie,
@@ -551,7 +586,7 @@ T_ERREUR testInitReseauNeurone ( )
     T_RESEAU_NEURONES monRN = { RESEAU_FULLY_CONNECTED_AVEC_BIAIS,
                                 "Voici un reseau de neurones",
                                 0.2,
-                                2,
+                                3,
                                 tabCouchesNeurones,
                                 tabPredictions,
                                 tabVraiesValeursFinales,
@@ -560,6 +595,8 @@ T_ERREUR testInitReseauNeurone ( )
                                 };
 
     T_RESEAU_NEURONES monRNAInitialiser;
+
+
 
     T_ERREUR resultat = InitReseauNeurone(monRN.typeReseauNeurones,
                                           monRN.szDescription,
@@ -574,12 +611,27 @@ T_ERREUR testInitReseauNeurone ( )
                                           CalcSoftMax,
                                           CalcDeriveePartielleSoftMaxViaValSoftMax,
                                           monRN.usiNbLots,
-                                          monRNAInitialiser);
+                                          &monRNAInitialiser);
+
 
     if ( resultat != PAS_D_ERREUR
-        || )//|| CoucheNeuroneAInitialiser != NULL)
+        || monRNAInitialiser.typeReseauNeurones != monRN.typeReseauNeurones
+        || strcmp(monRNAInitialiser.szDescription, monRN.szDescription) != 0
+        || monRNAInitialiser.lfTauxApprentissage != monRN.lfTauxApprentissage
+        || monRNAInitialiser.siNbCouches != monRN.siNbCouches
+        || monRNAInitialiser.lfCoutCumule != monRN.lfCoutCumule
+        || monRNAInitialiser.usiNbLots != monRN.usiNbLots
+      //   A voir plus tard, faut il vérifier le contenu des tabz'
+      //  || monRNAInitialiser.plfPredictionFinale[0] != 1
+      //  || monRNAInitialiser.plfVraieValeurFinale != NULL
+    )
+        return ERREUR_RESEAU_NEURONE_MAL_INITIALISEE;
 
-        return ERREUR;
+    //Comparaison des couches de neurones
+    for(int i = 0; i<monRN.siNbCouches; i++)
+        if(CmpCoucheNeurone(monRNAInitialiser.pCouchesNeurones[i], monRN.pCouchesNeurones[i]) != 0)
+            return ERREUR_RESEAU_NEURONE_MAL_INITIALISEE;
+
 
 
     return PAS_D_ERREUR;
@@ -720,4 +772,19 @@ T_ERREUR testPredictionJeuDeDonnees ( )
 T_ERREUR testApprentissageJeuDeDonnees ( )
 {
     return ERREUR_FONCTION_NON_DEFINIE ;
+}
+
+short cmpMatrice1(int taille, REEL* matA, REEL* matB){
+    for(int i=0;i<taille;i++)
+        if(matA[i]!=matB[i])
+            return 1;
+    return 0;
+}
+
+short cmpMatrice2(int taille1D,int taille2D, REEL** matA, REEL** matB){
+    return 0;
+}
+
+short cmpMatrice3(int taille1D,int taille2D,int taille3D, REEL*** matA, REEL*** matB){
+    return 0;
 }

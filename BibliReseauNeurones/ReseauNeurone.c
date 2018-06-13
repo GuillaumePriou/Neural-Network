@@ -26,6 +26,7 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
 
     short int i = 0;
     char str[TAILLE_TEXTE];
+    char strCoucheCache[TAILLE_TEXTE] = "couche cachee, indice";
 
     if (siNbCouches < 2)
         return ERREUR_NB_COUCHES;
@@ -58,7 +59,10 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
                       NULL,
                       tabsiNbNeurones[0],
                       1,
-                      (REEL**) &(mat3DlfPoids[0]),
+                      NULL,
+                      //QS/SS -> mat2DlfPoids doit être NULL
+                      // pour les couches d'entrées
+                      // ancienne valeur : (REEL**) &(mat3DlfPoids[0]),
                       CalcIdentite,
                       CalcDeriveeIdentite,
                       &(((*pReseauNeurones).pCouchesNeurones)[0])
@@ -66,7 +70,7 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
 
     for(i = 1; i<siNbCouches-1; i++)
     {
-        sprintf(str, "%hd", i);
+        sprintf(str, "%s %hd", strCoucheCache, i);
         InitCoucheNeurone(COUCHE_CACHEE,
                           str,
                           &(((*pReseauNeurones).pCouchesNeurones)[i-1]),
@@ -81,7 +85,7 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
                           );
     }
 
-    sprintf(str, "%hd", i);
+    sprintf(str, "couche de sortie, indice %hd", i);
     InitCoucheNeurone(COUCHE_SORTIE,
                       str,
                       &(((*pReseauNeurones).pCouchesNeurones)[i-1]),

@@ -292,6 +292,21 @@ ERREUR_TYPE_COUCHE_INCONNU = la couche est de type "inconnu"
 
 T_ERREUR CalcPredictionCoucheNeurones ( T_COUCHE_NEURONES * pCoucheNeurones ) ;
 
+/***************************************************
+                 CmpCoucheNeurone
+  Compare deux couches de neurones
+
+ENTREE :
+- Couche_Neurone 1
+- Couche_Neurone 2
+SORTIE :
+- short 0 si égale, 1 sinon
+
+***************************************************/
+
+short CmpCoucheNeurone ( T_COUCHE_NEURONES   coucheA ,
+                         T_COUCHE_NEURONES   coucheB );
+
 #endif // COUCHENEURONE_H_INCLUDED
 
 /***************************************************

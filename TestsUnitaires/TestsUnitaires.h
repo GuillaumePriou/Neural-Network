@@ -109,4 +109,12 @@ T_FONCTION_TEST testCalcCorrectionPoidsSynaptiques;
 T_FONCTION_TEST testPredictionJeuDeDonnees;
 T_FONCTION_TEST testApprentissageJeuDeDonnees;
 
+/*********************************************************************************
+    Utilitaire
+*********************************************************************************/
+short cmpMatrice1(int taille, REEL* matA, REEL* matB);
+short cmpMatrice2(int taille1D,int taille2D, REEL** matA, REEL** matB);
+short cmpMatrice3(int taille1D,int taille2D,int taille3D, REEL*** matA, REEL*** matB);
+
+
 #endif // TESTSUNITAIRES_H_INCLUDED

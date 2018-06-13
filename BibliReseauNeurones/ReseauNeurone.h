@@ -40,7 +40,7 @@ ENTREE :
   NULL si pas de fonction
 - la fonction d'activation des neurones de sortie (Fonction_ActivationNeurone_Sortie), NULL si pas de fonction
 - la derivee de la fonction d'activation des neurones de sortie (Fonction_Derivee_ActivationNeurone_Sortie)
-  NULL si pas de fonction
+  NULL si pas de foncreturn PAS_D_ERREURtion
 - nombre de lot eventuel si traitement par batch pour un apprentissage stochastique  (usiNbLots)
   si usiNbLots non< 2 on traite tout le jeu de donnees dans chaque passe d'apprentissage
   si usiNbLots = 2, 3, ..., on divise le jeu de donnees en usiNbLots
