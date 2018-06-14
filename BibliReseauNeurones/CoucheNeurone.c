@@ -20,17 +20,20 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
                              T_FONCTION_ACTIVATION             * Fonction_Derivee_ActivationNeurone ,
                              T_COUCHE_NEURONES                 * pCoucheNeurones                    )
 {
-    int i,j;
-    REEL tabDeBiais[1] = {1};
+    int cptNeurone = 0;
 
     // Verifie la coherence des parametres d'initialisation
     if (pCoucheNeurones == NULL)
         return ERREUR_COUCHE_NEURONE_MAL_INITIALISEE;
+    if (pszDescription == NULL)
+            return ERREUR_AUCUNE_DESCRIPTION_COUCHE_NEURONE;
+    if (siNbNeurones <= 0)
+        return ERREUR_NB_NEURONES_INSUFFISANT;
 
     switch (typeCoucheNeurones)
     {
         case COUCHE_ENTREE :    if (   mat2DlfPoids != NULL
-                                    || siNbDendritesParNeurone != 1
+                                    || siNbDendritesParNeurone != 0
                                     || Fonction_ActivationNeurone != CalcIdentite
                                     || Fonction_Derivee_ActivationNeurone != CalcDeriveeIdentite)
                                     return ERREUR_COUCHE_NEURONE_MAL_INITIALISEE;
@@ -55,28 +58,46 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
 
     // Initialisation des neurones (dans le cas ou ce n'est pas une couche d'entree)
     //(etape 4)
-    switch (typeCoucheNeurones)
-    {
-        case COUCHE_ENTREE: //  Initialisation des neurones de la couche d'entree
-                            for (i=0; i<siNbNeurones; i++)
-                                InitNeurone( 1,
-                                             tabDeBiais,
-                                             CalcIdentite,
-                                             CalcDeriveeIdentite,
-                                            &((*pCoucheNeurones).pNeurones[i]));
-                            break;
 
-        case COUCHE_CACHEE: // Pas de break ici : COUCHE_CACHE et COUCHE_SORTIE ont
-        case COUCHE_SORTIE: // la meme procedure d'initialisation
-                            for (i=0; i<siNbNeurones; i++)
-                                InitNeurone((*pCoucheNeurones).siNbDendritesParNeurone,
-                                             mat2DlfPoids[i],
-                                             Fonction_ActivationNeurone,
-                                             Fonction_Derivee_ActivationNeurone,
-                                            &((*pCoucheNeurones).pNeurones[i]));
+    // Initialisation du neurone de biais (exception : couche de sortie)
+    if (typeCoucheNeurones != COUCHE_SORTIE)
+        InitNeurone (NEURONE_DE_BIAIS, 0, NULL, CalcIdentite, CalcDeriveeIdentite, &((*pCoucheNeurones).pNeurones[cptNeurone]));
+    while (cptNeurone<siNbNeurones)
+    {
+        switch (typeCoucheNeurones)
+        {
+            case COUCHE_ENTREE: //  Initialisation des neurones de la couche d'entree
+
+                                    InitNeurone( NEURONE_D_ENTREE,
+                                                 0,
+                                                 NULL,
+                                                 CalcIdentite,
+                                                 CalcDeriveeIdentite,
+                                                &((*pCoucheNeurones).pNeurones[cptNeurone]));
+                                break;
+
+            case COUCHE_CACHEE: //  Initialisation des neurones de la couche cachee
+                                    InitNeurone( NEURONE_CACHE,
+                                                 (*pCoucheNeurones).siNbDendritesParNeurone,
+                                                 mat2DlfPoids[cptNeurone],
+                                                 Fonction_ActivationNeurone,
+                                                 Fonction_Derivee_ActivationNeurone,
+                                                &((*pCoucheNeurones).pNeurones[cptNeurone]));
+                                break;
+            case COUCHE_SORTIE: //  Initialisation des neurones de la couche de sortie
+
+                                    InitNeurone( NEURONE_DE_SORTIE,
+                                                 (*pCoucheNeurones).siNbDendritesParNeurone,
+                                                 mat2DlfPoids[cptNeurone],
+                                                 Fonction_ActivationNeurone,
+                                                 Fonction_Derivee_ActivationNeurone,
+                                                &((*pCoucheNeurones).pNeurones[cptNeurone]));
+                                break;
+            default:    return ERREUR_TYPE_COUCHE_INCONNU ;
                             break;
-        default:    return ERREUR_TYPE_COUCHE_INCONNU ;
-                        break;
+        }
+
+        cptNeurone++;
     }
 
     // Allocation de plfOutputSample (etape 5)
@@ -84,8 +105,8 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
 
     if ((*pCoucheNeurones).plfOutputSample == NULL) // En cas d'echec, annuler toute l'init
     {
-        for (i=0; i<siNbNeurones; i++)
-            DesinitNeurone(&(*pCoucheNeurones).pNeurones[i]);
+        for (cptNeurone=0; cptNeurone<siNbNeurones; cptNeurone++)
+            DesinitNeurone(&(*pCoucheNeurones).pNeurones[cptNeurone]);
 
         free ((*pCoucheNeurones).pNeurones);
         return ERREUR_ALLOCATION_MEMOIRE_COUCHE;
@@ -96,8 +117,8 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
 
     if ((*pCoucheNeurones).plfErreurDeltaSample == NULL) // En cas d'echec, annuler toute l'init
     {
-        for (i=0; i<siNbNeurones; i++)
-            DesinitNeurone(&(*pCoucheNeurones).pNeurones[i]);
+        for (cptNeurone=0; cptNeurone<siNbNeurones; cptNeurone++)
+            DesinitNeurone(&(*pCoucheNeurones).pNeurones[cptNeurone]);
 
         free ((*pCoucheNeurones).pNeurones);
         free((*pCoucheNeurones).plfOutputSample);
@@ -112,7 +133,7 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
 T_ERREUR DesinitCoucheNeurone ( T_COUCHE_NEURONES * pCoucheNeurones )
 {
 
-    // Sa couche est bizarre, revoie une erreur
+    // Si la couche est bizarre, revoie une erreur
     if ((*pCoucheNeurones).typeCoucheNeurones == COUCHE_NON_INITIALISEE)
         return ERREUR_TYPE_COUCHE_INCONNU ;
 

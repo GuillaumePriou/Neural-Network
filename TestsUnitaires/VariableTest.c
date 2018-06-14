@@ -13,13 +13,7 @@
 
 T_NEURONE tabNeuroneCoucheEntree[3] = {
                                         {
-                                            0, //Neurone biais
-                                            NULL,
-                                            NULL,
-                                            CalcIdentite,
-                                            CalcDeriveeIdentite
-                                        },
-                                        {
+                                            NEURONE_DE_BIAIS,
                                             0,
                                             NULL,
                                             NULL,
@@ -27,6 +21,15 @@ T_NEURONE tabNeuroneCoucheEntree[3] = {
                                             CalcDeriveeIdentite
                                         },
                                         {
+                                            NEURONE_D_ENTREE,
+                                            0,
+                                            NULL,
+                                            NULL,
+                                            CalcIdentite,
+                                            CalcDeriveeIdentite
+                                        },
+                                        {
+                                            NEURONE_D_ENTREE,
                                             0,
                                             NULL,
                                             NULL,
@@ -37,13 +40,15 @@ T_NEURONE tabNeuroneCoucheEntree[3] = {
 
 T_NEURONE tabNeuroneCoucheCachee[4] = {
                                             {
+                                                NEURONE_DE_BIAIS,
                                                 0,
                                                 NULL,
                                                 NULL,
                                                 CalcIdentite,
-                                                CalcDeriveeIdentite   //Neurone de biais
+                                                CalcDeriveeIdentite
                                             },
                                             {
+                                                NEURONE_CACHE,
                                                 3,
                                                 {0,1,2},
                                                 {0,0,0},
@@ -52,6 +57,7 @@ T_NEURONE tabNeuroneCoucheCachee[4] = {
                                                 //Neurone 1
                                             },
                                             {
+                                                NEURONE_CACHE,
                                                 3,
                                                 {4,5,6},
                                                 {0,0,0},
@@ -60,6 +66,7 @@ T_NEURONE tabNeuroneCoucheCachee[4] = {
                                                 //Neurone 2
                                             },
                                             {
+                                                NEURONE_CACHE,
                                                 3,
                                                 {8,9,10},
                                                 {0,0,0},
@@ -71,6 +78,7 @@ T_NEURONE tabNeuroneCoucheCachee[4] = {
 T_NEURONE tabNeuroneCoucheSortie[3] =
                                         {
                                             {
+                                                NEURONE_DE_BIAIS,
                                                 4,
                                                 {16,17,18,19},
                                                 {0,0,0,0},
@@ -78,6 +86,7 @@ T_NEURONE tabNeuroneCoucheSortie[3] =
                                                 CalcDeriveeLogistiqueViaValLogistique
                                             },
                                             {
+                                                NEURONE_DE_SORTIE,
                                                 4,
                                                 {20,21,22,23},
                                                 {0,0,0,0},
@@ -85,6 +94,7 @@ T_NEURONE tabNeuroneCoucheSortie[3] =
                                                 CalcDeriveeLogistiqueViaValLogistique
                                             },
                                             {
+                                                NEURONE_DE_SORTIE,
                                                 4,
                                                 {24,25,26,27},
                                                 {0,0,0,0},

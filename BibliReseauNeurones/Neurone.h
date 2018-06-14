@@ -11,9 +11,20 @@
 #include "constantes.h"
 #include "Activation.h"
 
+/* les differents types de reseau de neurones */
+typedef enum
+{
+ NEURONE_NON_INITIALISE = -1 ,
+ NEURONE_CACHE          =  0 , // un neurone standard qui fait la somme pondérée de ses entrees avant de tester son calcul contre une fonction d'activation
+ NEURONE_DE_BIAIS       =  1 , // aucun clcul : renvoie 1 systematiquement
+ NEURONE_D_ENTREE       =  2 , // ne fait aucun calcul
+ NEURONE_DE_SORTIE      =  3   // comme un neurone standard mais ne s'occupe pas de l'activation (la couche s'en charge a sa place)
+} T_TYPE_NEURONES ;
+
 /***************************************************
               Definition d'un neurone
 On suppose qu'il possede :
+- un type indiquant son role
 - siNbDendrites dendrites
 - un vecteur des poids tablfPoids
   (en nombre egal a siNbDendrites)
@@ -24,6 +35,7 @@ On suppose qu'il possede :
 ***************************************************/
 typedef struct TagNeurone
 {
+    T_TYPE_NEURONES         typeNeurone ;
     short int               siNbDendrites ;
     REEL                  * tablfPoids ;
     T_FONCTION_ACTIVATION * F_Activation ;
@@ -34,9 +46,14 @@ typedef struct TagNeurone
            Initialisation d'un neurone
 ENTREE :
 - Nombre de dendrites (siNbDendrites)
-    Valeur minimum : 1
+     NEURONE_CACHE, NEURONE_DE_SORTIE : 1 ou plusieurs dendrites
+     NEURONE_DE_BIAIS, NEURONE_D_ENTREE : 0 dendrites
 - tableau des siNbDendrites poids (tablfPoids)
 - la fonction d'activation (Fonction_Activation)
+     NEURONE_CACHE : fonction d'activation reelle ( R -> R )
+     NEURONE_DE_SORTIE : fonction d'activation vectorielle ( R ^ siNbDendrites -> R ^ siNbDendrites), geree par la couche
+                         -> fonction identite ?
+     NEURONE_DE_BIAIS, NEURONE_D_ENTREE : fonction d'activation identite
 - la derivee de la fonction d'activation (Fonction_Derivee_Activation)
 SORTIE :
 - Le Neurone initialise (pointeur pNeurone)
@@ -62,7 +79,8 @@ Note :
 
 ***************************************************/
 
-T_ERREUR InitNeurone ( short int               siNbDendrites               ,
+T_ERREUR InitNeurone ( T_TYPE_NEURONES         typeNeurone                 ,
+                       short int               siNbDendrites               ,
                        REEL                  * tablfPoids                  ,
                        T_FONCTION_ACTIVATION * Fonction_Activation         ,
                        T_FONCTION_ACTIVATION * Fonction_Derivee_Activation ,
