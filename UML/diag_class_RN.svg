@@ -1,0 +1,350 @@
+<svg id="mermaid-1528969684202" width="100%" xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="-10 -10 563 1013"><style>
+
+
+#mermaid-1528969684202 .label {
+  font-family: 'trebuchet ms', verdana, arial;
+  color: #333; }
+
+#mermaid-1528969684202 .node rect,
+#mermaid-1528969684202 .node circle,
+#mermaid-1528969684202 .node ellipse,
+#mermaid-1528969684202 .node polygon {
+  fill: #FFF;
+  stroke: #333;
+  stroke-width: 1px; }
+
+#mermaid-1528969684202 .node.clickable {
+  cursor: pointer; }
+
+#mermaid-1528969684202 .arrowheadPath {
+  fill: #333333; }
+
+#mermaid-1528969684202 .edgePath .path {
+  stroke: #333333;
+  stroke-width: 1.5px; }
+
+#mermaid-1528969684202 .edgeLabel {
+  background-color: #e8e8e8; }
+
+#mermaid-1528969684202 .cluster rect {
+  fill: #ffffde !important;
+  stroke: #aaaa33 !important;
+  stroke-width: 1px !important; }
+
+#mermaid-1528969684202 .cluster text {
+  fill: #333; }
+
+#mermaid-1528969684202 div.mermaidTooltip {
+  position: absolute;
+  text-align: center;
+  max-width: 200px;
+  padding: 2px;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-size: 12px;
+  background: #ffffde;
+  border: 1px solid #aaaa33;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 100; }
+
+#mermaid-1528969684202 .actor {
+  stroke: #CCCCFF;
+  fill: #FFF; }
+
+#mermaid-1528969684202 text.actor {
+  fill: black;
+  stroke: none; }
+
+#mermaid-1528969684202 .actor-line {
+  stroke: grey; }
+
+#mermaid-1528969684202 .messageLine0 {
+  stroke-width: 1.5;
+  stroke-dasharray: '2 2';
+  marker-end: 'url(#arrowhead)';
+  stroke: #333; }
+
+#mermaid-1528969684202 .messageLine1 {
+  stroke-width: 1.5;
+  stroke-dasharray: '2 2';
+  stroke: #333; }
+
+#mermaid-1528969684202 #arrowhead {
+  fill: #333; }
+
+#mermaid-1528969684202 #crosshead path {
+  fill: #333 !important;
+  stroke: #333 !important; }
+
+#mermaid-1528969684202 .messageText {
+  fill: #333;
+  stroke: none; }
+
+#mermaid-1528969684202 .labelBox {
+  stroke: #CCCCFF;
+  fill: #FFF; }
+
+#mermaid-1528969684202 .labelText {
+  fill: black;
+  stroke: none; }
+
+#mermaid-1528969684202 .loopText {
+  fill: black;
+  stroke: none; }
+
+#mermaid-1528969684202 .loopLine {
+  stroke-width: 2;
+  stroke-dasharray: '2 2';
+  marker-end: 'url(#arrowhead)';
+  stroke: #CCCCFF; }
+
+#mermaid-1528969684202 .note {
+  stroke: #aaaa33;
+  fill: #fff5ad; }
+
+#mermaid-1528969684202 .noteText {
+  fill: black;
+  stroke: none;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-size: 14px; }
+
+
+#mermaid-1528969684202 .section {
+  stroke: none;
+  opacity: 0.2; }
+
+#mermaid-1528969684202 .section0 {
+  fill: rgba(102, 102, 255, 0.49); }
+
+#mermaid-1528969684202 .section2 {
+  fill: #fff400; }
+
+#mermaid-1528969684202 .section1,
+#mermaid-1528969684202 .section3 {
+  fill: white;
+  opacity: 0.2; }
+
+#mermaid-1528969684202 .sectionTitle0 {
+  fill: #333; }
+
+#mermaid-1528969684202 .sectionTitle1 {
+  fill: #333; }
+
+#mermaid-1528969684202 .sectionTitle2 {
+  fill: #333; }
+
+#mermaid-1528969684202 .sectionTitle3 {
+  fill: #333; }
+
+#mermaid-1528969684202 .sectionTitle {
+  text-anchor: start;
+  font-size: 11px;
+  text-height: 14px; }
+
+
+#mermaid-1528969684202 .grid .tick {
+  stroke: lightgrey;
+  opacity: 0.3;
+  shape-rendering: crispEdges; }
+
+#mermaid-1528969684202 .grid path {
+  stroke-width: 0; }
+
+
+#mermaid-1528969684202 .today {
+  fill: none;
+  stroke: red;
+  stroke-width: 2px; }
+
+
+
+#mermaid-1528969684202 .task {
+  stroke-width: 2; }
+
+#mermaid-1528969684202 .taskText {
+  text-anchor: middle;
+  font-size: 11px; }
+
+#mermaid-1528969684202 .taskTextOutsideRight {
+  fill: black;
+  text-anchor: start;
+  font-size: 11px; }
+
+#mermaid-1528969684202 .taskTextOutsideLeft {
+  fill: black;
+  text-anchor: end;
+  font-size: 11px; }
+
+
+#mermaid-1528969684202 .taskText0,
+#mermaid-1528969684202 .taskText1,
+#mermaid-1528969684202 .taskText2,
+#mermaid-1528969684202 .taskText3 {
+  fill: white; }
+
+#mermaid-1528969684202 .task0,
+#mermaid-1528969684202 .task1,
+#mermaid-1528969684202 .task2,
+#mermaid-1528969684202 .task3 {
+  fill: #8a90dd;
+  stroke: #534fbc; }
+
+#mermaid-1528969684202 .taskTextOutside0,
+#mermaid-1528969684202 .taskTextOutside2 {
+  fill: black; }
+
+#mermaid-1528969684202 .taskTextOutside1,
+#mermaid-1528969684202 .taskTextOutside3 {
+  fill: black; }
+
+
+#mermaid-1528969684202 .active0,
+#mermaid-1528969684202 .active1,
+#mermaid-1528969684202 .active2,
+#mermaid-1528969684202 .active3 {
+  fill: #bfc7ff;
+  stroke: #534fbc; }
+
+#mermaid-1528969684202 .activeText0,
+#mermaid-1528969684202 .activeText1,
+#mermaid-1528969684202 .activeText2,
+#mermaid-1528969684202 .activeText3 {
+  fill: black !important; }
+
+
+#mermaid-1528969684202 .done0,
+#mermaid-1528969684202 .done1,
+#mermaid-1528969684202 .done2,
+#mermaid-1528969684202 .done3 {
+  stroke: grey;
+  fill: lightgrey;
+  stroke-width: 2; }
+
+#mermaid-1528969684202 .doneText0,
+#mermaid-1528969684202 .doneText1,
+#mermaid-1528969684202 .doneText2,
+#mermaid-1528969684202 .doneText3 {
+  fill: black !important; }
+
+
+#mermaid-1528969684202 .crit0,
+#mermaid-1528969684202 .crit1,
+#mermaid-1528969684202 .crit2,
+#mermaid-1528969684202 .crit3 {
+  stroke: #ff8888;
+  fill: red;
+  stroke-width: 2; }
+
+#mermaid-1528969684202 .activeCrit0,
+#mermaid-1528969684202 .activeCrit1,
+#mermaid-1528969684202 .activeCrit2,
+#mermaid-1528969684202 .activeCrit3 {
+  stroke: #ff8888;
+  fill: #bfc7ff;
+  stroke-width: 2; }
+
+#mermaid-1528969684202 .doneCrit0,
+#mermaid-1528969684202 .doneCrit1,
+#mermaid-1528969684202 .doneCrit2,
+#mermaid-1528969684202 .doneCrit3 {
+  stroke: #ff8888;
+  fill: lightgrey;
+  stroke-width: 2;
+  cursor: pointer;
+  shape-rendering: crispEdges; }
+
+#mermaid-1528969684202 .doneCritText0,
+#mermaid-1528969684202 .doneCritText1,
+#mermaid-1528969684202 .doneCritText2,
+#mermaid-1528969684202 .doneCritText3 {
+  fill: black !important; }
+
+#mermaid-1528969684202 .activeCritText0,
+#mermaid-1528969684202 .activeCritText1,
+#mermaid-1528969684202 .activeCritText2,
+#mermaid-1528969684202 .activeCritText3 {
+  fill: black !important; }
+
+#mermaid-1528969684202 .titleText {
+  text-anchor: middle;
+  font-size: 18px;
+  fill: black; }
+
+#mermaid-1528969684202 g.classGroup text {
+  fill: #333;
+  stroke: none;
+  font-family: 'trebuchet ms', verdana, arial;
+  font-size: 10px; }
+
+#mermaid-1528969684202 g.classGroup rect {
+  fill: #FFF;
+  stroke: #333; }
+
+#mermaid-1528969684202 g.classGroup line {
+  stroke: #333;
+  stroke-width: 1; }
+
+#mermaid-1528969684202 .classLabel .box {
+  stroke: none;
+  stroke-width: 0;
+  fill: #FFF;
+  opacity: 0.5; }
+
+#mermaid-1528969684202 .classLabel .label {
+  fill: #333;
+  font-size: 10px; }
+
+#mermaid-1528969684202 .relation {
+  stroke: #333;
+  stroke-width: 1;
+  fill: none; }
+
+#mermaid-1528969684202 #compositionStart {
+  fill: #333;
+  stroke: #333;
+  stroke-width: 1; }
+
+#mermaid-1528969684202 #compositionEnd {
+  fill: #333;
+  stroke: #333;
+  stroke-width: 1; }
+
+#mermaid-1528969684202 #aggregationStart {
+  fill: #FFF;
+  stroke: #333;
+  stroke-width: 1; }
+
+#mermaid-1528969684202 #aggregationEnd {
+  fill: #FFF;
+  stroke: #333;
+  stroke-width: 1; }
+
+#mermaid-1528969684202 #dependencyStart {
+  fill: #333;
+  stroke: #333;
+  stroke-width: 1; }
+
+#mermaid-1528969684202 #dependencyEnd {
+  fill: #333;
+  stroke: #333;
+  stroke-width: 1; }
+
+#mermaid-1528969684202 #extensionStart {
+  fill: #333;
+  stroke: #333;
+  stroke-width: 1; }
+
+#mermaid-1528969684202 #extensionEnd {
+  fill: #333;
+  stroke: #333;
+  stroke-width: 1; }
+
+#mermaid-1528969684202 .commit-id,
+#mermaid-1528969684202 .commit-msg,
+#mermaid-1528969684202 .branch-label {
+  fill: lightgrey;
+  color: lightgrey; }
+</style><style>#mermaid-1528969684202 {
+    color: rgba(0, 0, 0, 0.65);
+    font: ;
+  }</style><g></g><defs><marker id="extensionStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 1,7 L18,13 V 1 Z"></path></marker></defs><defs><marker id="extensionEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 1,1 V 13 L18,7 Z"></path></marker></defs><defs><marker id="compositionStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="compositionEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="aggregationStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="aggregationEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="dependencyStart" class="extension" refX="0" refY="7" markerWidth="190" markerHeight="240" orient="auto"><path d="M 5,7 L9,13 L1,7 L9,1 Z"></path></marker></defs><defs><marker id="dependencyEnd" refX="19" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"></path></marker></defs><g id="classId0" class="classGroup" transform="translate(46,211 )"><rect x="0" y="0" width="185" height="164"></rect><text x="5" y="15">Neurone</text><line x1="0" y1="23" y2="23" x2="185"></line><text x="5" y="33" fill="white" class="classText"><tspan x="5">T_TYPE_NEURONES typeNeurone</tspan><tspan x="5" dy="10">short int NombreDentrites</tspan><tspan x="5" dy="10">REEL[] tablfPoids</tspan><tspan x="5" dy="10">REEL[] tablfGradients</tspan></text><line x1="0" y1="71" y2="71" x2="185"></line><text x="5" y="86" fill="white" class="classText"><tspan x="5">T_ERREUR InitNeurone()</tspan><tspan x="5" dy="10">T_ERREUR DesinitNeurone()</tspan><tspan x="5" dy="10">T_ERREUR AfficheNeurone()</tspan><tspan x="5" dy="10">T_ERREUR SauveFicTexteNeurone()</tspan><tspan x="5" dy="10">T_ERREUR SauveFicBinaireNeurone()</tspan><tspan x="5" dy="10">T_ERREUR ChargeFicBinaireNeurone()</tspan><tspan x="5" dy="10">T_ERREUR CalcPredictionNeurone()</tspan><tspan x="5" dy="10">short CmpNeurone()</tspan></text></g><g id="classId1" class="classGroup" transform="translate(104.75,425 )"><rect x="0" y="0" width="341" height="214"></rect><text x="5" y="15">CoucheNeurone</text><line x1="0" y1="23" y2="23" x2="341"></line><text x="5" y="33" fill="white" class="classText"><tspan x="5">T_TYPE_COUCHE_NEURONES typeCouche</tspan><tspan x="5" dy="10">char[] szDescription</tspan><tspan x="5" dy="10">T_FONCTION_ACTIVATION_VECTORIELLE F_ActivationVectorielle</tspan><tspan x="5" dy="10">T_FONCTION_ACTIVATION_VECTORIELLE F_Derivee_ActivationVectorielle</tspan><tspan x="5" dy="10">short int siNbNeurones</tspan><tspan x="5" dy="10">short int siNbDendritesParNeurone</tspan><tspan x="5" dy="10">REEL[] plfOutputSample</tspan><tspan x="5" dy="10">REEL[] plfErreurDeltaSample</tspan></text><line x1="0" y1="111" y2="111" x2="341"></line><text x="5" y="126" fill="white" class="classText"><tspan x="5">T_ERREUR InitCoucheNeurone()</tspan><tspan x="5" dy="10">T_ERREUR DesinitCoucheNeurone()</tspan><tspan x="5" dy="10">T_ERREUR AfficheCoucheNeurone()</tspan><tspan x="5" dy="10">T_ERREUR SauveFicTexteCoucheNeurones()</tspan><tspan x="5" dy="10">T_ERREUR SauveNeuroneDansFicTexte()</tspan><tspan x="5" dy="10">T_ERREUR SauveFicBinaireCoucheNeurones()</tspan><tspan x="5" dy="10">T_ERREUR ChargeFicBinaireCoucheNeurones()</tspan><tspan x="5" dy="10">T_ERREUR CalcPredictionCoucheNeurones()</tspan><tspan x="5" dy="10">short CmpCoucheNeurone()</tspan></text></g><g id="classId2" class="classGroup" transform="translate(155.25,689 )"><rect x="0" y="0" width="240" height="304"></rect><text x="5" y="15">ReseauNeurone</text><line x1="0" y1="23" y2="23" x2="240"></line><text x="5" y="33" fill="white" class="classText"><tspan x="5">T_TYPE_RESEAU_NEURONES typeReseauNeurones</tspan><tspan x="5" dy="10">char[] szDescription</tspan><tspan x="5" dy="10">REEL lfTauxApprentissage</tspan><tspan x="5" dy="10">short int siNbCouches</tspan><tspan x="5" dy="10">REEL[] plfPredictionFinale</tspan><tspan x="5" dy="10">REEL[] plfVraieValeurFinale</tspan><tspan x="5" dy="10">REEL[] lfCoutCumule</tspan><tspan x="5" dy="10">unsigned short int usiNbLots</tspan></text><line x1="0" y1="111" y2="111" x2="240"></line><text x="5" y="126" fill="white" class="classText"><tspan x="5">T_ERREUR InitReseauNeurone()</tspan><tspan x="5" dy="10">T_ERREUR DesinitReseauNeurone()</tspan><tspan x="5" dy="10">T_ERREUR AfficheReseauNeurone()</tspan><tspan x="5" dy="10">T_ERREUR AfficheIntegralReseauNeurone()</tspan><tspan x="5" dy="10">T_ERREUR SauveFicTexteReseauNeurones()</tspan><tspan x="5" dy="10">T_ERREUR SauveCoucheNeuronesDansFicTexte()</tspan><tspan x="5" dy="10">T_ERREUR SauveFicBinaireReseauNeurones()</tspan><tspan x="5" dy="10">T_ERREUR ChargeFicBinaireReseauNeurones()</tspan><tspan x="5" dy="10">T_ERREUR ChargeCoucheNeuronesDansFicBinaire()</tspan><tspan x="5" dy="10">T_ERREUR CalcPredictionReseauNeurones()</tspan><tspan x="5" dy="10">T_ERREUR RetroPropagationErreursEtGradients()</tspan><tspan x="5" dy="10">T_ERREUR InitAZeroGradientsPoidsCumules()</tspan><tspan x="5" dy="10">T_ERREUR CalcCorrectionPoidsSynaptiques()</tspan><tspan x="5" dy="10">T_ERREUR PredictionJeuDeDonnees()</tspan><tspan x="5" dy="10">T_ERREUR ApprentissageJeuDeDonnees()</tspan><tspan x="5" dy="10">void DesInitParametresReseauNeuronesNiveauUn()</tspan><tspan x="5" dy="10">void DesInitTabPredictionsNiveauDeux()</tspan><tspan x="5" dy="10">void DesInitTabVraiesValeursNiveauTrois()</tspan></text></g><g id="classId3" class="classGroup" transform="translate(0,0 )"><rect x="0" y="0" width="277" height="161"></rect><text x="5" y="15">FonctionActivation</text><line x1="0" y1="23" y2="23" x2="277"></line><text x="5" y="33" fill="white" class="classText"></text><line x1="0" y1="28" y2="28" x2="277"></line><text x="5" y="43" fill="white" class="classText"><tspan x="5">REEL CalcLogistique()</tspan><tspan x="5" dy="10">REEL CalcDeriveeLogistiqueViaValLogistique()</tspan><tspan x="5" dy="10">REEL CalcTanHyperbolique()</tspan><tspan x="5" dy="10">REEL CalcDeriveeTanHyperboliqueViaValTanHyperbolique()</tspan><tspan x="5" dy="10">REEL CalcReLU()</tspan><tspan x="5" dy="10">REEL CalcDeriveeReLU()</tspan><tspan x="5" dy="10">REEL CalcIdentite()</tspan><tspan x="5" dy="10">REEL CalcDeriveeIdentite()</tspan><tspan x="5" dy="10">REEL CalcHeavisideZero()</tspan><tspan x="5" dy="10">REEL CalcDeriveeHeavisideZero()</tspan><tspan x="5" dy="10">REEL CalcHeavisideMoinsUn()</tspan><tspan x="5" dy="10">REEL CalcDeriveeHeavisideMoinsUn()</tspan></text></g><g id="classId4" class="classGroup" transform="translate(281,262.5 )"><rect x="0" y="0" width="262" height="61"></rect><text x="5" y="15">FonctionActivationVectorielle</text><line x1="0" y1="23" y2="23" x2="262"></line><text x="5" y="33" fill="white" class="classText"></text><line x1="0" y1="28" y2="28" x2="262"></line><text x="5" y="43" fill="white" class="classText"><tspan x="5">T_ERREUR CalcSoftMax()</tspan><tspan x="5" dy="10">T_ERREUR CalcDeriveePartielleSoftMaxViaValSoftMax()</tspan></text></g><path d="M138.5,375L138.5,379.1666666666667C138.5,383.3333333333333,138.5,391.6666666666667,142.81660353535355,400C147.13320707070707,408.3333333333333,155.76641414141415,416.6666666666667,160.0830176767677,420.8333333333333L164.39962121212122,425" id="edge0" class="relation" marker-end="url(#compositionEnd)"></path><g class="classLabel"><rect class="box" x="124.94981384277344" y="400" width="54" height="18"></rect><text class="label" x="151.44981060606062" y="412.5" fill="red" text-anchor="middle">pNeurones</text></g><path d="M275.25,639L275.25,643.1666666666666C275.25,647.3333333333334,275.25,655.6666666666666,275.25,664C275.25,672.3333333333334,275.25,680.6666666666666,275.25,684.8333333333334L275.25,689" id="edge1" class="relation" marker-end="url(#compositionEnd)"></path><g class="classLabel"><rect class="box" x="231.25" y="664" width="89" height="18"></rect><text class="label" x="275.25" y="676.5" fill="red" text-anchor="middle">pCouchesNeurones</text></g><path d="M445.75,437.8804815133276L449.6388888888889,435.7337345944397C453.5277777777778,433.5869876755517,461.3055555555556,429.2934938377759,466.1666666666667,427.1467469188879C471.0277777777778,425,472.9722222222222,425,474.9166666666667,442.8333333333333C476.8611111111111,460.6666666666667,478.8055555555555,496.3333333333333,478.8055555555555,532C478.8055555555555,567.6666666666666,476.8611111111111,603.3333333333334,474.9166666666667,621.1666666666666C472.9722222222222,639,471.0277777777778,639,466.1666666666667,636.853253081112C461.3055555555556,634.7065061622242,453.5277777777778,630.4130123244482,449.6388888888889,628.2662654055604L445.75,626.1195184866724" id="edge2" class="relation" marker-end="url(#dependencyEnd)"></path><g class="classLabel"><rect class="box" x="421.8333435058594" y="573" width="113" height="18"></rect><text class="label" x="477.8333333333333" y="585.5" fill="red" text-anchor="middle">pCoucheNeuronesAmont</text></g><path d="M138.5,161L138.5,165.16666666666666C138.5,169.33333333333334,138.5,177.66666666666666,138.5,186C138.5,194.33333333333334,138.5,202.66666666666666,138.5,206.83333333333334L138.5,211" id="edge3" class="relation" marker-end="url(#dependencyEnd)"></path><g class="classLabel"><rect class="box" x="55.5" y="186" width="167" height="18"></rect><text class="label" x="138.5" y="198.5" fill="red" text-anchor="middle">F_Activation et F_DeriveeActivation</text></g><path d="M412,323.5L412,336.25C412,349,412,374.5,407.6833964646465,391.4166666666667C403.3667929292929,408.3333333333333,394.73358585858585,416.6666666666667,390.41698232323233,420.8333333333333L386.10037878787875,425" id="edge4" class="relation" marker-end="url(#dependencyEnd)"></path><g class="classLabel"><rect class="box" x="266.5502014160156" y="400" width="266" height="18"></rect><text class="label" x="399.0501893939394" y="412.5" fill="red" text-anchor="middle">F_ActivationVectorielle et F_Derivee_ActivationVectorielle</text></g></svg>
