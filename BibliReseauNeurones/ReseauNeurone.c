@@ -58,7 +58,7 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
                       NULL,
                       NULL,
                       tabsiNbNeurones[0],
-                      1,
+                      0,
                       NULL,
                       //QS/SS -> mat2DlfPoids doit être NULL
                       // pour les couches d'entrées
@@ -101,7 +101,7 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
 
     //etape 4 : allocation memoire tableau prediction valeurs finales
 
-    (*pReseauNeurones).plfPredictionFinale = malloc((1+tabsiNbNeurones[i]) * sizeof(REEL));
+    (*pReseauNeurones).plfPredictionFinale = malloc((tabsiNbNeurones[i]) * sizeof(REEL));
 
     if ((*pReseauNeurones).plfPredictionFinale == NULL)
     {
@@ -111,7 +111,7 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
 
     //etape 5 : allocation memoire tableau vraies valeurs finales
 
-    (*pReseauNeurones).plfVraieValeurFinale = malloc((1+tabsiNbNeurones[i]) * sizeof(REEL));
+    (*pReseauNeurones).plfVraieValeurFinale = malloc((tabsiNbNeurones[i]) * sizeof(REEL));
 
 
     if ((*pReseauNeurones).plfVraieValeurFinale == NULL)

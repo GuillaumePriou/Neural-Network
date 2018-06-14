@@ -61,7 +61,11 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
 
     // Initialisation du neurone de biais (exception : couche de sortie)
     if (typeCoucheNeurones != COUCHE_SORTIE)
+    {
         InitNeurone (NEURONE_DE_BIAIS, 0, NULL, CalcIdentite, CalcDeriveeIdentite, &((*pCoucheNeurones).pNeurones[cptNeurone]));
+        cptNeurone++;
+    }
+
     while (cptNeurone<siNbNeurones)
     {
         switch (typeCoucheNeurones)
