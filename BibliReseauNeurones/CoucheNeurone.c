@@ -136,10 +136,14 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
 
 T_ERREUR DesinitCoucheNeurone ( T_COUCHE_NEURONES * pCoucheNeurones )
 {
+    short i;
 
     // Si la couche est bizarre, revoie une erreur
     if ((*pCoucheNeurones).typeCoucheNeurones == COUCHE_NON_INITIALISEE)
         return ERREUR_TYPE_COUCHE_INCONNU ;
+
+    for (i=0; i<(*pCoucheNeurones).siNbNeurones; i++)
+        DesinitNeurone(&((*pCoucheNeurones).pNeurones[i]));
 
     // Mettre a zero toutes les variables
     (*pCoucheNeurones).typeCoucheNeurones = COUCHE_NON_INITIALISEE;
