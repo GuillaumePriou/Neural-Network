@@ -40,7 +40,7 @@ ENTREE :
   NULL si pas de fonction
 - la fonction d'activation des neurones de sortie (Fonction_ActivationNeurone_Sortie), NULL si pas de fonction
 - la derivee de la fonction d'activation des neurones de sortie (Fonction_Derivee_ActivationNeurone_Sortie)
-  NULL si pas de fonction
+  NULL si pas de foncreturn PAS_D_ERREURtion
 - nombre de lot eventuel si traitement par batch pour un apprentissage stochastique  (usiNbLots)
   si usiNbLots non< 2 on traite tout le jeu de donnees dans chaque passe d'apprentissage
   si usiNbLots = 2, 3, ..., on divise le jeu de donnees en usiNbLots
@@ -60,6 +60,14 @@ IMPORTANT : les pointeurs F_ActivationVectorielle, F_Derivee_ActivationVectoriel
             mat3DlfPoids, Fonction_ActivationNeurone_Cache, Fonction_Derivee_ActivationNeurone_Cache,
             Fonction_ActivationNeurone_Sortie, Fonction_Derivee_ActivationNeurone_Sortie
             sont supposes valides s'ils sont utilises
+
+NOTE :
+    La creation d'un reseau de neurone se compose de ... etapes:
+    1. Remplissage des parametres du reseau de neurones (hors allocation dynamique)
+    2. Allocation memoire pour les couches de neurones du reseau de neurones
+    3. Initialisation des couches de neurones
+    4. Allocation memoire tableau prediction des valeurs finales
+    5. Allocation memoire tableau des vrais valeurs finales
 
 ***************************************************/
 

@@ -223,6 +223,26 @@ T_ERREUR CalcPredictionCoucheNeurones ( T_COUCHE_NEURONES * pCoucheNeurones )
     return ERREUR_FONCTION_NON_DEFINIE ;
 }
 
+short CmpCoucheNeurone ( T_COUCHE_NEURONES   coucheA ,
+                         T_COUCHE_NEURONES   coucheB )
+{
+    if( coucheA.typeCoucheNeurones != coucheB.typeCoucheNeurones
+        || strcmp(coucheA.szDescription, coucheB.szDescription)
+        //|| coucheA.pCoucheNeuronesAmont != coucheB.pCoucheNeuronesAmont
+        || coucheA.F_ActivationVectorielle != coucheB.F_ActivationVectorielle
+        || coucheA.F_Derivee_ActivationVectorielle != coucheB.F_Derivee_ActivationVectorielle
+        || coucheA.siNbNeurones != coucheB.siNbNeurones
+        || coucheA.siNbDendritesParNeurone != coucheB.siNbDendritesParNeurone
+    )
+      return 1;
+
+    int i;
+    for (i=0; i<coucheA.siNbNeurones; i++)
+        if(CmpNeurone(coucheA.pNeurones[i],coucheB.pNeurones[i]) != 0)
+            return 1;
+    return 0;
+}
+
 /***************************************************
                  FIN DU COMPOSANT
 ***************************************************/

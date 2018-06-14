@@ -4,7 +4,7 @@
 #include "../BibliReseauNeurones/constantes.h"
 
 // Le nombre de tests
-#define NB_TESTS 7
+#define NB_TESTS 8
 
 // Format des fonctions de test
 typedef T_ERREUR T_FONCTION_TEST(void) ;
@@ -105,9 +105,16 @@ T_FONCTION_TEST testChargeFicBinaireReseauNeurones;
 T_FONCTION_TEST testChargeCoucheNeuronesDansFicBinaire;
 T_FONCTION_TEST testCalcPredictionReseauNeurones;
 T_FONCTION_TEST testRetroPropagationErreursEtGradients;
-T_FONCTION_TEST testInitAZeroGradientsPoidsCumules;
 T_FONCTION_TEST testCalcCorrectionPoidsSynaptiques;
 T_FONCTION_TEST testPredictionJeuDeDonnees;
 T_FONCTION_TEST testApprentissageJeuDeDonnees;
+
+/*********************************************************************************
+    Utilitaire
+*********************************************************************************/
+short cmpMatrice1(int taille, REEL* matA, REEL* matB);
+short cmpMatrice2(int taille1D,int taille2D, REEL** matA, REEL** matB);
+short cmpMatrice3(int taille1D,int taille2D,int taille3D, REEL*** matA, REEL*** matB);
+
 
 #endif // TESTSUNITAIRES_H_INCLUDED
