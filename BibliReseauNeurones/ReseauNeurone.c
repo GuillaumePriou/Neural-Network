@@ -132,7 +132,7 @@ T_ERREUR DesinitReseauNeurone ( T_RESEAU_NEURONES * pReseauNeurones )
     }
 
     //étapes 2 : on vide la mémoire des tableaux
-    free((*pReseauNeurones).szDescription);
+    //free((*pReseauNeurones).szDescription);
     free((*pReseauNeurones).plfPredictionFinale);
     free((*pReseauNeurones).plfVraieValeurFinale);
     free((*pReseauNeurones).pCouchesNeurones);
