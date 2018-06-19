@@ -125,7 +125,32 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
 
 T_ERREUR DesinitReseauNeurone ( T_RESEAU_NEURONES * pReseauNeurones )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    //étape 1 : on désinit les couches
+    int i;
+    for(i=0;i<(*pReseauNeurones).siNbCouches;i++){
+        DesinitCoucheNeurone(&((*pReseauNeurones).pCouchesNeurones[i]));
+    }
+
+    //étapes 2 : on vide la mémoire des tableaux
+    free((*pReseauNeurones).szDescription);
+    free((*pReseauNeurones).plfPredictionFinale);
+    free((*pReseauNeurones).plfVraieValeurFinale);
+    free((*pReseauNeurones).pCouchesNeurones);
+
+    //étapes 3 : on assigne des valeurs cohérente avec un RN désinit
+    (*pReseauNeurones).plfPredictionFinale = NULL;
+    (*pReseauNeurones).plfVraieValeurFinale = NULL;
+    (*pReseauNeurones).pCouchesNeurones = NULL;
+
+    strcpy((*pReseauNeurones).szDescription, "réseau desinit");
+    (*pReseauNeurones).lfTauxApprentissage = 0;
+    (*pReseauNeurones).siNbCouches = 0;
+    (*pReseauNeurones).lfCoutCumule = 0;
+    (*pReseauNeurones).usiNbLots = 0;
+
+    (*pReseauNeurones).typeReseauNeurones = RESEAU_NON_INITIALISE;
+
+    return PAS_D_ERREUR ;
 }
 
 T_ERREUR AfficheReseauNeurone ( T_RESEAU_NEURONES LeReseauNeurones )
