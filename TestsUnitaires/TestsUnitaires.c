@@ -23,9 +23,11 @@ T_ERREUR executerTests (void)
                                           { &testDesinitNeurone      , "DesinitNeurone..."       , false},
                                           { &testInitCoucheNeurone   , "InitCoucheNeurone..."    , false},
                                           { &testDesinitCoucheNeurone, "DesinitCoucheNeurone..." , false},
-                                          { &testInitReseauNeurone   , "InitReseauNeurone..."    , false}
+                                          { &testInitReseauNeurone   , "InitReseauNeurone..."    , false},
+                                          { &testDesinitReseauNeurone, "DesinitReseauNeurone..." , false}
                                           //{ &, "Test de ..."},
-                                        };
+                                   };
+
 
     while (resultat == PAS_D_ERREUR && i<NB_TESTS)
     {
@@ -399,13 +401,40 @@ T_ERREUR testInitReseauNeurone ( )
             return ERREUR_RESEAU_NEURONE_MAL_INITIALISEE;
 
 
-
     return PAS_D_ERREUR;
 }
 
-T_ERREUR testDesinitReseauNeurone ( )
+T_ERREUR testDesinitReseauNeurone()
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    T_RESEAU_NEURONES monReseauTest;
+    T_ERREUR resultatInit =InitReseauNeurone(reseauNeurone.typeReseauNeurones,
+                                             reseauNeurone.szDescription,
+                                             reseauNeurone.lfTauxApprentissage,
+                                             reseauNeurone.siNbCouches,
+                                             tabsiNbNeuronesRN,
+                                             CalcSoftMax,
+                                             CalcDeriveePartielleSoftMaxViaValSoftMax,
+                                             (REEL ***) tabCoefs,
+                                             CalcLogistique,
+                                             CalcDeriveeLogistiqueViaValLogistique,
+                                             CalcLogistique,
+                                             CalcDeriveeLogistiqueViaValLogistique,
+                                             reseauNeurone.usiNbLots,
+                                             &monReseauTest);
+
+
+    T_ERREUR resultat = DesinitReseauNeurone(&monReseauTest);
+    if (resultat != PAS_D_ERREUR
+        ||strcmp(monReseauTest.szDescription,"réseau desinit")!=0
+        ||monReseauTest.plfPredictionFinale!=NULL
+        ||monReseauTest.plfVraieValeurFinale!=NULL
+        ||monReseauTest.pCouchesNeurones!=NULL
+        ||monReseauTest.siNbCouches!=0
+        ||monReseauTest.lfCoutCumule!=0
+        ||monReseauTest.usiNbLots!=0)
+        return ERREUR_INDETERMINEE;
+    return PAS_D_ERREUR;
+
 }
 
 T_ERREUR testAfficheReseauNeurone ( )

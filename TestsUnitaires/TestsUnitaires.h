@@ -4,7 +4,7 @@
 #include "../BibliReseauNeurones/constantes.h"
 
 // Le nombre de tests
-#define NB_TESTS 8
+#define NB_TESTS 9
 
 // Format des fonctions de test
 typedef T_ERREUR T_FONCTION_TEST(void) ;
