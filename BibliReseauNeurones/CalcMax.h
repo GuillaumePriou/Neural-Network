@@ -1,6 +1,7 @@
 /*******************************************************************
                               CALCMAX.H
         Fonction de calcul de l'indice du maximum dans un tableau
+
 *******************************************************************/
 #ifndef CALCMAX_H_INCLUDED
 #define CALCMAX_H_INCLUDED

@@ -4,6 +4,9 @@
 *******************************************************************/
 #include "CalcMax.h"
 
+/**
+*   Retourne l'indice du plus grand élément d'un tableau
+*/
 short int CalcIndiceMax ( double    * TabVal ,
                           short int   NbElts )
 {
@@ -21,9 +24,23 @@ short int CalcIndiceMax ( double    * TabVal ,
     return indiceValMax ;
 }
 
+/**
+*   Affiche le contenu d'un tableau dans la console
+*/
 void AfficheTab ( double    * TabVal ,
                   short int   NbElts )
 {
+    short i;
+    printf(" \r\n[ ");
+    if(NbElts<1)
+         printf(" tableau vide ! ");
+    else{
+        NbElts = NbElts-1;
+        for (i=0; i<NbElts; i++)
+           printf("%d, ",TabVal[i]);
+        printf("%d ",TabVal[i]);
+    }
+    printf("] \r\n");
 }
 
 /***************************************************
