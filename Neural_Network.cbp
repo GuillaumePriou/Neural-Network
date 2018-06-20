@@ -62,6 +62,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="TestsUnitaires/TestsUnitaires.h" />
+		<Unit filename="TestsUnitaires/VariableTest.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
