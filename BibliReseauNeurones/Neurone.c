@@ -162,10 +162,39 @@ T_ERREUR ChargeFicBinaireNeurone ( T_NEURONE * pNeurone     ,
 
 T_ERREUR CalcPredictionNeurone ( REEL      * tablfX        ,
                                  short int   siNbElts      ,
-                                 T_NEURONE   LeNeurone     ,
+                                 T_NEURONE * LeNeurone     ,
                                  REEL      * plfPrediction )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    short int i;
+    REEL somme = 0;
+    if(siNbElts != LeNeurone->siNbDendrites)
+        return ERREUR_NB_DENDRITES;
+
+    switch (LeNeurone->typeNeurone)
+    {
+        case NEURONE_DE_BIAIS:
+                                *plfPrediction = 1;
+                                break;
+        case NEURONE_D_ENTREE:
+                                break;
+        case NEURONE_CACHE:
+                                 for(i = 0; i<siNbElts; i++)
+                                    somme += tablfX[i] * LeNeurone->tablfPoids[i];
+
+                                *plfPrediction = LeNeurone->F_Activation(somme);
+                                break;
+
+        case NEURONE_DE_SORTIE:
+                                for(i = 0; i<siNbElts; i++)
+                                    somme += tablfX[i] * LeNeurone->tablfPoids[i];
+                                break;
+
+        default:
+            return ERREUR_TYPE_NEURONE_INCONNU;
+            break;
+    }
+
+    return PAS_D_ERREUR ;
 }
 
 
@@ -178,11 +207,6 @@ short CmpNeurone ( T_NEURONE   LeNeuroneA ,
         || LeNeuroneA.F_DeriveeActivation != LeNeuroneB.F_DeriveeActivation )
       return 1;
 
-    int i;
-  /*  for (i=0; i<LeNeuroneA.siNbDendrites; i++)
-        if(LeNeuroneA.tablfPoids[i] != LeNeuroneB.tablfPoids[i] )
-            return 1;
-    */
     return 0;
 }
 

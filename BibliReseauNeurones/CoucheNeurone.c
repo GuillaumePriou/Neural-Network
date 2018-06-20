@@ -228,7 +228,26 @@ T_ERREUR ChargeFicBinaireCoucheNeurones ( T_COUCHE_NEURONES * LaCoucheNeurones ,
 
 T_ERREUR CalcPredictionCoucheNeurones ( T_COUCHE_NEURONES * pCoucheNeurones )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    int i;
+    if(pCoucheNeurones->typeCoucheNeurones != COUCHE_ENTREE
+       && pCoucheNeurones->pCoucheNeuronesAmont->siNbNeurones == pCoucheNeurones->siNbDendritesParNeurone)
+    {
+        for(i=0; i<pCoucheNeurones->siNbNeurones;i++)
+        {
+            CalcPredictionNeurone(pCoucheNeurones->pCoucheNeuronesAmont->plfOutputSample,
+                                  pCoucheNeurones->pCoucheNeuronesAmont->siNbNeurones,
+                                  &(pCoucheNeurones->pNeurones[i]),
+                                  &(pCoucheNeurones->plfOutputSample[i]));
+        }
+
+        if(pCoucheNeurones->typeCoucheNeurones == COUCHE_SORTIE)
+            pCoucheNeurones->F_ActivationVectorielle(pCoucheNeurones->pCoucheNeuronesAmont->plfOutputSample,
+                                                     pCoucheNeurones->siNbNeurones,
+                                                     pCoucheNeurones->plfOutputSample,
+                                                     0);
+
+    }
+    return PAS_D_ERREUR ;
 }
 
 short CmpCoucheNeurone ( T_COUCHE_NEURONES   coucheA ,

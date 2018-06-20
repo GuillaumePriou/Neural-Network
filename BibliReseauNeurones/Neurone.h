@@ -203,7 +203,7 @@ ERREUR_NB_DENDRITES = la taille du tableau tablfX
 
 T_ERREUR CalcPredictionNeurone ( REEL      * tablfX        ,
                                  short int   siNbElts      ,
-                                 T_NEURONE   LeNeurone     ,
+                                 T_NEURONE * LeNeurone     ,
                                  REEL      * plfPrediction ) ;
 
 
