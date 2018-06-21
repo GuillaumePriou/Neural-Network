@@ -4,7 +4,7 @@
 #include "../BibliReseauNeurones/constantes.h"
 
 // Le nombre de tests
-#define NB_TESTS 9
+#define NB_TESTS 10
 
 // Format des fonctions de test
 typedef T_ERREUR T_FONCTION_TEST(void) ;
@@ -61,7 +61,9 @@ T_FONCTION_TEST testSauveFicTexteCoucheNeurones;
 T_FONCTION_TEST testSauveNeuroneDansFicTexte;
 T_FONCTION_TEST testSauveFicBinaireCoucheNeurones;
 T_FONCTION_TEST testChargeFicBinaireCoucheNeurones;
-T_FONCTION_TEST testCalcPredictionCoucheNeurones;
+T_FONCTION_TEST testCalcPredictionCoucheNeuronesEntree;
+T_FONCTION_TEST testCalcPredictionCoucheNeuronesCachee;
+T_FONCTION_TEST testCalcPredictionCoucheNeuronesSortie;
 
 
 /*********************************************************************************
