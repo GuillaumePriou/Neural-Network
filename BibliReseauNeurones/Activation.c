@@ -92,6 +92,8 @@ T_ERREUR CalcSoftMax( REEL      * tablfX                   ,
         tablfResult[i] = exp(tablfX[i]);
         somme += tablfResult[i];
     }
+    if(somme == 0)
+        return ERREUR_DIVISION_ZERO_SOFT_MAX;
 
     // Division par la somme des exponentielles
     for(int i = 0; i<siNbElts; i++)

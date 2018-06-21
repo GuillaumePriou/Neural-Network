@@ -24,7 +24,11 @@ T_ERREUR executerTests (void)
                                           { &testInitCoucheNeurone   , "InitCoucheNeurone..."    , false},
                                           { &testDesinitCoucheNeurone, "DesinitCoucheNeurone..." , false},
                                           { &testInitReseauNeurone   , "InitReseauNeurone..."    , false},
-                                          { &testDesinitReseauNeurone, "DesinitReseauNeurone..." , false}
+                                          { &testDesinitReseauNeurone, "DesinitReseauNeurone..." , false},
+                                          //{ &testCalcPredictionNeurone,"CalcPredictionNeurone...", false},
+                                          //{ &testCalcPredictionCoucheNeuronesEntree, "CalcPredictionCoucheNeuroneEntree...", false},
+                                          { &testCalcPredictionCoucheNeuronesCachee, "CalcPredictionCoucheNeuroneCachee...", false},
+                                          //{ &testCalcPredictionCoucheNeuronesSortie, "CalcPredictionCoucheNeuroneSortie...", false}
                                           //{ &, "Test de ..."},
                                    };
 
@@ -151,8 +155,6 @@ T_ERREUR testAfficheCoucheNeurone ()
 {
     short int resultat = 0;
 
-
-
     T_COUCHE_NEURONES cn_initialisee = coucheNeuroneEntree;
 
     resultat = AfficheCoucheNeurone(cn_initialisee, 0, 2);
@@ -185,9 +187,61 @@ T_ERREUR testChargeFicBinaireCoucheNeurones ()
     return ERREUR_FONCTION_NON_DEFINIE ;
 }
 
-T_ERREUR testCalcPredictionCoucheNeurones ()
+T_ERREUR testCalcPredictionCoucheNeuronesEntree()
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    short int resultat = 0;
+    short int i;
+
+    resultat = CalcPredictionCoucheNeurones(&coucheNeuroneEntree);
+
+    for(i = 0; i<coucheNeuroneEntree.siNbNeurones; i++)
+        printf("\n plfOutputSample %lf ", coucheNeuroneEntree.plfOutputSample[i]);
+
+    if (resultat != PAS_D_ERREUR)
+        printf ("-> Echec test CalcPredictionCoucheNeurones (couche entrée) (cause : %hd)\n", resultat);
+
+    if(resultat != 0)
+        return ERREUR_FONCTION_NON_DEFINIE;
+    else
+        return PAS_D_ERREUR;
+}
+
+T_ERREUR testCalcPredictionCoucheNeuronesCachee ()
+{
+    short int resultat = 0;
+    short int i;
+
+    resultat = CalcPredictionCoucheNeurones(&coucheNeuroneCachee);
+
+    for(i = 0; i<coucheNeuroneCachee.siNbNeurones; i++)
+        printf("\n plfOutputSample %lf ", coucheNeuroneCachee.plfOutputSample[i]);
+
+    if (resultat != PAS_D_ERREUR)
+        printf ("-> Echec test CalcPredictionCoucheNeurones (couche cachée) (cause : %hd)\n", resultat);
+
+    if(resultat != 0)
+        return ERREUR_FONCTION_NON_DEFINIE;
+    else
+        return PAS_D_ERREUR;
+}
+
+T_ERREUR testCalcPredictionCoucheNeuronesSortie ()
+{
+    short int resultat = 0;
+    short int i;
+
+    resultat = CalcPredictionCoucheNeurones(&coucheNeuroneSortie);
+
+    for(i = 0; i<coucheNeuroneSortie.siNbNeurones; i++)
+        printf("\n plfOutputSample %lf ", coucheNeuroneSortie.plfOutputSample[i]);
+
+    if (resultat != PAS_D_ERREUR)
+        printf ("-> Echec test CalcPredictionCoucheNeurones (couche sortie) (cause : %hd)\n", resultat);
+
+    if(resultat != 0)
+        return ERREUR_FONCTION_NON_DEFINIE;
+    else
+        return PAS_D_ERREUR;
 }
 
 /*********************************************************************************
@@ -353,7 +407,22 @@ T_ERREUR testChargeFicBinaireNeurone ()
 
 T_ERREUR testCalcPredictionNeurone ()
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    short int resultat = 0;
+
+    REEL plfPrediction[1] = {0};
+
+    resultat = CalcPredictionNeurone(plfOutputSamplesCC,
+                                     4,
+                                     &(tabNeuroneCoucheSortie[2]),
+                                     &(plfPrediction[0]));
+
+    if (resultat != PAS_D_ERREUR)
+        printf ("-> Echec test CalcPredictionNeurone (couche sortie) (cause : %hd)\n", resultat);
+
+    if(resultat != 0)
+        return ERREUR_FONCTION_NON_DEFINIE;
+    else
+        return PAS_D_ERREUR;
 }
 
 /*********************************************************************************

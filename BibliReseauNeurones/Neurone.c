@@ -187,6 +187,8 @@ T_ERREUR CalcPredictionNeurone ( REEL      * tablfX        ,
         case NEURONE_DE_SORTIE:
                                 for(i = 0; i<siNbElts; i++)
                                     somme += tablfX[i] * LeNeurone->tablfPoids[i];
+
+                                *plfPrediction = somme;
                                 break;
 
         default:

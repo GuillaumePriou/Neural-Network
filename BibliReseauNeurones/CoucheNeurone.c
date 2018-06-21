@@ -229,24 +229,31 @@ T_ERREUR ChargeFicBinaireCoucheNeurones ( T_COUCHE_NEURONES * LaCoucheNeurones ,
 T_ERREUR CalcPredictionCoucheNeurones ( T_COUCHE_NEURONES * pCoucheNeurones )
 {
     int i;
-    if(pCoucheNeurones->typeCoucheNeurones != COUCHE_ENTREE
-       && pCoucheNeurones->pCoucheNeuronesAmont->siNbNeurones == pCoucheNeurones->siNbDendritesParNeurone)
+    if(pCoucheNeurones->typeCoucheNeurones != COUCHE_ENTREE)
     {
-        for(i=0; i<pCoucheNeurones->siNbNeurones;i++)
+        if(pCoucheNeurones->pCoucheNeuronesAmont->siNbNeurones == pCoucheNeurones->siNbDendritesParNeurone)
         {
-            CalcPredictionNeurone(pCoucheNeurones->pCoucheNeuronesAmont->plfOutputSample,
-                                  pCoucheNeurones->pCoucheNeuronesAmont->siNbNeurones,
-                                  &(pCoucheNeurones->pNeurones[i]),
-                                  &(pCoucheNeurones->plfOutputSample[i]));
+            for(i=0; i<pCoucheNeurones->siNbNeurones;i++)
+            {
+                CalcPredictionNeurone(pCoucheNeurones->pCoucheNeuronesAmont->plfOutputSample,
+                                      pCoucheNeurones->pCoucheNeuronesAmont->siNbNeurones,
+                                      &(pCoucheNeurones->pNeurones[i]),
+                                      &(pCoucheNeurones->plfOutputSample[i]));
+            }
+
+            if(pCoucheNeurones->typeCoucheNeurones == COUCHE_SORTIE)
+                pCoucheNeurones->F_ActivationVectorielle(pCoucheNeurones->pCoucheNeuronesAmont->plfOutputSample,
+                                                         pCoucheNeurones->siNbNeurones,
+                                                         pCoucheNeurones->plfOutputSample,
+                                                         0);
+        }
+        else
+        {
+            return ERREUR_NB_DENDRITES;
         }
 
-        if(pCoucheNeurones->typeCoucheNeurones == COUCHE_SORTIE)
-            pCoucheNeurones->F_ActivationVectorielle(pCoucheNeurones->pCoucheNeuronesAmont->plfOutputSample,
-                                                     pCoucheNeurones->siNbNeurones,
-                                                     pCoucheNeurones->plfOutputSample,
-                                                     0);
-
     }
+
     return PAS_D_ERREUR ;
 }
 
