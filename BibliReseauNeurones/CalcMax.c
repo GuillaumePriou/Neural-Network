@@ -3,6 +3,7 @@
         Fonction de calcul de l'indice du maximum dans un tableau
 *******************************************************************/
 #include "CalcMax.h"
+#include "string.h"
 
 /**
 *   Retourne l'indice du plus grand élément d'un tableau

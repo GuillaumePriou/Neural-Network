@@ -83,7 +83,7 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
             case COUCHE_CACHEE: //  Initialisation des neurones de la couche cachee
                                     InitNeurone( NEURONE_CACHE,
                                                  (*pCoucheNeurones).siNbDendritesParNeurone,
-                                                 mat2DlfPoids[cptNeurone],
+                                                 &(mat2DlfPoids[cptNeurone]),
                                                  Fonction_ActivationNeurone,
                                                  Fonction_Derivee_ActivationNeurone,
                                                 &((*pCoucheNeurones).pNeurones[cptNeurone]));
@@ -92,7 +92,7 @@ T_ERREUR InitCoucheNeurone ( T_TYPE_COUCHE_NEURONES              typeCoucheNeuro
 
                                     InitNeurone( NEURONE_DE_SORTIE,
                                                  (*pCoucheNeurones).siNbDendritesParNeurone,
-                                                 mat2DlfPoids[cptNeurone],
+                                                 &(mat2DlfPoids[cptNeurone]),
                                                  Fonction_ActivationNeurone,
                                                  Fonction_Derivee_ActivationNeurone,
                                                 &((*pCoucheNeurones).pNeurones[cptNeurone]));
@@ -229,6 +229,7 @@ T_ERREUR ChargeFicBinaireCoucheNeurones ( T_COUCHE_NEURONES * LaCoucheNeurones ,
 T_ERREUR CalcPredictionCoucheNeurones ( T_COUCHE_NEURONES * pCoucheNeurones )
 {
     int i;
+    AfficheCoucheNeurone(*pCoucheNeurones, 0,0 );
     if(pCoucheNeurones->typeCoucheNeurones != COUCHE_ENTREE)
     {
         if(pCoucheNeurones->pCoucheNeuronesAmont->siNbNeurones == pCoucheNeurones->siNbDendritesParNeurone)

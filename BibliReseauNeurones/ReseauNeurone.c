@@ -24,7 +24,7 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
                              T_RESEAU_NEURONES                   * pReseauNeurones                           )
 {
 
-    short int i = 0;
+    short int i = 0, couche;
     char str[TAILLE_TEXTE];
     char strCoucheCache[TAILLE_TEXTE] = "couche cachee, indice";
 
@@ -70,6 +70,8 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
 
     for(i = 1; i<siNbCouches-1; i++)
     {
+        for (couche=0; couche<4; couche++)
+                printf ("%lf, %lf, %lf\n", mat3DlfPoids[i][couche][0], mat3DlfPoids[i][couche][1], mat3DlfPoids[i][couche][2]);
         sprintf(str, "%s %hd", strCoucheCache, i);
         InitCoucheNeurone(COUCHE_CACHEE,
                           str,
@@ -218,7 +220,22 @@ T_ERREUR ChargeCoucheNeuronesDansFicBinaire ( FILE              * pFic          
 
 T_ERREUR CalcPredictionReseauNeurones ( T_RESEAU_NEURONES * pReseauNeurones )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    short int i;
+    short int y;
+
+    if(pReseauNeurones->typeReseauNeurones == RESEAU_NON_INITIALISE)
+        return ERREUR_TYPE_RESEAU_INCONNU;
+
+    for(i = 0; i<pReseauNeurones->siNbCouches; i++)
+    {
+        CalcPredictionCoucheNeurones(&(pReseauNeurones->pCouchesNeurones[i]));
+    }
+
+    for(y = 0; y < pReseauNeurones->pCouchesNeurones[i-1].siNbNeurones; y++)
+        pReseauNeurones->plfPredictionFinale[y] = pReseauNeurones->pCouchesNeurones[i-1].plfOutputSample[y];
+
+
+    return PAS_D_ERREUR ;
 }
 
 T_ERREUR RetroPropagationErreursEtGradients ( T_RESEAU_NEURONES * pReseauNeurones )

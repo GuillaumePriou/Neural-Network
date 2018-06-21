@@ -167,8 +167,6 @@ T_ERREUR CalcPredictionNeurone ( REEL      * tablfX        ,
 {
     short int i;
     REEL somme = 0;
-    if(siNbElts != LeNeurone->siNbDendrites)
-        return ERREUR_NB_DENDRITES;
 
     switch (LeNeurone->typeNeurone)
     {
@@ -178,6 +176,9 @@ T_ERREUR CalcPredictionNeurone ( REEL      * tablfX        ,
         case NEURONE_D_ENTREE:
                                 break;
         case NEURONE_CACHE:
+                                if(siNbElts != LeNeurone->siNbDendrites)
+                                    return ERREUR_NB_DENDRITES;
+
                                  for(i = 0; i<siNbElts; i++)
                                     somme += tablfX[i] * LeNeurone->tablfPoids[i];
 
@@ -185,6 +186,9 @@ T_ERREUR CalcPredictionNeurone ( REEL      * tablfX        ,
                                 break;
 
         case NEURONE_DE_SORTIE:
+                                if(siNbElts != LeNeurone->siNbDendrites)
+                                    return ERREUR_NB_DENDRITES;
+
                                 for(i = 0; i<siNbElts; i++)
                                     somme += tablfX[i] * LeNeurone->tablfPoids[i];
 

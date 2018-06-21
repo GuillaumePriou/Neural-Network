@@ -12,23 +12,24 @@
 *********************************************************************************/
 T_ERREUR executerTests (void)
 {
-    short i=3 ;
+    short i=0 ;
     T_ERREUR resultat = PAS_D_ERREUR ;
 
     T_GROUPE_TEST tabTest [NB_TESTS] =  {
-                                          { &testAfficheNeurone      , "AfficheNeurone..."       , false},
-                                          { &testAfficheCoucheNeurone, "AfficheCoucheNeurone..." , false},
-                                          { &testAfficheReseauNeurone, "AfficheReseauNeurone..." , false},
-                                          { &testInitNeurone         , "InitNeurone..."          , false},
-                                          { &testDesinitNeurone      , "DesinitNeurone..."       , false},
-                                          { &testInitCoucheNeurone   , "InitCoucheNeurone..."    , false},
-                                          { &testDesinitCoucheNeurone, "DesinitCoucheNeurone..." , false},
-                                          { &testInitReseauNeurone   , "InitReseauNeurone..."    , false},
-                                          { &testDesinitReseauNeurone, "DesinitReseauNeurone..." , false},
+                                          //{ &testAfficheNeurone      , "AfficheNeurone..."       , false},
+                                          //{ &testAfficheCoucheNeurone, "AfficheCoucheNeurone..." , false},
+                                          //{ &testAfficheReseauNeurone, "AfficheReseauNeurone..." , false},
+                                          //{ &testInitNeurone         , "InitNeurone..."          , false},
+                                          //{ &testDesinitNeurone      , "DesinitNeurone..."       , false},
+                                          //{ &testInitCoucheNeurone   , "InitCoucheNeurone..."    , false},
+                                          //{ &testDesinitCoucheNeurone, "DesinitCoucheNeurone..." , false},
+                                          //{ &testInitReseauNeurone   , "InitReseauNeurone..."    , false},
+                                          //{ &testDesinitReseauNeurone, "DesinitReseauNeurone..." , false},
                                           //{ &testCalcPredictionNeurone,"CalcPredictionNeurone...", false},
                                           //{ &testCalcPredictionCoucheNeuronesEntree, "CalcPredictionCoucheNeuroneEntree...", false},
-                                          { &testCalcPredictionCoucheNeuronesCachee, "CalcPredictionCoucheNeuroneCachee...", false},
-                                          //{ &testCalcPredictionCoucheNeuronesSortie, "CalcPredictionCoucheNeuroneSortie...", false}
+                                          //{ &testCalcPredictionCoucheNeuronesCachee, "CalcPredictionCoucheNeuroneCachee...", false},
+                                          //{ &testCalcPredictionCoucheNeuronesSortie, "CalcPredictionCoucheNeuroneSortie...", false},
+                                          { &testCalcPredictionReseauNeurones, "CalcPredictionReseauNeurone...", false}
                                           //{ &, "Test de ..."},
                                    };
 
@@ -557,7 +558,48 @@ T_ERREUR testChargeCoucheNeuronesDansFicBinaire ( )
 
 T_ERREUR testCalcPredictionReseauNeurones ( )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    short int resultat = 0;
+    short int i;
+    T_RESEAU_NEURONES LeReseau3c3n;
+
+    short int tabsiNbNeuroneParCouche[3] = {3, 3, 3};
+
+  InitReseauNeurone ( RESEAU_FULLY_CONNECTED_AVEC_BIAIS  ,
+                    "Reseau de 3 couches de 3 neurones" ,
+                    0.2 , // 0.2
+                    3 , // 3
+                    tabsiNbNeuroneParCouche , // {3, 3, 3}
+                    CalcSoftMax ,
+                    CalcDeriveePartielleSoftMaxViaValSoftMax ,
+                    tabCoefs,
+                    CalcLogistique ,
+                    CalcDeriveeLogistiqueViaValLogistique ,
+                    CalcIdentite ,
+                    CalcDeriveeIdentite ,
+                    0 , // 0
+                    &LeReseau3c3n );
+
+    LeReseau3c3n.pCouchesNeurones[0].plfOutputSample[0] = 1;
+    LeReseau3c3n.pCouchesNeurones[0].plfOutputSample[1] = 1.4;
+    LeReseau3c3n.pCouchesNeurones[0].plfOutputSample[2] = 0.2;
+
+    AfficheReseauNeurone(LeReseau3c3n);
+
+    resultat = CalcPredictionReseauNeurones(&LeReseau3c3n);
+
+    for(i = 0; i<LeReseau3c3n.siNbCouches; i++)
+    {
+        for(int y = 0; y<LeReseau3c3n.pCouchesNeurones[i].siNbNeurones; y++)
+            printf("\n output couche %hd, value %lf", i, LeReseau3c3n.pCouchesNeurones[i].plfOutputSample[y]);
+    }
+
+    if (resultat != PAS_D_ERREUR)
+        printf ("-> Echec test CalcPredictionReseauNeurones (cause : %hd)\n", resultat);
+
+    if(resultat != 0)
+        return ERREUR_FONCTION_NON_DEFINIE;
+    else
+        return PAS_D_ERREUR;
 }
 
 T_ERREUR testRetroPropagationErreursEtGradients ( )
