@@ -58,6 +58,10 @@
 		<Unit filename="BibliReseauNeurones/TypeReseauNeurones.h" />
 		<Unit filename="BibliReseauNeurones/constantes.h" />
 		<Unit filename="InterfaceNeuroneDataSet.h" />
+		<Unit filename="InterfacesJeuxDeDonnees/IrisDataSet/IrisDataSet.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="InterfacesJeuxDeDonnees/IrisDataSet/IrisDataSet.h" />
 		<Unit filename="TestsUnitaires/TestsUnitaires.c">
 			<Option compilerVar="CC" />
 		</Unit>

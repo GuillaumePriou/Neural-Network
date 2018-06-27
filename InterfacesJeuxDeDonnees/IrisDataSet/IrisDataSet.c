@@ -28,9 +28,9 @@ T_ERREUR ChargeDonneesIris ( char      * szNomFichier ,
     fichier = fopen(szNomFichier, "r");
     if (fichier != NULL)
     {
-        char* ligne[TAILLE_TEXTE];
+        char ligne[TAILLE_TEXTE];
         int numLigneLu = 0;
-        char* classeIris[20];
+        char classeIris[20];
 
         while (fgets(ligne, TAILLE_TEXTE, fichier) != NULL)
         {
@@ -40,7 +40,7 @@ T_ERREUR ChargeDonneesIris ( char      * szNomFichier ,
                    &(tabIris[numLigneLu].lfLargeur),
                    &(tabIris[numLigneLu].lfLongueurSepal),
                    &(tabIris[numLigneLu].lfLargeurSepal),
-                   &classeIris
+                   classeIris
                    );
             if(strcmp(classeIris, "Iris-setosa") == 0)
                 tabIris[numLigneLu].cType = 0;

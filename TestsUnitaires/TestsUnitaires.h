@@ -2,6 +2,7 @@
 #define TESTSUNITAIRES_H_INCLUDED
 
 #include "../BibliReseauNeurones/constantes.h"
+#include "../InterfaceNeuroneDataSet.h"
 
 // Le nombre de tests
 #define NB_TESTS 2

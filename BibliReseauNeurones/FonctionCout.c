@@ -4,6 +4,7 @@
 ******************************************************/
 #include "FonctionCout.h"
 #include "constantes.h"
+#include <math.h>
 
 T_ERREUR FonctionCoutLogLoss ( REEL      * tablfValeursVraies   ,
                                REEL      * tablfValeursEstimees ,
