@@ -29,7 +29,7 @@ T_ERREUR executerTests (void)
                                           //{ &testCalcPredictionCoucheNeuronesEntree, "CalcPredictionCoucheNeuroneEntree...", false},
                                           //{ &testCalcPredictionCoucheNeuronesCachee, "CalcPredictionCoucheNeuroneCachee...", false},
                                           //{ &testCalcPredictionCoucheNeuronesSortie, "CalcPredictionCoucheNeuroneSortie...", false},
-                                         // { &testCalcPredictionReseauNeurones, "CalcPredictionReseauNeurone...", false}
+                                          { &testCalcPredictionReseauNeurones, "CalcPredictionReseauNeurone...", false}
                                           //{ &, "Test de ..."},
                                    };
 
