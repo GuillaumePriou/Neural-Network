@@ -249,8 +249,14 @@ T_ERREUR RetroPropagationErreursEtGradients ( T_RESEAU_NEURONES * pReseauNeurone
 
 T_ERREUR InitAZeroGradientsPoidsCumules ( T_RESEAU_NEURONES * pReseauNeurones )
 {
+    short couche, neurone, dendrite;
 
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    for (couche=0; couche<pReseauNeurones->siNbCouches; couche++)
+        for (neurone=0; neurone<pReseauNeurones->pCouchesNeurones[couche].siNbNeurones; neurone++)
+            for (dendrite=0; dendrite<pReseauNeurones->pCouchesNeurones[couche-1].siNbNeurones; dendrite++)
+                pReseauNeurones->pCouchesNeurones[couche].pNeurones[neurone].tablfGradients[dendrite] = 0;
+
+    return PAS_D_ERREUR ;
 }
 
 T_ERREUR CalcCorrectionPoidsSynaptiques ( T_RESEAU_NEURONES * pReseauNeurones ,
