@@ -4,6 +4,7 @@
 #include "../BibliReseauNeurones/CoucheNeurone.h"
 #include "../BibliReseauNeurones/TypeReseauNeurones.h"
 #include "../BibliReseauNeurones/ReseauNeurone.h"
+#include "../InterfacesJeuxDeDonnees/IrisDataSet/IrisDataSet.h"
 #include "VariableTest.h"
 #include <string.h>
 #include <stdlib.h>
@@ -32,6 +33,7 @@ T_ERREUR executerTests (void)
                                           //{ &testCalcPredictionCoucheNeuronesSortie, "CalcPredictionCoucheNeuroneSortie...", false},
                                           { &testCalcPredictionReseauNeurones, "CalcPredictionReseauNeurone...", false},
                                           //{ &testCmpMatrice, "TestCmpMatrice...", false}
+                                          { &testChargementDonneeIris, "TestChargementDonneeIris...", false}
                                           //{ &, "Test de ..."},
                                    };
 
@@ -725,6 +727,27 @@ T_ERREUR testCmpMatrice( )
     } ;
     if(cmpMatrice3(taille1D,taille2D,taille3D, (REEL***)tabTest, (REEL***)tabTest2) != 0)
         return ERREUR_FONCTION_NON_DEFINIE;
+    return PAS_D_ERREUR;
+}
+
+T_ERREUR testChargementDonneeIris( )
+{
+    char file[TAILLE_TEXTE];
+    strcpy(file,"JeuxDeDonnees/iris/iris_test.txt");
+    T_DONNEES_IRIS* data = malloc(NB_IRIS_TEST*sizeof(T_DONNEES_IRIS));
+    ChargeDonneesIris(file, NB_IRIS_TEST, data);
+    int i;
+    printf("\n");
+    for(i=0;i<NB_IRIS_TEST;i++)
+        printf("data%i : %lf,%lf,%lf,%lf,%uc \n",
+               i,
+               data[i].lfLongueurSepal,
+               data[i].lfLargeurSepal,
+               data[i].lfLongueur,
+               data[i].lfLargeur,
+               data[i].cType
+              );
+
     return PAS_D_ERREUR;
 }
 

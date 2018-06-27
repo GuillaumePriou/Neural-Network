@@ -4,7 +4,7 @@
 #include "../BibliReseauNeurones/constantes.h"
 
 // Le nombre de tests
-#define NB_TESTS 1
+#define NB_TESTS 2
 
 // Format des fonctions de test
 typedef T_ERREUR T_FONCTION_TEST(void) ;
@@ -110,6 +110,11 @@ T_FONCTION_TEST testRetroPropagationErreursEtGradients;
 T_FONCTION_TEST testCalcCorrectionPoidsSynaptiques;
 T_FONCTION_TEST testPredictionJeuDeDonnees;
 T_FONCTION_TEST testApprentissageJeuDeDonnees;
+
+/*********************************************************************************
+    Data
+*********************************************************************************/
+T_FONCTION_TEST testChargementDonneeIris;
 
 /*********************************************************************************
     Utilitaire

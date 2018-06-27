@@ -18,6 +18,10 @@ PAGE WEB : archive.ics.edu/ml/datasets/iris
 #ifndef IRISDATASET_H_INCLUDED
 #define IRISDATASET_H_INCLUDED
 
+#include "../../BibliReseauNeurones/constantes.h"
+#include "../../BibliReseauNeurones/Neurone.h"
+#include "../../BibliReseauNeurones/TypeReseauNeurones.h"
+
 /* nombre d'iris servant a l'apprentissage */
 #define NB_IRIS_APPRENTISSAGE 120
 /* nombre d'apprentissage servant au test */
@@ -41,6 +45,8 @@ double        lfProbabilite  : probabilité calculee
 
 typedef struct TagDonneesIris
 {
+ REEL        lfLongueurSepal    ;
+ REEL        lfLargeurSepal     ;
  REEL        lfLongueur    ;
  REEL        lfLargeur     ;
  unsigned char cType         ;
