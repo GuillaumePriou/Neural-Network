@@ -29,7 +29,7 @@ T_ERREUR executerTests (void)
                                           //{ &testCalcPredictionCoucheNeuronesEntree, "CalcPredictionCoucheNeuroneEntree...", false},
                                           //{ &testCalcPredictionCoucheNeuronesCachee, "CalcPredictionCoucheNeuroneCachee...", false},
                                           //{ &testCalcPredictionCoucheNeuronesSortie, "CalcPredictionCoucheNeuroneSortie...", false},
-                                          { &testCalcPredictionReseauNeurones, "CalcPredictionReseauNeurone...", false}
+                                         // { &testCalcPredictionReseauNeurones, "CalcPredictionReseauNeurone...", false}
                                           //{ &, "Test de ..."},
                                    };
 
@@ -630,9 +630,15 @@ short cmpMatrice1(int taille, REEL* matA, REEL* matB){
 }
 
 short cmpMatrice2(int taille1D,int taille2D, REEL** matA, REEL** matB){
+    for(int i=0;i<taille1D;i++)
+        if(cmpMatrice1(taille2D, matA[i], matB[i]) != 0)
+            return 1;
     return 0;
 }
 
 short cmpMatrice3(int taille1D,int taille2D,int taille3D, REEL*** matA, REEL*** matB){
+    for(int i=0;i<taille1D;i++)
+        if(cmpMatrice2(taille2D,taille3D, matA[i], matB[i]) != 0)
+            return 1;
     return 0;
 }
