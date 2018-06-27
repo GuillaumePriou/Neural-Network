@@ -249,6 +249,7 @@ T_ERREUR RetroPropagationErreursEtGradients ( T_RESEAU_NEURONES * pReseauNeurone
 
 T_ERREUR InitAZeroGradientsPoidsCumules ( T_RESEAU_NEURONES * pReseauNeurones )
 {
+
     return ERREUR_FONCTION_NON_DEFINIE ;
 }
 

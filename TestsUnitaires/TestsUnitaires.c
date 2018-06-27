@@ -600,7 +600,7 @@ T_ERREUR testCalcPredictionReseauNeurones ( )
 
     if(tabCoefficient != NULL)
     {
-        for(short i = 0; i < 3; i++)
+        for(i = 0; i < 3; i++)
         {
             tabCoefficient[i] = malloc(3 * sizeof(REEL*));
 
@@ -614,7 +614,7 @@ T_ERREUR testCalcPredictionReseauNeurones ( )
 
         }
 
-        for(short i = 0; i < 3; i++)
+        for(i = 0; i < 3; i++)
             for(short j = 0; j < 3; j++)
             {
                 for(short k = 0; k < 3; k++)
@@ -723,7 +723,7 @@ T_ERREUR testCmpMatrice( )
         { 0.421330 , 0.480866 , -0.406068 }
       }
     } ;
-    if(cmpMatrice3(taille1D,taille2D,taille3D, tabTest, tabTest2) != 0)
+    if(cmpMatrice3(taille1D,taille2D,taille3D, (REEL***)tabTest, (REEL***)tabTest2) != 0)
         return ERREUR_FONCTION_NON_DEFINIE;
     return PAS_D_ERREUR;
 }
@@ -739,7 +739,7 @@ short cmpMatrice1(int taille, REEL* matA, REEL* matB){
 short cmpMatrice2(int taille1D,int taille2D, REEL** matA, REEL** matB){
     int j;
     for(j=0;j<taille1D;j++)
-        if(cmpMatrice1(taille2D, &matA[j], &matB[j]) != 0)
+        if(cmpMatrice1(taille2D, (REEL*)&matA[j], (REEL*)&matB[j]) != 0)
             return 1;
     return 0;
 }
@@ -747,7 +747,7 @@ short cmpMatrice2(int taille1D,int taille2D, REEL** matA, REEL** matB){
 short cmpMatrice3(int taille1D,int taille2D,int taille3D, REEL*** matA, REEL*** matB){
     int k;
     for(k=0;k<taille1D;k++)
-        if(cmpMatrice2(taille2D,taille3D, &matA[k], &matB[k]) != 0)
+        if(cmpMatrice2(taille2D,taille3D, (REEL**)&matA[k], (REEL**) &matB[k]) != 0)
             return 1;
     return 0;
 }
