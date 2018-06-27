@@ -4,6 +4,7 @@
 *******************************************************************/
 #include "CalcMax.h"
 #include "string.h"
+#include <stdio.h>
 
 /**
 *   Retourne l'indice du plus grand élément d'un tableau
@@ -38,8 +39,8 @@ void AfficheTab ( double    * TabVal ,
     else{
         NbElts = NbElts-1;
         for (i=0; i<NbElts; i++)
-           printf("%d, ",TabVal[i]);
-        printf("%d ",TabVal[i]);
+           printf("%lf, ",TabVal[i]);
+        printf("%lf ",TabVal[i]);
     }
     printf("] \r\n");
 }

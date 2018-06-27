@@ -6,6 +6,7 @@
 #include "../BibliReseauNeurones/ReseauNeurone.h"
 #include "VariableTest.h"
 #include <string.h>
+#include <stdlib.h>
 
 /*********************************************************************************
     Fonctions de test general
@@ -29,8 +30,8 @@ T_ERREUR executerTests (void)
                                           //{ &testCalcPredictionCoucheNeuronesEntree, "CalcPredictionCoucheNeuroneEntree...", false},
                                           //{ &testCalcPredictionCoucheNeuronesCachee, "CalcPredictionCoucheNeuroneCachee...", false},
                                           //{ &testCalcPredictionCoucheNeuronesSortie, "CalcPredictionCoucheNeuroneSortie...", false},
-                                          //{ &testCalcPredictionReseauNeurones, "CalcPredictionReseauNeurone...", false},
-                                         { &testCmpMatrice, "TestCmpMatrice...", false}
+                                          { &testCalcPredictionReseauNeurones, "CalcPredictionReseauNeurone...", false},
+                                          //{ &testCmpMatrice, "TestCmpMatrice...", false}
                                           //{ &, "Test de ..."},
                                    };
 
@@ -435,6 +436,37 @@ T_ERREUR testInitReseauNeurone ( )
 {
     T_RESEAU_NEURONES monRNAInitialiser;
 
+    REEL*** tabCoefficient = NULL;
+
+    tabCoefficient = malloc(3 * sizeof(REEL**));
+
+    if(tabCoefficient != NULL)
+    {
+        for(short i = 0; i < 3; i++)
+        {
+            tabCoefficient[i] = malloc(3 * sizeof(REEL*));
+
+            if(tabCoefficient[i] != NULL)
+            {
+                for(short j = 0; j < 3; j++)
+                {
+                   tabCoefficient[i][j] = malloc(3 * sizeof(REEL));
+                }
+            }
+
+        }
+
+        for(short i = 0; i < 3; i++)
+            for(short j = 0; j < 3; j++)
+                for(short k = 0; k < 3; k++)
+                    tabCoefficient[i][j][k] = tabCoefs[i][j][k];
+    }
+
+
+
+
+
+
 
 
     T_ERREUR resultat = InitReseauNeurone(reseauNeurone.typeReseauNeurones,
@@ -444,7 +476,7 @@ T_ERREUR testInitReseauNeurone ( )
                                           tabsiNbNeuronesRN,
                                           CalcSoftMax,
                                           CalcDeriveePartielleSoftMaxViaValSoftMax,
-                                          (REEL ***) tabCoefs,
+                                          tabCoefficient,
                                           CalcLogistique,
                                           CalcDeriveeLogistiqueViaValLogistique,
                                           CalcLogistique,
@@ -561,18 +593,51 @@ T_ERREUR testCalcPredictionReseauNeurones ( )
 {
     short int resultat = 0;
     short int i;
+
+    REEL*** tabCoefficient = NULL;
+
+    tabCoefficient = malloc(3 * sizeof(REEL**));
+
+    if(tabCoefficient != NULL)
+    {
+        for(short i = 0; i < 3; i++)
+        {
+            tabCoefficient[i] = malloc(3 * sizeof(REEL*));
+
+            if(tabCoefficient[i] != NULL)
+            {
+                for(short j = 0; j < 3; j++)
+                {
+                   tabCoefficient[i][j] = malloc(3 * sizeof(REEL));
+                }
+            }
+
+        }
+
+        for(short i = 0; i < 3; i++)
+            for(short j = 0; j < 3; j++)
+            {
+                for(short k = 0; k < 3; k++)
+                {
+
+                    tabCoefficient[i][j][k] = tabCoefs[i][j][k];
+                }
+            }
+
+    }
+
     T_RESEAU_NEURONES LeReseau3c3n;
 
     short int tabsiNbNeuroneParCouche[3] = {3, 3, 3};
 
-  InitReseauNeurone ( RESEAU_FULLY_CONNECTED_AVEC_BIAIS  ,
+   InitReseauNeurone ( RESEAU_FULLY_CONNECTED_AVEC_BIAIS  ,
                     "Reseau de 3 couches de 3 neurones" ,
                     0.2 , // 0.2
                     3 , // 3
                     tabsiNbNeuroneParCouche , // {3, 3, 3}
                     CalcSoftMax ,
                     CalcDeriveePartielleSoftMaxViaValSoftMax ,
-                    tabCoefs,
+                    tabCoefficient,
                     CalcLogistique ,
                     CalcDeriveeLogistiqueViaValLogistique ,
                     CalcIdentite ,

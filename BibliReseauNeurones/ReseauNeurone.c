@@ -24,7 +24,7 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
                              T_RESEAU_NEURONES                   * pReseauNeurones                           )
 {
 
-    short int i = 0, couche;
+    short int i = 0;
     char str[TAILLE_TEXTE];
     char strCoucheCache[TAILLE_TEXTE] = "couche cachee, indice";
 
@@ -70,9 +70,13 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
 
     for(i = 1; i<siNbCouches-1; i++)
     {
-        for (couche=0; couche<4; couche++)
-                printf ("%lf, %lf, %lf\n", mat3DlfPoids[i][couche][0], mat3DlfPoids[i][couche][1], mat3DlfPoids[i][couche][2]);
+
         sprintf(str, "%s %hd", strCoucheCache, i);
+
+        for(short j = 0; j<tabsiNbNeurones[i-1]; j++)
+            for(short k = 0; k<3; k++)
+                printf("%lf ", mat3DlfPoids[i][j][k]);
+
         InitCoucheNeurone(COUCHE_CACHEE,
                           str,
                           &(((*pReseauNeurones).pCouchesNeurones)[i-1]),
@@ -80,7 +84,7 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
                           NULL,
                           tabsiNbNeurones[i],
                           tabsiNbNeurones[i-1],
-                          (REEL**) &(mat3DlfPoids[i]),
+                          mat3DlfPoids[i],
                           Fonction_ActivationNeurone_Cache,
                           Fonction_Derivee_ActivationNeurone_Cache,
                           &(((*pReseauNeurones).pCouchesNeurones)[i])
@@ -95,7 +99,7 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
                       F_Derivee_ActivationVectorielle,
                       tabsiNbNeurones[i],
                       tabsiNbNeurones[i-1],
-                      (REEL**) &(mat3DlfPoids[i]),
+                      mat3DlfPoids[i],
                       Fonction_ActivationNeurone_Sortie,
                       Fonction_Derivee_ActivationNeurone_Sortie,
                       &(((*pReseauNeurones).pCouchesNeurones)[i])
@@ -164,7 +168,7 @@ T_ERREUR AfficheReseauNeurone ( T_RESEAU_NEURONES LeReseauNeurones )
     printf("Taux d'apprentissage du RN : %lf \n", LeReseauNeurones.lfTauxApprentissage);
     printf("Cout Cumulee : %lf\n", LeReseauNeurones.lfCoutCumule);
 
-    for(i=0; i< LeReseauNeurones.pCouchesNeurones[LeReseauNeurones.siNbCouches].siNbNeurones; i++)
+    for(i=0; i< LeReseauNeurones.pCouchesNeurones[LeReseauNeurones.siNbCouches-1].siNbNeurones; i++)
     {
        printf("indice %d - Prediction finale : %lf, Vrai valeur : %lf\n", i,
               LeReseauNeurones.plfPredictionFinale[i], LeReseauNeurones.plfVraieValeurFinale[i]);

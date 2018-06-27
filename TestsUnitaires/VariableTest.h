@@ -27,7 +27,7 @@ REEL plfErreurDeltaSampleCS[] = {0,0,0} ;
 ***********************************************************/
 
 // tab [couche][neurone][coefficient]
-REEL tabCoefs[3][4][4]=
+REEL tabCoefs[3][3][3]=
     {
          {  // couche ZERO (entree)
              { 0.0      , 0.0      ,  0.0      } ,
