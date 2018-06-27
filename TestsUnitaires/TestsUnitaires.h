@@ -117,6 +117,6 @@ T_FONCTION_TEST testApprentissageJeuDeDonnees;
 short cmpMatrice1(int taille, REEL* matA, REEL* matB);
 short cmpMatrice2(int taille1D,int taille2D, REEL** matA, REEL** matB);
 short cmpMatrice3(int taille1D,int taille2D,int taille3D, REEL*** matA, REEL*** matB);
-
+T_FONCTION_TEST testCmpMatrice;
 
 #endif // TESTSUNITAIRES_H_INCLUDED

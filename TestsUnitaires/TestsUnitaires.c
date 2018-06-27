@@ -29,7 +29,8 @@ T_ERREUR executerTests (void)
                                           //{ &testCalcPredictionCoucheNeuronesEntree, "CalcPredictionCoucheNeuroneEntree...", false},
                                           //{ &testCalcPredictionCoucheNeuronesCachee, "CalcPredictionCoucheNeuroneCachee...", false},
                                           //{ &testCalcPredictionCoucheNeuronesSortie, "CalcPredictionCoucheNeuroneSortie...", false},
-                                          { &testCalcPredictionReseauNeurones, "CalcPredictionReseauNeurone...", false}
+                                          //{ &testCalcPredictionReseauNeurones, "CalcPredictionReseauNeurone...", false},
+                                         { &testCmpMatrice, "TestCmpMatrice...", false}
                                           //{ &, "Test de ..."},
                                    };
 
@@ -622,23 +623,66 @@ T_ERREUR testApprentissageJeuDeDonnees ( )
     return ERREUR_FONCTION_NON_DEFINIE ;
 }
 
+T_ERREUR testCmpMatrice( )
+{
+    int taille1D = 3;
+    int taille2D = 2;
+    int taille3D = 3;
+    REEL tabTest[3][2][3]=
+    {
+      {  // couche ZERO (entree)
+        { 0.0      , 0.0      ,  0.0      } ,
+        { 0.0      , 0.0      ,  0.0      }
+      } ,
+      {  // couche UN (cachee)
+        { 0.0      , 0.0      ,  0.0      } ,
+        { 0.194711 , 0.103084 ,  0.305393 }
+      } ,
+      {  // couche DEUX (sortie)
+        { 0.431965 , 0.447154 , -0.373282 } ,
+        { 0.421330 , 0.480866 , -0.406068 }
+      }
+    } ;
+    REEL tabTest2[3][2][3]=
+     {
+      {  // couche ZERO (entree)
+        { 0.0      , 0.0      ,  0.0      } ,
+        { 0.0      , 0.0      ,  0.0      }
+      } ,
+      {  // couche UN (cachee)
+        { 0.0      , 0.0      ,  0.0      } ,
+        { 0.194711 , 0.103084 ,  0.305393 }
+      } ,
+      {  // couche DEUX (sortie)
+        { 0.431965 , 0.447154 , -0.373282 } ,
+        { 0.421330 , 0.480866 , -0.406068 }
+      }
+    } ;
+    if(cmpMatrice3(taille1D,taille2D,taille3D, tabTest, tabTest2) != 0)
+        return ERREUR_FONCTION_NON_DEFINIE;
+    return PAS_D_ERREUR;
+}
+
 short cmpMatrice1(int taille, REEL* matA, REEL* matB){
-    for(int i=0;i<taille;i++)
+    int i;
+    for(i=0;i<taille;i++)
         if(matA[i]!=matB[i])
             return 1;
     return 0;
 }
 
 short cmpMatrice2(int taille1D,int taille2D, REEL** matA, REEL** matB){
-    for(int i=0;i<taille1D;i++)
-        if(cmpMatrice1(taille2D, matA[i], matB[i]) != 0)
+    int j;
+    for(j=0;j<taille1D;j++)
+        if(cmpMatrice1(taille2D, &matA[j], &matB[j]) != 0)
             return 1;
     return 0;
 }
 
 short cmpMatrice3(int taille1D,int taille2D,int taille3D, REEL*** matA, REEL*** matB){
-    for(int i=0;i<taille1D;i++)
-        if(cmpMatrice2(taille2D,taille3D, matA[i], matB[i]) != 0)
+    int k;
+    for(k=0;k<taille1D;k++)
+        if(cmpMatrice2(taille2D,taille3D, &matA[k], &matB[k]) != 0)
             return 1;
     return 0;
 }
