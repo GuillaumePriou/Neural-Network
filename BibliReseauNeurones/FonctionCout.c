@@ -58,7 +58,20 @@ T_ERREUR FonctionCoutErrQuadra ( REEL      * tablfValeursVraies   ,
                                  short int   siNbElts             ,
                                  REEL      * plfCout              )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    T_ERREUR Err = PAS_D_ERREUR ;
+    REEL lfInter ;
+    short int siCompteur ;
+
+    lfInter = tablfValeursVraies[0] - tablfValeursEstimees[0] ;
+    * plfCout = lfInter * lfInter ;
+
+    for ( siCompteur = 1 ; siCompteur < siNbElts ; siCompteur++ )
+    {
+        lfInter = tablfValeursVraies[siCompteur] - tablfValeursEstimees[siCompteur] ;
+        (* plfCout) += lfInter * lfInter ;
+    }
+
+    return ( Err ) ;
 }
 
 /******************************************************
