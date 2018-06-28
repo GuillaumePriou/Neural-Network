@@ -244,7 +244,67 @@ T_ERREUR CalcPredictionReseauNeurones ( T_RESEAU_NEURONES * pReseauNeurones )
 
 T_ERREUR RetroPropagationErreursEtGradients ( T_RESEAU_NEURONES * pReseauNeurones )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    long int i , jNeurone , kDendrite ;
+
+    if ( pReseauNeurones->typeReseauNeurones != RESEAU_FULLY_CONNECTED_AVEC_BIAIS )
+        return ERREUR_TYPE_RESEAU_INCONNU ;
+
+    /* calcul de l'erreur en sortie du reseau de neurone */
+    for ( i = 0 ; i < pReseauNeurones->pCouchesNeurones[pReseauNeurones->siNbCouches-1].siNbNeurones ; i++ )
+    {
+        pReseauNeurones->pCouchesNeurones[pReseauNeurones->siNbCouches-1].plfErreurDeltaSample[i]
+            = (pReseauNeurones->plfPredictionFinale[i] - pReseauNeurones->plfVraieValeurFinale[i]) ;
+        // penser a intgrer la derivee pour que la formule soit generale !!!!!!!!!!!!!
+    }
+
+    /* retro-propagation des erreurs et calcul de la contribution aux corrections de gradient :
+    boucle sur la couche de sortie et sur toutes les couches cachees */
+    for ( i = pReseauNeurones->siNbCouches - 1 ; i > 0 ; i-- )
+    {
+        /* contribution a la correction de gradient :
+        - si c'est la couche de sortie, jNeurone varie de ZERO a (NbNeurones-1) car pas de neurone de biais.
+        - si c'est une couche cachee, jNeurone varie de UN a (NbNeurones-1) car il y a un neurone de biais (d'indice ZERO). */
+        for ( jNeurone = ( (i == (pReseauNeurones->siNbCouches - 1)) ? 0 : 1 ) ;
+        jNeurone < pReseauNeurones->pCouchesNeurones[i].siNbNeurones ;
+        jNeurone ++ )
+        {
+            for ( kDendrite = 0 ; kDendrite < pReseauNeurones->pCouchesNeurones[i-1].siNbNeurones ; kDendrite++ )
+                pReseauNeurones->pCouchesNeurones[i].pNeurones[jNeurone].tablfGradients[kDendrite] +=
+                    pReseauNeurones->pCouchesNeurones[i].plfErreurDeltaSample[jNeurone]
+                    * pReseauNeurones->pCouchesNeurones[i-1].plfOutputSample[kDendrite] ;
+
+        }
+
+        /* retro-propagation de l'erreur vers la couche precedent d'indice i > 0
+        car on retro-propage vers la couche cachee precedente (inutile pour la couche d'entree) */
+        if ( i != 1 )
+        {
+            /* on ne retro-propage que vers une couche cachee :
+            si la couche precedente est la couche d'entree (i vaut 1), on ne retro-propage pas */
+            for ( kDendrite = 1 ; kDendrite < pReseauNeurones->pCouchesNeurones[i-1].siNbNeurones ; kDendrite ++ )
+            { /* kDendrite debute a UN car le neurone d'indice ZERO est de biais */
+                pReseauNeurones->pCouchesNeurones[i-1].plfErreurDeltaSample[kDendrite] = 0.0 ;
+                for (   jNeurone = ( (i == (pReseauNeurones->siNbCouches - 1)) ? 0 : 1 ) ;
+                        jNeurone < pReseauNeurones->pCouchesNeurones[i].siNbNeurones ;
+                        jNeurone ++ )
+                {
+                    pReseauNeurones->pCouchesNeurones[i-1].plfErreurDeltaSample[kDendrite] +=
+                        pReseauNeurones->pCouchesNeurones[i].plfErreurDeltaSample[jNeurone]
+                        * pReseauNeurones->pCouchesNeurones[i].pNeurones[jNeurone].tablfPoids[kDendrite] ;
+                }
+
+                pReseauNeurones->pCouchesNeurones[i-1].plfErreurDeltaSample[kDendrite] *=
+                //                        pReseauNeurones->pCouchesNeurones[i-1].plfOutputSample[kDendrite]
+                //                        * ( 1.0 - pReseauNeurones->pCouchesNeurones[i-1].plfOutputSample[kDendrite] ) ;
+                // penser a remplacer par l'expression de la derivee generale !!!!!!!!!!!
+                // CAD (verifier!!!) :
+                pReseauNeurones->pCouchesNeurones[i-1].pNeurones[kDendrite].F_DeriveeActivation
+                    ( pReseauNeurones->pCouchesNeurones[i-1].plfOutputSample[kDendrite] ) ;
+            }
+        }
+    }
+
+    return PAS_D_ERREUR ;
 }
 
 T_ERREUR InitAZeroGradientsPoidsCumules ( T_RESEAU_NEURONES * pReseauNeurones )
@@ -262,7 +322,20 @@ T_ERREUR InitAZeroGradientsPoidsCumules ( T_RESEAU_NEURONES * pReseauNeurones )
 T_ERREUR CalcCorrectionPoidsSynaptiques ( T_RESEAU_NEURONES * pReseauNeurones ,
                                           long int            liNbElts        )
 {
-    return ERREUR_FONCTION_NON_DEFINIE ;
+    long int i , j , k ;
+
+    if ( pReseauNeurones->typeReseauNeurones != RESEAU_FULLY_CONNECTED_AVEC_BIAIS )
+        return ERREUR_TYPE_RESEAU_INCONNU ;
+
+    for ( i = 1 ; i < pReseauNeurones->siNbCouches ; i++ )
+        for (   j = ( (i == (pReseauNeurones->siNbCouches - 1)) ? 0 : 1 ) ;
+                j < pReseauNeurones->pCouchesNeurones[i].siNbNeurones ;
+                j++ )
+            for ( k = 0 ; k < pReseauNeurones->pCouchesNeurones[i-1].siNbNeurones ; k++ )
+                pReseauNeurones->pCouchesNeurones[i].pNeurones[j].tablfPoids[k] +=
+                    - pReseauNeurones->lfTauxApprentissage * pReseauNeurones->pCouchesNeurones[i].pNeurones[j].tablfGradients[k] / liNbElts ;
+
+    return PAS_D_ERREUR ;
 }
 
 T_ERREUR PredictionJeuDeDonnees ( long int                            liNbElts                         ,

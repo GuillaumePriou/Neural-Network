@@ -672,6 +672,7 @@ T_ERREUR testCalcPredictionReseauNeurones ( )
 
 T_ERREUR testRetroPropagationErreursEtGradients ( )
 {
+    // Zappe
     return ERREUR_FONCTION_NON_DEFINIE ;
 }
 

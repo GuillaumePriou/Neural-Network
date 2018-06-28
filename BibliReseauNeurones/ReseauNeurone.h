@@ -299,10 +299,11 @@ SORTIE :
 - la matrice des corrections de gradient cumulees sur tous les echantillons
   deja traites PLUS l'echantillon present.
   A la fin de la boucle sur les tous les echantillons du data set, la matrice contient
-  la sommes des contributions au gradient pour tous les echantillnos du dataset.
+  la sommes des contributions au gradient pour tous les echantillons du dataset.
   Il faudra alors soustraire chacun des termes de cette matrice (multiplie par le coefficient
   d'apprentissage et divise par le nombre d'echantillon pour obtenir une correction MOYENNE)
-  a chacun des poids synaptiques
+  a chacun des poids synaptiques :
+  coefficient -= coef_apprentissage * somme_contribution / nb_echantillons_analyses
 
 VALEUR RETOURNEE :
 PAS_D_ERREUR = OK
