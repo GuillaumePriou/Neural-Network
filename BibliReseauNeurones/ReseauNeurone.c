@@ -73,9 +73,9 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
 
         sprintf(str, "%s %hd", strCoucheCache, i);
 
-        for(short j = 0; j<tabsiNbNeurones[i-1]; j++)
+        /*for(short j = 0; j<tabsiNbNeurones[i-1]; j++)
             for(short k = 0; k<3; k++)
-                printf("%lf ", mat3DlfPoids[i][j][k]);
+                printf("%lf ", mat3DlfPoids[i][j][k]);*/
 
         InitCoucheNeurone(COUCHE_CACHEE,
                           str,
@@ -84,7 +84,7 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
                           NULL,
                           tabsiNbNeurones[i],
                           tabsiNbNeurones[i-1],
-                          mat3DlfPoids[i],
+                          (mat3DlfPoids != NULL)? mat3DlfPoids[i] : NULL,
                           Fonction_ActivationNeurone_Cache,
                           Fonction_Derivee_ActivationNeurone_Cache,
                           &(((*pReseauNeurones).pCouchesNeurones)[i])
@@ -99,7 +99,7 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
                       F_Derivee_ActivationVectorielle,
                       tabsiNbNeurones[i],
                       tabsiNbNeurones[i-1],
-                      mat3DlfPoids[i],
+                      (mat3DlfPoids != NULL)? mat3DlfPoids[i] : NULL,
                       Fonction_ActivationNeurone_Sortie,
                       Fonction_Derivee_ActivationNeurone_Sortie,
                       &(((*pReseauNeurones).pCouchesNeurones)[i])

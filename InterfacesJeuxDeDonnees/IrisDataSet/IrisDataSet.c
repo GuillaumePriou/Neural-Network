@@ -123,7 +123,22 @@ T_ERREUR InjectionVraieValeurDansReseauNeurones ( void              * pDonnees  
                                                   short int           siParamUn       ,
                                                   long int            liParamDeux     )
 {
-    return ERREUR_FONCTION_NON_DEFINIE;
+    short int i ;
+    T_DONNEES_IRIS * pDonneesIris ;
+
+    if ( pReseauNeurone->typeReseauNeurones == RESEAU_FULLY_CONNECTED_AVEC_BIAIS )
+    {
+        pDonneesIris = (T_DONNEES_IRIS *) pDonnees ;
+
+        for ( i = 0 ; i < pReseauNeurone->pCouchesNeurones[pReseauNeurone->siNbCouches-1].siNbNeurones ; i++ )
+            pReseauNeurone->plfVraieValeurFinale[i] = ZERO ;
+
+        pReseauNeurone->plfVraieValeurFinale[pDonneesIris->cType] = UN ;
+    }
+    else
+        return ERREUR_TYPE_RESEAU_MAUVAIS ;
+
+    return PAS_D_ERREUR ;
 }
 
 T_ERREUR TestePredictionPerceptronIrisDataSet ( void )
