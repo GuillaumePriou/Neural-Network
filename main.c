@@ -36,13 +36,13 @@ int main()
                         10,
                         &rn);
 
-    /*
+
         Chargement des donnees en memoire vive
 
     T_DONNEES_IRIS tabIris[NB_IRIS_APPRENTISSAGE];
     ChargeDonneesIris("./JeuxDeDonnees/iris/iris_apprenti.txt", NB_IRIS_APPRENTISSAGE, tabIris);
 
-    /*
+
         Lancement analyse
 
     double seuilValCout = DBL_MAX ;

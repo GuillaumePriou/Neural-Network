@@ -32,7 +32,6 @@ T_ERREUR executerTests (void)
                                           { &testCalcPredictionCoucheNeuronesCachee, "CalcPredictionCoucheNeuroneCachee...", false},
                                           { &testCalcPredictionCoucheNeuronesSortie, "CalcPredictionCoucheNeuroneSortie...", false},
                                           { &testCalcPredictionReseauNeurones, "CalcPredictionReseauNeurone...", false},
-                                          //{ &testCmpMatrice, "TestCmpMatrice...", false}
                                           { &testChargementDonneeIris, "TestChargementDonneeIris...", false}
                                           //{ &, "Test de ..."},
                                    };
@@ -746,11 +745,11 @@ T_ERREUR testChargementDonneeIris( )
                data[i].cType
               );
 
-	if (    data[0].lfLongueurSepale == 5.1
+	if (    data[0].lfLongueurSepale == 5.0
 		 && data[0].lfLargeurSepale ==  3.5
-		 && data[0].lfLongueurPetale == 1.4
-		 && data[0].lfLargeurPetale ==  0.2
-		 && data[i].cType == 1) // setosa
+		 && data[0].lfLongueurPetale == 1.3
+		 && data[0].lfLargeurPetale ==  0.3
+		 && data[i].cType == 0) // setosa
 		return PAS_D_ERREUR;
 	else
 		return ERREUR_DECODAGE_JEU_DE_DONNEES;
