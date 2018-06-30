@@ -167,7 +167,7 @@ T_NEURONE tabNeuroneCoucheSortie[3] =
                                         {
                                             {
                                                 NEURONE_DE_SORTIE,
-                                                4,
+                                                3,
                                                 &(tabCoefs[2][0][0]),
                                                 &(tabGradients[2][0][0]),
                                                 CalcLogistique,
@@ -175,7 +175,7 @@ T_NEURONE tabNeuroneCoucheSortie[3] =
                                             },
                                             {
                                                 NEURONE_DE_SORTIE,
-                                                4,
+                                                3,
                                                 &(tabCoefs[2][1][0]),
                                                 &(tabGradients[2][1][0]),
                                                 CalcLogistique,
@@ -183,7 +183,7 @@ T_NEURONE tabNeuroneCoucheSortie[3] =
                                             },
                                             {
                                                 NEURONE_DE_SORTIE,
-                                                4,
+                                                3,
                                                 &(tabCoefs[2][2][0]),
                                                 &(tabGradients[2][2][0]),
                                                 CalcLogistique,
@@ -214,7 +214,7 @@ T_NEURONE tabNeuroneCoucheSortie[3] =
                                             &coucheNeuroneEntree,\
                                             NULL,\
                                             NULL,\
-                                            4,\
+                                            3,\
                                             3,\
                                             tabNeuroneCoucheCachee,\
                                             plfOutputSamplesCC,\
@@ -228,7 +228,7 @@ T_NEURONE tabNeuroneCoucheSortie[3] =
                                             CalcSoftMax,\
                                             CalcDeriveePartielleSoftMaxViaValSoftMax,\
                                             3,\
-                                            4,\
+                                            3,\
                                             tabNeuroneCoucheSortie,\
                                             plfOutputSamplesCS,\
                                             plfErreurDeltaSampleCS\
@@ -251,7 +251,9 @@ T_COUCHE_NEURONES tabCoucheNeurones[3] = {
 
 REEL plfPredictionFinaleRN[] = {0,0,0};
 REEL plfVraieValeurFinaleRN[] = {0,0,0};
+
 short int tabsiNbNeuronesRN[3] = {3,3,3};
+
 T_RESEAU_NEURONES reseauNeurone = {
                                         RESEAU_FULLY_CONNECTED_AVEC_BIAIS,
                                         "Reseau de neurones",

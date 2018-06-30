@@ -70,7 +70,6 @@ T_ERREUR InitReseauNeurone ( T_TYPE_RESEAU_NEURONES                typeReseauNeu
 
     for(i = 1; i<siNbCouches-1; i++)
     {
-
         sprintf(str, "%s %hd", strCoucheCache, i);
 
         /*for(short j = 0; j<tabsiNbNeurones[i-1]; j++)

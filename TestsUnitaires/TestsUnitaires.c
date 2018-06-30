@@ -527,7 +527,7 @@ T_ERREUR testDesinitReseauNeurone()
 
     T_ERREUR resultat = DesinitReseauNeurone(&monReseauTest);
     if (resultat != PAS_D_ERREUR
-		|| resultatInit != PAS_D_ERREUR 
+		|| resultatInit != PAS_D_ERREUR
         ||strcmp(monReseauTest.szDescription,"réseau desinit")!=0
         ||monReseauTest.plfPredictionFinale!=NULL
         ||monReseauTest.plfVraieValeurFinale!=NULL
@@ -745,14 +745,14 @@ T_ERREUR testChargementDonneeIris( )
                data[i].lfLargeurPetale,
                data[i].cType
               );
-	
+
 	if (    data[0].lfLongueurSepale == 5.1
 		 && data[0].lfLargeurSepale ==  3.5
 		 && data[0].lfLongueurPetale == 1.4
 		 && data[0].lfLargeurPetale ==  0.2
-		 && data[i].cType == 1) // setosa  
+		 && data[i].cType == 1) // setosa
 		return PAS_D_ERREUR;
-	else 
+	else
 		return ERREUR_DECODAGE_JEU_DE_DONNEES;
 }
 
