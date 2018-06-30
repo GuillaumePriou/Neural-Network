@@ -417,7 +417,7 @@ T_ERREUR testCalcPredictionNeurone ()
     REEL plfPrediction[1] = {0};
 
     resultat = CalcPredictionNeurone(plfOutputSamplesCC,
-                                     4,
+                                     3,
                                      &(tabNeuroneCoucheSortie[2]),
                                      &(plfPrediction[0]));
 

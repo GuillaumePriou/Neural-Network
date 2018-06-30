@@ -71,7 +71,7 @@ REEL tabCoefs[3][3][3]=
 ***********************************************************/
 
 // tab [couche][neurone][coefficient]
-REEL tabGradients[3][4][4]= {0};
+REEL tabGradients[3][3][3]= {0};
        /* {
             { // Couche entree => neurones a 0 dendrites
                 { 0,  0,  0,  0},
