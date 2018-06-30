@@ -9,10 +9,11 @@
 #include "./BibliReseauNeurones/TypeReseauNeurones.h"
 #include "./BibliReseauNeurones/ReseauNeurone.h"
 #include "./InterfacesJeuxDeDonnees/IrisDataSet/IrisDataSet.h"
+#include "./BibliReseauNeurones/CalcMax.h"
 
 int main()
 {
-    // executerTests();
+    //executerTests();
 
 
     /*
@@ -39,7 +40,7 @@ int main()
         Chargement des donnees en memoire vive
     */
     T_DONNEES_IRIS tabIris[NB_IRIS_APPRENTISSAGE];
-    ChargeDonneesIris("./JeuxDeDonnees/iris_apprenti.txt", NB_IRIS_APPRENTISSAGE, tabIris);
+    ChargeDonneesIris("./JeuxDeDonnees/iris/iris_apprenti.txt", NB_IRIS_APPRENTISSAGE, tabIris);
 
     /*
         Lancement analyse
@@ -47,6 +48,7 @@ int main()
     double seuilValCout = DBL_MAX ;
     long nbIteration = 0 ;
     long nbTotalIterations = 1000 ;
+	long echantillonAAnalyser;
     long echant=0; // "echantillon", iterateur pour les echantillons de donnees
     double coutLot ;
 
@@ -80,7 +82,7 @@ int main()
             rn.lfCoutCumule += coutLot;
         }
 
-        CalcCorrectionPoidsSynaptiques (&rn, rn.usiNbLots);
+        CalcCorrectionPoidsSynaptiques (&rn, rn.usiNbLots); 
 
 
         nbIteration++;

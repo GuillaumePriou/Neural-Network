@@ -21,16 +21,16 @@ T_ERREUR executerTests (void)
                                           //{ &testAfficheNeurone      , "AfficheNeurone..."       , false},
                                           //{ &testAfficheCoucheNeurone, "AfficheCoucheNeurone..." , false},
                                           //{ &testAfficheReseauNeurone, "AfficheReseauNeurone..." , false},
-                                          //{ &testInitNeurone         , "InitNeurone..."          , false},
-                                          //{ &testDesinitNeurone      , "DesinitNeurone..."       , false},
-                                          //{ &testInitCoucheNeurone   , "InitCoucheNeurone..."    , false},
-                                          //{ &testDesinitCoucheNeurone, "DesinitCoucheNeurone..." , false},
-                                          //{ &testInitReseauNeurone   , "InitReseauNeurone..."    , false},
-                                          //{ &testDesinitReseauNeurone, "DesinitReseauNeurone..." , false},
-                                          //{ &testCalcPredictionNeurone,"CalcPredictionNeurone...", false},
-                                          //{ &testCalcPredictionCoucheNeuronesEntree, "CalcPredictionCoucheNeuroneEntree...", false},
-                                          //{ &testCalcPredictionCoucheNeuronesCachee, "CalcPredictionCoucheNeuroneCachee...", false},
-                                          //{ &testCalcPredictionCoucheNeuronesSortie, "CalcPredictionCoucheNeuroneSortie...", false},
+                                          { &testInitNeurone         , "InitNeurone..."          , false},
+                                          { &testDesinitNeurone      , "DesinitNeurone..."       , false},
+                                          { &testInitCoucheNeurone   , "InitCoucheNeurone..."    , false},
+                                          { &testDesinitCoucheNeurone, "DesinitCoucheNeurone..." , false},
+                                          { &testInitReseauNeurone   , "InitReseauNeurone..."    , false},
+                                          { &testDesinitReseauNeurone, "DesinitReseauNeurone..." , false},
+                                          { &testCalcPredictionNeurone,"CalcPredictionNeurone...", false},
+                                          { &testCalcPredictionCoucheNeuronesEntree, "CalcPredictionCoucheNeuroneEntree...", false},
+                                          { &testCalcPredictionCoucheNeuronesCachee, "CalcPredictionCoucheNeuroneCachee...", false},
+                                          { &testCalcPredictionCoucheNeuronesSortie, "CalcPredictionCoucheNeuroneSortie...", false},
                                           { &testCalcPredictionReseauNeurones, "CalcPredictionReseauNeurone...", false},
                                           //{ &testCmpMatrice, "TestCmpMatrice...", false}
                                           { &testChargementDonneeIris, "TestChargementDonneeIris...", false}
@@ -203,7 +203,7 @@ T_ERREUR testCalcPredictionCoucheNeuronesEntree()
         printf("\n plfOutputSample %lf ", coucheNeuroneEntree.plfOutputSample[i]);
 
     if (resultat != PAS_D_ERREUR)
-        printf ("-> Echec test CalcPredictionCoucheNeurones (couche entrée) (cause : %hd)\n", resultat);
+        printf ("-> Echec test CalcPredictionCoucheNeurones (couche entrée) (cause : %hd)\n", (short)resultat);
 
     if(resultat != 0)
         return ERREUR_FONCTION_NON_DEFINIE;
@@ -468,9 +468,6 @@ T_ERREUR testInitReseauNeurone ( )
 
 
 
-
-
-
     T_ERREUR resultat = InitReseauNeurone(reseauNeurone.typeReseauNeurones,
                                           reseauNeurone.szDescription,
                                           reseauNeurone.lfTauxApprentissage,
@@ -530,6 +527,7 @@ T_ERREUR testDesinitReseauNeurone()
 
     T_ERREUR resultat = DesinitReseauNeurone(&monReseauTest);
     if (resultat != PAS_D_ERREUR
+		|| resultatInit != PAS_D_ERREUR 
         ||strcmp(monReseauTest.szDescription,"réseau desinit")!=0
         ||monReseauTest.plfPredictionFinale!=NULL
         ||monReseauTest.plfVraieValeurFinale!=NULL
@@ -627,7 +625,6 @@ T_ERREUR testCalcPredictionReseauNeurones ( )
             }
 
     }
-
     T_RESEAU_NEURONES LeReseau3c3n;
 
     short int tabsiNbNeuroneParCouche[3] = {3, 3, 3};
@@ -742,14 +739,21 @@ T_ERREUR testChargementDonneeIris( )
     for(i=0;i<NB_IRIS_TEST;i++)
         printf("data%i : %lf,%lf,%lf,%lf,%uc \n",
                i,
-               data[i].lfLongueurSepal,
-               data[i].lfLargeurSepal,
-               data[i].lfLongueur,
-               data[i].lfLargeur,
+               data[i].lfLongueurSepale,
+               data[i].lfLargeurSepale,
+               data[i].lfLongueurPetale,
+               data[i].lfLargeurPetale,
                data[i].cType
               );
-
-    return PAS_D_ERREUR;
+	
+	if (    data[0].lfLongueurSepale == 5.1
+		 && data[0].lfLargeurSepale ==  3.5
+		 && data[0].lfLongueurPetale == 1.4
+		 && data[0].lfLargeurPetale ==  0.2
+		 && data[i].cType == 1) // setosa  
+		return PAS_D_ERREUR;
+	else 
+		return ERREUR_DECODAGE_JEU_DE_DONNEES;
 }
 
 short cmpMatrice1(int taille, REEL* matA, REEL* matB){

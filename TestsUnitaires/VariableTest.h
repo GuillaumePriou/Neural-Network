@@ -251,7 +251,7 @@ T_COUCHE_NEURONES tabCoucheNeurones[3] = {
 
 REEL plfPredictionFinaleRN[] = {0,0,0};
 REEL plfVraieValeurFinaleRN[] = {0,0,0};
-short int tabsiNbNeuronesRN[3] = {3,4,3};
+short int tabsiNbNeuronesRN[3] = {3,3,3};
 T_RESEAU_NEURONES reseauNeurone = {
                                         RESEAU_FULLY_CONNECTED_AVEC_BIAIS,
                                         "Reseau de neurones",

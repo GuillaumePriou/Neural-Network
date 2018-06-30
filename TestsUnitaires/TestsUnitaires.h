@@ -5,7 +5,7 @@
 #include "../InterfaceNeuroneDataSet.h"
 
 // Le nombre de tests
-#define NB_TESTS 2
+#define NB_TESTS 12
 
 // Format des fonctions de test
 typedef T_ERREUR T_FONCTION_TEST(void) ;

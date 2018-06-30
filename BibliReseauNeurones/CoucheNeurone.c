@@ -172,9 +172,9 @@ T_ERREUR DesinitCoucheNeurone ( T_COUCHE_NEURONES * pCoucheNeurones )
     (*pCoucheNeurones).siNbDendritesParNeurone = 0 ;
 
     // Desallouer les tableaux dynamiquement alloues
-    free((*pCoucheNeurones).pNeurones);
-    free((*pCoucheNeurones).plfOutputSample);
-    free((*pCoucheNeurones).plfErreurDeltaSample);
+    if ((*pCoucheNeurones).pNeurones != NULL)		free((*pCoucheNeurones).pNeurones);
+    if ((*pCoucheNeurones).plfOutputSample != NULL)		free((*pCoucheNeurones).plfOutputSample);
+    if ((*pCoucheNeurones).plfErreurDeltaSample != NULL)		free((*pCoucheNeurones).plfErreurDeltaSample);
 
     (*pCoucheNeurones).pNeurones = NULL;
     (*pCoucheNeurones).plfOutputSample = NULL;

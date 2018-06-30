@@ -21,6 +21,7 @@ PAGE WEB : archive.ics.edu/ml/datasets/iris
 #include "../../BibliReseauNeurones/constantes.h"
 #include "../../BibliReseauNeurones/Neurone.h"
 #include "../../BibliReseauNeurones/TypeReseauNeurones.h"
+#include "../../BibliReseauNeurones/FonctionCout.h"
 
 /* nombre d'iris servant a l'apprentissage */
 #define NB_IRIS_APPRENTISSAGE 120
@@ -45,15 +46,15 @@ double        lfProbabilite  : probabilité calculee
 
 typedef struct TagDonneesIris
 {
- REEL        lfLongueurSepal    ;
- REEL        lfLargeurSepal     ;
- REEL        lfLongueur    ;
- REEL        lfLargeur     ;
+ REEL        lfLongueurSepale    ;
+ REEL        lfLargeurSepale     ;
+ REEL        lfLongueurPetale    ;
+ REEL        lfLargeurPetale     ;
  unsigned char cType         ;
  //REEL        TabOutputCoucheCachee[NB_MAX_NEURONES_PAR_COUCHE_IRIS] ;
  //REEL        TabOutputCoucheSortie[NB_MAX_NEURONES_PAR_COUCHE_IRIS] ;
  REEL        lfProbabilite ;
- unsigned char cTypePredit   ;
+ short cTypePredit   ;
 } T_DONNEES_IRIS ;
 
 /********************************************************
