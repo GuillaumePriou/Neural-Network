@@ -47,23 +47,41 @@ int main()
     double seuilValCout = DBL_MAX ;
     long nbIteration = 0 ;
     long nbTotalIterations = 1000 ;
-
+    long echant=0; // "echantillon", iterateur pour les echantillons de donnees
+    double coutLot ;
 
 
     while (rn.lfCoutCumule > seuilValCout && nbIteration < nbTotalIterations)
     {
         // Reset des variables
         InitAZeroGradientsPoidsCumules (&rn);
+        rn.lfCoutCumule = 0;
 
-        // Injection d'un echantillon
-        InjectionDonneesDansCoucheEntree (&(tabIris[i]))
+        echantillonAAnalyser = nbIteration%NB_IRIS_APPRENTISSAGE;
 
-        // Analyse predictive de l'echantillon
-        CalcPredictionReseauNeurones
-        RetroPropagationErreursEtGradients
-        TabIrisApprentissage[liCompteurElt].cTypePredit = CalcIndiceMax
-        FonctionCoutLogLoss
-        CalcCorrectionPoidsSynaptiques
+        // Analyse d'un lot d'echantillons
+        for (echant=0; echant<rn.usiNbLots; echant++)
+        {
+            // Injection d'un echantillon a analyser
+            InjectionDonneesDansCoucheEntree (&(tabIris[echantillonAAnalyser]), &rn, 0,0);
+
+            // Analyse predictive de l'echantillon
+            CalcPredictionReseauNeurones (&rn);
+
+            // Calcul des erreurs de prediction a partir des vraies valeurs
+            InjectionVraieValeurDansReseauNeurones (&(tabIris[echantillonAAnalyser]), &rn, 0, 0);
+            RetroPropagationErreursEtGradients (&rn);
+
+            // Selection de la reponse la plus probable selon les analyses
+            tabIris[echantillonAAnalyser].cTypePredit = CalcIndiceMax (rn.plfPredictionFinale, rn.pCouchesNeurones[rn.siNbCouches-1].siNbNeurones);
+
+            // Calcul du cout des predictions
+            FonctionCoutLogLoss (rn.plfVraieValeurFinale, rn.plfPredictionFinale, rn.pCouchesNeurones[rn.siNbCouches-1].siNbNeurones, &coutLot);
+            rn.lfCoutCumule += coutLot;
+        }
+
+        CalcCorrectionPoidsSynaptiques (&rn, rn.usiNbLots);
+
 
         nbIteration++;
     }
